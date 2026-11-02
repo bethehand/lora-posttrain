@@ -14,14 +14,14 @@ Prime Intellect reported that LoRA RL takes Qwen3-4B-Instruct-2507 from 0.55 to 
 | Environment | wiki-search tools, prompt and judge prompt from verifiers b2e4e81 |
 | Questions | willcb/wiki-trivia-questions @ bd21382, split by source page: train 1,771 (331 pages), heldout 490 (88 pages) |
 | splits.json sha256 | TBD at freeze |
-| Judge | DeepSeek API, `deepseek-flash` or `deepseek-v4-pro` (the two models the API lists), whichever agrees better with the original gpt-4.1-mini verdicts |
+| Judge | Training reward: `deepseek-flash`. Evaluation: `deepseek-v4-pro` (primary) and `deepseek-flash` (secondary), so a policy that learns to please the training judge shows up as a gap between the two. Agreement with the 700 published gpt-4.1-mini verdicts: flash 95.7%, kappa 0.872; v4-pro 96.0%, kappa 0.882 (`results/judge_agreement/`) |
 | Trainer | prime-rl v0.9.0 (ab5de8f), LoRA rank 8 on all linear projections, lr 1e-5, group size 16, 512 tokens per turn, seq_len 4096 |
 | Batch and steps | TBD from the pilot |
 | Training seeds | 1 |
 
 ## Evaluation
 
-- **Sets:** `heldout` (490 questions); `slide100` (the published 100, a subset of heldout); `train-sample` (300 training questions, fixed seed), for the train/held-out gap.
+- **Sets:** `heldout` (490 questions); `slide100` (the published 100, a subset of heldout); `train_sample` (300 training questions, seed 0), for the train/held-out gap.
 - **Sampling:** 4 rollouts per question, the model's generation_config defaults, 512 tokens per turn.
 - **Metric:** mean judge reward per question, averaged over questions; 95% CI from a paired bootstrap over questions (10,000 resamples).
 
@@ -38,6 +38,7 @@ All results are reported whether or not they pass.
 ## Exploratory, reported as such
 
 - Tool calls per episode, rate of answering without any tool call, final-answer length.
+- No-tools baseline (`use_tools = false`) on `heldout`, for base and trained models: how much of the score is memory. The judge only sees the final reply, so a remembered answer scores like a searched one (the base model answers the slide's first question correctly with no tool call).
 - 50 random trained-model trajectories read by hand for judge gaming, such as listing several candidate answers.
 
 ## Stop rules

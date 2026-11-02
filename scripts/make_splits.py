@@ -9,12 +9,16 @@ any training question:
 2. more pages, in sha256 order of their names, until the held-out set has at least
    MIN_HELDOUT questions.
 
+`train_sample` is a fixed random 300 of the training questions, for measuring the
+train/held-out gap after RL.
+
 Run from the repo root:
     uv run --no-project --with datasets==5.1.0 python scripts/make_splits.py
 """
 
 import hashlib
 import json
+import random
 from collections import defaultdict
 from pathlib import Path
 
@@ -23,6 +27,7 @@ from datasets import load_dataset
 DATASET = "willcb/wiki-trivia-questions"
 REVISION = "bd2138213717fa69d5df34514169d6bec0f5b6b3"
 MIN_HELDOUT = 300
+TRAIN_SAMPLE = 300
 OUT = Path(__file__).resolve().parents[1] / "envs/wiki_search_heldout/wiki_search_heldout/splits.json"
 
 
@@ -51,6 +56,7 @@ def main() -> None:
     train = [i for i, p in enumerate(pages) if p not in held]
     assert not {pages[i] for i in train} & held
     assert set(slide100) <= set(heldout)
+    train_sample = sorted(random.Random(0).sample(train, TRAIN_SAMPLE))
 
     OUT.write_text(json.dumps({
         "dataset": DATASET,
@@ -63,11 +69,13 @@ def main() -> None:
         "heldout_pages": sorted(held),
         "slide100": slide100,
         "heldout": heldout,
+        "train_sample": train_sample,
         "train": train,
     }, indent=1) + "\n")
     n_pages = len(questions_on)
     print(f"train   {len(train):5d} questions on {n_pages - len(held):4d} pages")
     print(f"heldout {len(heldout):5d} questions on {len(held):4d} pages (includes slide100)")
+    print(f"train_sample {len(train_sample)} of the training questions")
     print(f"wrote {OUT}")
 
 

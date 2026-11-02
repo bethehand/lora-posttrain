@@ -6,6 +6,8 @@
 
 model = "/mnt/nvme1/bruce/models/Qwen3-4B-Instruct-2507"
 num_rollouts = 4
+# Results stay local; nothing is uploaded to Prime Intellect's platform
+push = false
 
 [client]
 base_url = "http://localhost:18000/v1"
@@ -17,9 +19,10 @@ max_tokens = 512
 id = "wiki-search-heldout"
 split = "heldout"
 
+# Evaluation judge; training uses deepseek-flash (see prereg/01-wiki-search.md)
 [[env.taskset.task.judges]]
 id = "wiki-search"
-model = "deepseek-flash"
+model = "deepseek-v4-pro"
 base_url = "https://api.deepseek.com/v1"
 api_key_var = "DEEPSEEK_API_KEY"
 

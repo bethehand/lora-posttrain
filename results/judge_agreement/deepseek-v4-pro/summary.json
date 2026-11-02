@@ -1,0 +1,63 @@
+{
+ "judge": {
+  "model": "deepseek-v4-pro",
+  "base_url": "https://api.deepseek.com/v1"
+ },
+ "reference_judge": "gpt-4.1-mini (verifiers baea257 eval outputs)",
+ "n": 700,
+ "agreement": 0.96,
+ "cohen_kappa": 0.8818536914693542,
+ "theirs_yes_ours_no": 7,
+ "theirs_no_ours_yes": 21,
+ "per_model": {
+  "gpt-5-mini": {
+   "n": 100,
+   "unparseable": 0,
+   "failed": 0,
+   "acc_theirs": 0.92,
+   "acc_ours": 0.93
+  },
+  "willcb--qwen3-4b-wiki-search": {
+   "n": 100,
+   "unparseable": 0,
+   "failed": 0,
+   "acc_theirs": 0.89,
+   "acc_ours": 0.89
+  },
+  "gpt-4.1": {
+   "n": 100,
+   "unparseable": 0,
+   "failed": 0,
+   "acc_theirs": 0.88,
+   "acc_ours": 0.96
+  },
+  "gpt-4.1-mini": {
+   "n": 100,
+   "unparseable": 0,
+   "failed": 0,
+   "acc_theirs": 0.78,
+   "acc_ours": 0.82
+  },
+  "gpt-5-nano": {
+   "n": 100,
+   "unparseable": 0,
+   "failed": 0,
+   "acc_theirs": 0.77,
+   "acc_ours": 0.79
+  },
+  "gpt-4.1-nano": {
+   "n": 100,
+   "unparseable": 0,
+   "failed": 0,
+   "acc_theirs": 0.63,
+   "acc_ours": 0.62
+  },
+  "qwen--qwen3-4b-instruct-2507": {
+   "n": 100,
+   "unparseable": 0,
+   "failed": 0,
+   "acc_theirs": 0.55,
+   "acc_ours": 0.55
+  }
+ }
+}
