@@ -7,6 +7,7 @@ renaming the argument raised well-formed read calls from 22% to 70% in replayed 
 """
 
 import verifiers.v1 as vf
+import wiki_search_heldout.threads  # noqa: F401  (must run before chroma builds its session)
 from wiki_search.servers.wiki import WikiSearchToolset
 
 

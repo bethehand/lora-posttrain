@@ -28,3 +28,17 @@ Sampler-trainer mismatch KL stayed between 0.0006 and 0.009.
    default inference port. The router could not bind, and the orchestrator sent its requests to
    that service and got 401s, so every rollout failed. Fix: inference on port 18000, with the
    orchestrator client URL set explicitly because it does not follow `inference.server.port`.
+   The router also binds a metrics port at `server.port + 21000`; a server on 18600 died because
+   39600 was taken, so check both before picking a port.
+
+## Later, on wiki-search
+
+4. **vLLM context.** Qwen3-4B's default 262k context needs 36 GiB of KV cache for one request, so
+   vLLM refuses to start; cap `max_model_len` (8192 for evals, the training seq_len for RL).
+5. **The wiki tool server ate the CPU.** chromadb builds its MiniLM ONNX session with default
+   options, so every tool server takes all physical cores. During the RL pilot six of them (one per
+   env worker) held the load average of the shared 128-thread server above 300, GPU utilization
+   fell to 0% while rollouts waited on searches, and step 6 took 6m44s. Capping the session at
+   2 threads (`envs/wiki_search_heldout/wiki_search_heldout/threads.py`) cut a tool server's CPU from
+   about 4,080% to 145% on 200 searches, which also got faster (48 s against 63 s). The filter
+   pass then ran at about 15 episodes per second on 4 GPUs with the load average near 40.

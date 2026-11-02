@@ -16,9 +16,9 @@ from pathlib import Path
 from typing import Literal
 
 import verifiers.v1 as vf
-from wiki_search.servers.wiki import WikiSearchToolset
 from wiki_search.taskset import SYSTEM, TriviaTask, TriviaTaskData, WikiSearchConfig
 from wiki_search_heldout.servers import SectionArgWikiToolset
+from wiki_search_heldout.wiki_tools import WikiToolset
 
 SPLITS = json.loads((Path(__file__).parent / "splits.json").read_text())
 NO_TOOLS_SYSTEM = "Answer the question from your own knowledge. Reply with a concise final answer."
@@ -38,7 +38,8 @@ class WikiSearchHeldoutTaskset(vf.Taskset[TriviaTask, HeldoutConfig]):
     def toolsets(cls, config: HeldoutConfig) -> list[vf.Toolset]:
         if not config.use_tools:
             return []
-        toolset = SectionArgWikiToolset if config.read_arg == "section" else WikiSearchToolset
+        # Both are upstream's tools with the embedder capped at a few CPU threads (threads.py)
+        toolset = SectionArgWikiToolset if config.read_arg == "section" else WikiToolset
         return [toolset(config.tools)]
 
     def load(self) -> list[TriviaTask]:
