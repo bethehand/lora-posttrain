@@ -50,4 +50,7 @@ done
 uv pip install --no-deps -e "$REPO/envs/wiki_search_heldout"
 uv pip install --no-deps --require-hashes -r "$REPO/setup/vllm-router.txt"
 
+# Build the wiki corpus and search index now; on first use the tool server would do it and time out
+uv run python "$REPO/scripts/warm_wiki_tools.py"
+
 bash "$REPO/setup/record_versions.sh"
