@@ -1,0 +1,30 @@
+# Base-model pass over the training split for the difficulty filter (scripts/make_train_filter.py):
+# 8 rollouts per question, judged by the training judge so "has a learning signal" means the same
+# as during RL. Needs the base model served on port 18000 (see eval.toml).
+#   uv run eval @ $REPO/configs/wiki-search/filter.toml --output-dir $ROOT/outputs/evals/qwen3-4b-base-filter/train
+
+model = "/mnt/nvme1/bruce/models/Qwen3-4B-Instruct-2507"
+num_rollouts = 8
+push = false
+
+[client]
+base_url = "http://localhost:18000/v1"
+
+[sampling]
+max_tokens = 512
+
+[env.taskset]
+id = "wiki-search-heldout"
+split = "train"
+
+[[env.taskset.task.judges]]
+id = "wiki-search"
+model = "deepseek-flash"
+base_url = "https://api.deepseek.com/v1"
+api_key_var = "DEEPSEEK_API_KEY"
+
+[env.agent.harness]
+id = "null"
+
+[env.agent.runtime]
+type = "subprocess"
