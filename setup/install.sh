@@ -27,9 +27,21 @@ git -c url."https://github.com/".insteadOf="git@github.com:" \
 # Locked dependencies plus the two upstream environments we use. Only the extras a 4090 box
 # needs: --all-extras would add Hopper/Blackwell kernels and multi-node disaggregation, which
 # are useless here and mostly hosted on GitHub, where large downloads stall from this server.
+# Git fetches from GitHub also drop at random (TLS resets); downloads already in the uv cache
+# survive, so each retry only redoes what failed.
 export UV_HTTP_TIMEOUT=120 UV_HTTP_RETRIES=8
-uv sync --locked --extra gpu --extra flash-attn --extra dashboard \
-  --package prime-rl --package reverse-text --package wiki-search
+for attempt in 1 2 3 4 5; do
+  if uv sync --locked --extra gpu --extra flash-attn --extra dashboard \
+      --package prime-rl --package reverse-text --package wiki-search; then
+    break
+  fi
+  if [ "$attempt" = 5 ]; then
+    echo "uv sync failed 5 times" >&2
+    exit 1
+  fi
+  echo "uv sync failed (attempt $attempt), retrying in 30s" >&2
+  sleep 30
+done
 # Our environment variants: editable, so a `scripts/sync.sh push` takes effect without reinstalling.
 # `uv sync` is exact and removes them, so this step always runs after it.
 uv pip install --no-deps -e "$REPO/envs/wiki_search_heldout"
