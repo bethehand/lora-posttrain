@@ -11,7 +11,7 @@ Prime Intellect reported that LoRA RL takes Qwen3-4B-Instruct-2507 from 0.55 to 
 | Item | Value |
 |---|---|
 | Base model | Qwen/Qwen3-4B-Instruct-2507 @ cdbee75, weights checked by sha256 |
-| Environment | wiki-search tools, prompt and judge prompt from verifiers b2e4e81 |
+| Environment | wiki-search tools, prompt and judge prompt from verifiers b2e4e81. Its system prompt names the three tools and how to use them; the published eval used "Use the provided Wikipedia search tools to help answer questions." A more explicit prompt can raise the base score, so it is the first suspect if H2 fails high |
 | Questions | willcb/wiki-trivia-questions @ bd21382, split by source page: train 1,771 (331 pages), heldout 490 (88 pages) |
 | splits.json sha256 | TBD at freeze |
 | Judge | Training reward: `deepseek-flash`. Evaluation: `deepseek-v4-pro` (primary) and `deepseek-flash` (secondary), so a policy that learns to please the training judge shows up as a gap between the two. Agreement with the 700 published gpt-4.1-mini verdicts: flash 95.7%, kappa 0.872; v4-pro 96.0%, kappa 0.882 (`results/judge_agreement/`) |
@@ -22,7 +22,7 @@ Prime Intellect reported that LoRA RL takes Qwen3-4B-Instruct-2507 from 0.55 to 
 ## Evaluation
 
 - **Sets:** `heldout` (490 questions); `slide100` (the published 100, a subset of heldout); `train_sample` (300 training questions, seed 0), for the train/held-out gap.
-- **Sampling:** 4 rollouts per question, the model's generation_config defaults, 512 tokens per turn.
+- **Sampling:** 4 rollouts per question, the model's generation_config defaults, 512 tokens per turn, context up to 8,192 tokens per episode (training uses 4,096).
 - **Metric:** mean judge reward per question, averaged over questions; 95% CI from a paired bootstrap over questions (10,000 resamples).
 
 ## Hypotheses and pass criteria

@@ -1,0 +1,10 @@
+{"idx": 0, "mean_reward": 1.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 1, "mean_reward": 1.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 2, "mean_reward": 1.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 3, "mean_reward": 1.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 4, "mean_reward": 0.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 5, "mean_reward": 1.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 6, "mean_reward": 0.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 7, "mean_reward": 1.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 8, "mean_reward": 0.0, "rollouts": 1, "tool_calls": [3]}
+{"idx": 9, "mean_reward": 1.0, "rollouts": 1, "tool_calls": [3]}
