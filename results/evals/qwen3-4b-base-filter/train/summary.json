@@ -1,0 +1,26 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/qwen3-4b-base-filter/train/merged",
+ "episodes": 14168,
+ "errored": 1,
+ "error_kinds": {
+  "{'type': 'TaskError', 'message': 'task TriviaTask scoring: APITimeoutError: Request timed out.', 'traceback': 'Traceback": 1
+ },
+ "all": {
+  "questions": 1771,
+  "accuracy": 0.6194240542066629,
+  "ci95": [
+   0.597755505364201,
+   0.6415160926030491
+  ]
+ },
+ "slide100": null,
+ "mean_tool_calls": 3.031058092750759,
+ "no_tool_call_rate": 0.007905696336556786,
+ "truncation_rate": 0.002399943530740453,
+ "median_final_reply_chars": 109,
+ "stop_conditions": {
+  "agent_completed": 14064,
+  "context_length": 104
+ },
+ "judge_tokens_total": 4224002
+}
