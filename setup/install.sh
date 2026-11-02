@@ -24,8 +24,12 @@ git checkout --detach "$PRIME_RL_COMMIT"
 git -c url."https://github.com/".insteadOf="git@github.com:" \
   submodule update --init -- deps/verifiers deps/renderers deps/prime-envs deps/pydantic-config
 
-# Locked dependencies plus the two upstream environments we use
-uv sync --locked --all-extras --package prime-rl --package reverse-text --package wiki-search
+# Locked dependencies plus the two upstream environments we use. Only the extras a 4090 box
+# needs: --all-extras would add Hopper/Blackwell kernels and multi-node disaggregation, which
+# are useless here and mostly hosted on GitHub, where large downloads stall from this server.
+export UV_HTTP_TIMEOUT=120 UV_HTTP_RETRIES=8
+uv sync --locked --extra gpu --extra flash-attn --extra dashboard \
+  --package prime-rl --package reverse-text --package wiki-search
 # Our environment variants: editable, so a `scripts/sync.sh push` takes effect without reinstalling.
 # `uv sync` is exact and removes them, so this step always runs after it.
 uv pip install --no-deps -e "$REPO/envs/wiki_search_heldout"
