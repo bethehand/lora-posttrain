@@ -1,15 +1,19 @@
-# wiki-search LoRA RL on 4x RTX 4090. Run with CUDA_VISIBLE_DEVICES=0,1,2:
-# GPUs 0-1 serve the policy, GPU 2 trains, GPU 3 stays free for standalone evals.
-# Recipe from prime-rl v0.9.0 examples/basic/wiki-search/rl.toml (8 GPUs, batch 512). Changes:
-# held-out split by source page, DeepSeek judge, batch 256, local weights, online held-out eval.
-# DRAFT: batch_size and max_steps are set from the pilot before the run is pre-registered.
+# wiki-search LoRA RL on 4x RTX 4090: 3 GPUs serve the policy, 1 trains. Run with CUDA_VISIBLE_DEVICES=0,1,2,3.
+# Recipe from prime-rl v0.9.0 examples/basic/wiki-search/rl.toml (8 GPUs, batch 512, group 16, 200 steps,
+# seq_len 4096). Changes, all decided from base-model data before any training result:
+# - questions: train_mixed, the 174 training questions the base model gets right in some but not all of
+#   8 rollouts (the other 1,597 give zero advantage); held-out pages never trained on
+# - group 8 x 16 questions = 128 rollouts per step, 35 steps: each question drawn about 3 times
+# - seq_len 8192: the base model reads one section and stops (results/audit), and longer reads must not
+#   be truncated to zero reward
+# - DeepSeek judge, local weights, held-out eval at steps 0, 15 and 30
 
-max_steps = 200
-seq_len = 4096
+max_steps = 35
+seq_len = 8192
 
 [deployment]
 num_train_gpus = 1
-num_infer_gpus = 2
+num_infer_gpus = 3
 
 [model]
 # Downloaded from ModelScope and checked against the Hugging Face sha256 of Qwen/Qwen3-4B-Instruct-2507@cdbee75
@@ -25,8 +29,8 @@ dropout = 0.0
 target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 
 [orchestrator]
-batch_size = 256
-group_size = 16
+batch_size = 128
+group_size = 8
 
 [orchestrator.concurrency]
 initial_inflight = 256
@@ -48,13 +52,13 @@ max_completion_tokens = 512
 name = "wiki-search-train"
 curriculum = { gates = { zero_advantage = { type = "advantage_range" } } }
 env.taskset.id = "wiki-search-heldout"
-env.taskset.split = "train"
+env.taskset.split = "train_mixed"
 env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-flash", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
 env.agent.harness.id = "null"
 env.agent.runtime.type = "subprocess"
 
 [orchestrator.eval]
-interval = 50
+interval = 15
 
 [[orchestrator.eval.source]]
 name = "wiki-search-heldout"
@@ -71,5 +75,4 @@ port = 18000
 
 [inference.vllm]
 tool_call_parser = "hermes"
-# The model's own 262k context needs 36 GiB of KV cache for one request; match the training seq_len
-max_model_len = 4096
+max_model_len = 8192
