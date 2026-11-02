@@ -4,7 +4,7 @@ Post-training small open models with LoRA (SFT and RL) on one 4× RTX 4090 machi
 
 ## Status
 
-- [ ] **Chapter 1: wiki-search.** Reproduce Prime Intellect's result (Qwen3-4B-Instruct-2507, LoRA RL, tool-use search over Wikipedia) on a held-out split by source page. The original numbers were measured on training questions; see [REPORT.md](REPORT.md).
+- [x] **Chapter 1: wiki-search.** Prime Intellect's result (Qwen3-4B-Instruct-2507, LoRA RL, tool-use search over Wikipedia) rerun on a held-out split by source page, pre-registered in [prereg/01-wiki-search.md](prereg/01-wiki-search.md). On pages never trained on, accuracy rises from 0.567 to 0.633 (+0.066, 95% CI +0.042 to +0.090); the published +0.34 appears only on trained questions (+0.371). See [REPORT.md](REPORT.md).
 
 ## Hardware
 
