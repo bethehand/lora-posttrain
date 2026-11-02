@@ -28,6 +28,9 @@ class HeldoutConfig(WikiSearchConfig):
     split: Literal["train", "heldout", "slide100", "train_sample", "train_mixed"] = "train"
     use_tools: bool = True
     read_arg: Literal["section_id", "section"] = "section_id"
+    # Serve every num_shards-th question starting at shard, to split one eval across servers
+    num_shards: int = 1
+    shard: int = 0
 
 
 class WikiSearchHeldoutTaskset(vf.Taskset[TriviaTask, HeldoutConfig]):
@@ -57,5 +60,5 @@ class WikiSearchHeldoutTaskset(vf.Taskset[TriviaTask, HeldoutConfig]):
                 ),
                 self.config.task,
             )
-            for i in SPLITS[self.config.split]
+            for i in SPLITS[self.config.split][self.config.shard :: self.config.num_shards]
         ]
