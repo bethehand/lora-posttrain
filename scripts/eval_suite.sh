@@ -10,13 +10,16 @@ name=$2
 base_url=${3:-http://localhost:$INFERENCE_PORT/v1}
 cd "$PRIME_RL_DIR"
 
+# EVAL_EXTRA adds arguments to every eval, e.g. "--env.taskset.read-arg section"
+read -ra extra <<< "${EVAL_EXTRA:-}"
+
 run() {  # <tag> <extra eval args...>
   local tag=$1
   shift
   local dir="$ROOT/outputs/evals/$name/$tag"
   rm -rf "$dir"
   uv run eval @ "$REPO/configs/wiki-search/eval.toml" -m "$model" --client.base-url "$base_url" \
-    --output-dir "$dir" --no-rich "$@"
+    --output-dir "$dir" --no-rich "$@" "${extra[@]}"
   uv run python "$REPO/scripts/summarize_eval.py" "$(ls -d "$dir"/*/ | head -1)" "$name/$tag"
 }
 
