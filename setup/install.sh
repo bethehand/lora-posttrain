@@ -24,7 +24,10 @@ git checkout --detach "$PRIME_RL_COMMIT"
 git -c url."https://github.com/".insteadOf="git@github.com:" \
   submodule update --init -- deps/verifiers deps/renderers deps/prime-envs deps/pydantic-config
 
-# Locked dependencies plus the two environments we use
+# Locked dependencies plus the two upstream environments we use
 uv sync --locked --all-extras --package prime-rl --package reverse-text --package wiki-search
+# Our environment variants: editable, so a `scripts/sync.sh push` takes effect without reinstalling.
+# `uv sync` is exact and removes them, so this step always runs after it.
+uv pip install --no-deps -e "$REPO/envs/wiki_search_heldout"
 
 bash "$REPO/setup/record_versions.sh"
