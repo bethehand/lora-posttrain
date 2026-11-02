@@ -13,6 +13,8 @@ questions, and the H4 verdict:
     python3 scripts/navigation_metrics.py --compare <name a> <name b>
 """
 
+from __future__ import annotations
+
 import json
 import random
 import re
