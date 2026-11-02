@@ -1,0 +1,17 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg01-rl35/train_mixed/wiki-search-heldout--wiki-search-rl35--null--0dddcb45",
+ "judge": "deepseek-flash",
+ "episodes": 696,
+ "unparseable": 0,
+ "failed": 0,
+ "all": {
+  "questions": 174,
+  "accuracy": 0.8692528735632183,
+  "ci95": [
+   0.8261494252873564,
+   0.9109195402298851
+  ]
+ },
+ "agreement_with_run_judge": 0.9497126436781609,
+ "kappa_with_run_judge": 0.7895718876334611
+}

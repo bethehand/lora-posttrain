@@ -1,0 +1,23 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg01-rl35/train_mixed/wiki-search-heldout--wiki-search-rl35--null--0dddcb45",
+ "episodes": 696,
+ "errored": 0,
+ "error_kinds": {},
+ "all": {
+  "questions": 174,
+  "accuracy": 0.853448275862069,
+  "ci95": [
+   0.8074712643678161,
+   0.896551724137931
+  ]
+ },
+ "slide100": null,
+ "mean_tool_calls": 3.2054597701149423,
+ "no_tool_call_rate": 0.0,
+ "truncation_rate": 0.0014367816091954023,
+ "median_final_reply_chars": 111,
+ "stop_conditions": {
+  "agent_completed": 696
+ },
+ "judge_tokens_total": 446358
+}

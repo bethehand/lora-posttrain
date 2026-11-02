@@ -1,0 +1,17 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg01-base/train_sample/wiki-search-heldout----mnt--nvme1--bruce--models--qwen3-4b-instruct-2507--null--31dd10dd",
+ "judge": "deepseek-flash",
+ "episodes": 1200,
+ "unparseable": 0,
+ "failed": 0,
+ "all": {
+  "questions": 300,
+  "accuracy": 0.6008333333333333,
+  "ci95": [
+   0.5458333333333333,
+   0.6541666666666667
+  ]
+ },
+ "agreement_with_run_judge": 0.9883333333333333,
+ "kappa_with_run_judge": 0.975694514772816
+}

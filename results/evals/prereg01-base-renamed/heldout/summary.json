@@ -1,0 +1,30 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg01-base-renamed/heldout/wiki-search-heldout----mnt--nvme1--bruce--models--qwen3-4b-instruct-2507--null--f13a3436",
+ "episodes": 1960,
+ "errored": 0,
+ "error_kinds": {},
+ "all": {
+  "questions": 490,
+  "accuracy": 0.5668367346938775,
+  "ci95": [
+   0.5244897959183673,
+   0.6107142857142858
+  ]
+ },
+ "slide100": {
+  "questions": 100,
+  "accuracy": 0.5975,
+  "ci95": [
+   0.5,
+   0.69
+  ]
+ },
+ "mean_tool_calls": 2.9948979591836733,
+ "no_tool_call_rate": 0.030612244897959183,
+ "truncation_rate": 0.0010204081632653062,
+ "median_final_reply_chars": 109,
+ "stop_conditions": {
+  "agent_completed": 1960
+ },
+ "judge_tokens_total": 507406
+}
