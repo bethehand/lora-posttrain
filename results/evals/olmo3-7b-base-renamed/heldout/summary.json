@@ -1,0 +1,31 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/olmo3-7b-base-renamed/heldout/wiki-search-heldout----mnt--nvme1--bruce--models--olmo-3-7b-instruct--null--442d845b",
+ "episodes": 1960,
+ "errored": 0,
+ "error_kinds": {},
+ "all": {
+  "questions": 490,
+  "accuracy": 0.09387755102040816,
+  "ci95": [
+   0.07551020408163266,
+   0.11326530612244898
+  ]
+ },
+ "slide100": {
+  "questions": 100,
+  "accuracy": 0.0925,
+  "ci95": [
+   0.0575,
+   0.1325
+  ]
+ },
+ "mean_tool_calls": 5.1959183673469385,
+ "no_tool_call_rate": 0.014285714285714285,
+ "truncation_rate": 0.10714285714285714,
+ "median_final_reply_chars": 270,
+ "stop_conditions": {
+  "agent_completed": 1937,
+  "context_length": 23
+ },
+ "judge_tokens_total": 690815
+}
