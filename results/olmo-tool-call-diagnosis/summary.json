@@ -1,0 +1,51 @@
+{
+ "raw_greedy": {
+  "other": 5,
+  "section_ \"": 11,
+  "section_id=": 4
+ },
+ "variants": {
+  "baseline": {
+   "unparsed call": 0.71,
+   "well formed": 0.22,
+   "parsed, wrong argument": 0.07,
+   "samples": 100
+  },
+  "json_list": {
+   "unparsed call": 0.52,
+   "well formed": 0.41,
+   "parsed, wrong argument": 0.07,
+   "samples": 100
+  },
+  "plain_text": {
+   "unparsed call": 0.91,
+   "well formed": 0.02,
+   "parsed, wrong argument": 0.07,
+   "samples": 100
+  },
+  "rename_param": {
+   "unparsed call": 0.3,
+   "well formed": 0.7,
+   "samples": 100
+  },
+  "rename_both": {
+   "unparsed call": 0.24,
+   "no call": 0.06,
+   "well formed": 0.7,
+   "samples": 100
+  },
+  "plain_description": {
+   "unparsed call": 0.65,
+   "no call": 0.01,
+   "well formed": 0.3,
+   "parsed, wrong argument": 0.04,
+   "samples": 100
+  },
+  "minimal": {
+   "well formed": 0.64,
+   "no call": 0.13,
+   "unparsed call": 0.23,
+   "samples": 100
+  }
+ }
+}

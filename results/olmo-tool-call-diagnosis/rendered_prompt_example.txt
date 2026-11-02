@@ -1,0 +1,297 @@
+<|im_start|>system
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Do not make assumptions about what values to plug into functions.<functions>[{"type": "function", "function": {"name": "wiki_read_section", "description": "Read the text of a section (`page_id:section`; use `page_id:full` for all).", "parameters": {"properties": {"section_id": {"title": "Section Id", "type": "string"}}, "required": ["section_id"], "title": "read_sectionArguments", "type": "object"}}}, {"type": "function", "function": {"name": "wiki_search_pages", "description": "Search the wiki for the 10 most relevant pages (by title). Returns\n        `[{page_id, title}, ...]` — pass a page_id to view_sections.", "parameters": {"properties": {"query": {"title": "Query", "type": "string"}}, "required": ["query"], "title": "search_pagesArguments", "type": "object"}}}, {"type": "function", "function": {"name": "wiki_view_sections", "description": "List a page's sections. Returns `[{section_id, section_name}, ...]` — pass a\n        section_id to read_section.", "parameters": {"properties": {"page_id": {"title": "Page Id", "type": "string"}}, "required": ["page_id"], "title": "view_sectionsArguments", "type": "object"}}}]</functions><|im_end|>
+<|im_start|>user
+Use the Wikipedia search tools — `wiki_search_pages` to find relevant pages, `wiki_view_sections` to list a page's sections, and `wiki_read_section` to read one — to answer the question. When confident, reply with a concise final answer.
+
+Question: Which American Express card, introduced in 1999, is often referred to as the 'black card'?<|im_end|>
+<|im_start|>assistant
+<function_calls>wiki_search_pages(query="American Express black card introduced 1999")</function_calls><|im_end|>
+<|im_start|>environment
+{
+  "page_id": "american_express",
+  "title": "American Express"
+}
+{
+  "page_id": "chase_bank",
+  "title": "Chase Bank"
+}
+{
+  "page_id": "the_black_phone",
+  "title": "The Black Phone"
+}
+{
+  "page_id": "american_airlines_flight_11",
+  "title": "American Airlines Flight 11"
+}
+{
+  "page_id": "house_of_cards__american_tv_series",
+  "title": "House of Cards _American TV series"
+}
+{
+  "page_id": "federal_reserve",
+  "title": "Federal Reserve"
+}
+{
+  "page_id": "southwest_airlines",
+  "title": "Southwest Airlines"
+}
+{
+  "page_id": "blackwater__company",
+  "title": "Blackwater _company"
+}
+{
+  "page_id": "united_parcel_service",
+  "title": "United Parcel Service"
+}
+{
+  "page_id": "american_black_bear",
+  "title": "American black bear"
+}<|im_end|>
+<|im_start|>assistant
+<function_calls>wiki_view_sections(page_id="american_express")</function_calls><|im_end|>
+<|im_start|>environment
+{
+  "section_id": "american_express:american_express",
+  "section_name": "American Express"
+}
+{
+  "section_id": "american_express:early_history",
+  "section_name": "Early history"
+}
+{
+  "section_id": "american_express:national_expansion",
+  "section_name": "National expansion"
+}
+{
+  "section_id": "american_express:railroad_express_business",
+  "section_name": "Railroad express business"
+}
+{
+  "section_id": "american_express:1980s_to_present",
+  "section_name": "1980s to present"
+}
+{
+  "section_id": "american_express:shearson_lehman_hutton,_ids:_1981–1994",
+  "section_name": "Shearson Lehman Hutton, IDS: 1981–1994"
+}
+{
+  "section_id": "american_express:tdb_american_express_bank,_switzerland",
+  "section_name": "TDB American Express Bank, Switzerland"
+}
+{
+  "section_id": "american_express:fees",
+  "section_name": "Fees"
+}
+{
+  "section_id": "american_express:\"boston_fee_party\"",
+  "section_name": "\"Boston Fee Party\""
+}
+{
+  "section_id": "american_express:conversion_to_bank_holding_company",
+  "section_name": "Conversion to bank holding company"
+}
+{
+  "section_id": "american_express:charging_order_controversy_in_the_uk",
+  "section_name": "Charging order controversy in the UK"
+}
+{
+  "section_id": "american_express:cfpb_enforcement_action",
+  "section_name": "CFPB enforcement action"
+}
+{
+  "section_id": "american_express:costco_exclusivity_arrangement_(2004–2016)",
+  "section_name": "Costco exclusivity arrangement (2004–2016)"
+}
+{
+  "section_id": "american_express:merchant_fees",
+  "section_name": "Merchant fees"
+}
+{
+  "section_id": "american_express:airport_lounges",
+  "section_name": "Airport lounges"
+}
+{
+  "section_id": "american_express:centurion_lounges",
+  "section_name": "Centurion lounges"
+}
+{
+  "section_id": "american_express:finances",
+  "section_name": "Finances"
+}
+{
+  "section_id": "american_express:cards",
+  "section_name": "Cards"
+}
+{
+  "section_id": "american_express:consumer_cards",
+  "section_name": "Consumer cards"
+}
+{
+  "section_id": "american_express:card_acceptance_outside_the_u.s.",
+  "section_name": "Card acceptance outside the U.S."
+}
+{
+  "section_id": "american_express:card_design",
+  "section_name": "Card design"
+}
+{
+  "section_id": "american_express:expresspay",
+  "section_name": "ExpressPay"
+}
+{
+  "section_id": "american_express:american_express_open",
+  "section_name": "American Express OPEN"
+}
+{
+  "section_id": "american_express:commercial_cards_and_services",
+  "section_name": "Commercial cards and services"
+}
+{
+  "section_id": "american_express:non-proprietary_cards",
+  "section_name": "Non-proprietary cards"
+}
+{
+  "section_id": "american_express:product_suite",
+  "section_name": "Product suite"
+}
+{
+  "section_id": "american_express:traveler's_cheques",
+  "section_name": "Traveler's cheques"
+}
+{
+  "section_id": "american_express:financial_advisors",
+  "section_name": "Financial advisors"
+}
+{
+  "section_id": "american_express:international_bank",
+  "section_name": "International bank"
+}
+{
+  "section_id": "american_express:travel",
+  "section_name": "Travel"
+}
+{
+  "section_id": "american_express:publishing",
+  "section_name": "Publishing"
+}
+{
+  "section_id": "american_express:individual_banking",
+  "section_name": "Individual banking"
+}
+{
+  "section_id": "american_express:business_banking",
+  "section_name": "Business banking"
+}
+{
+  "section_id": "american_express:advertising_campaigns",
+  "section_name": "Advertising campaigns"
+}
+{
+  "section_id": "american_express:\"don't_leave_home_without_them\"",
+  "section_name": "\"Don't Leave Home Without Them\""
+}
+{
+  "section_id": "american_express:*the_adventures_of_seinfeld_&_superman*",
+  "section_name": "*The Adventures of Seinfeld & Superman*"
+}
+{
+  "section_id": "american_express:\"my_life._my_card._/_are_you_a_cardmember?\"",
+  "section_name": "\"My life. My card. / Are You a Cardmember?\""
+}
+{
+  "section_id": "american_express:*animals*",
+  "section_name": "*Animals*"
+}
+{
+  "section_id": "american_express:c._f._frost",
+  "section_name": "C. F. Frost"
+}
+{
+  "section_id": "american_express:cause_marketing",
+  "section_name": "Cause marketing"
+}
+{
+  "section_id": "american_express:cultural_projects_and_sponsored_events",
+  "section_name": "Cultural projects and sponsored events"
+}
+{
+  "section_id": "american_express:workplace",
+  "section_name": "Workplace"
+}
+{
+  "section_id": "american_express:offices",
+  "section_name": "Offices"
+}
+{
+  "section_id": "american_express:job_satisfaction",
+  "section_name": "Job satisfaction"
+}
+{
+  "section_id": "american_express:corporate_governance",
+  "section_name": "Corporate governance"
+}
+{
+  "section_id": "american_express:in_popular_culture",
+  "section_name": "In popular culture"
+}
+{
+  "section_id": "american_express:list_of_ceos",
+  "section_name": "List of CEOs"
+}
+{
+  "section_id": "american_express:[wells](henry)(henry_wells)_(1850–1866)",
+  "section_name": "[Wells](Henry)(Henry Wells) (1850–1866)"
+}
+{
+  "section_id": "american_express:[fargo](william)(william_fargo)_(1866–1881)",
+  "section_name": "[Fargo](William)(William Fargo) (1866–1881)"
+}
+{
+  "section_id": "american_express:[c._fargo](j.)(j._c._fargo)_(1881–1914)",
+  "section_name": "[C. Fargo](J.)(J. C. Fargo) (1881–1914)"
+}
+{
+  "section_id": "american_express:george_c._taylor_(1914–1923)",
+  "section_name": "George C. Taylor (1914–1923)"
+}
+{
+  "section_id": "american_express:frederick_p._small_(1923–1944)",
+  "section_name": "Frederick P. Small (1923–1944)"
+}
+{
+  "section_id": "american_express:[reed](ralph)(ralph_reed_(american_express))_(1944–1960)",
+  "section_name": "[Reed](Ralph)(Ralph Reed (American Express)) (1944–1960)"
+}
+{
+  "section_id": "american_express:[l._clark_sr.](howard)(howard_l._clark_sr.)_(1960–1977)",
+  "section_name": "[L. Clark Sr.](Howard)(Howard L. Clark Sr.) (1960–1977)"
+}
+{
+  "section_id": "american_express:[d._robinson_iii](james)(james_d._robinson_iii)_(1977–1993)",
+  "section_name": "[D. Robinson III](James)(James D. Robinson III) (1977–1993)"
+}
+{
+  "section_id": "american_express:[golub](harvey)(harvey_golub)_(1993–2001)",
+  "section_name": "[Golub](Harvey)(Harvey Golub) (1993–2001)"
+}
+{
+  "section_id": "american_express:[chenault](kenneth)(kenneth_chenault)_(2001–2018)",
+  "section_name": "[Chenault](Kenneth)(Kenneth Chenault) (2001–2018)"
+}
+{
+  "section_id": "american_express:[squeri](stephen)(stephen_squeri)_(2018–present)",
+  "section_name": "[Squeri](Stephen)(Stephen Squeri) (2018–present)"
+}
+{
+  "section_id": "american_express:see_also",
+  "section_name": "See also"
+}
+{
+  "section_id": "american_express:references",
+  "section_name": "References"
+}
+{
+  "section_id": "american_express:external_links",
+  "section_name": "External links"
+}<|im_end|>
+<|im_start|>assistant
