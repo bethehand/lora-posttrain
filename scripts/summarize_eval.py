@@ -12,24 +12,27 @@ import json
 import os
 import random
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 BOOTSTRAP = 10_000
 
 
 def episode(record: dict) -> dict:
-    trace = record["traces"][0] if record.get("traces") else {}
-    nodes = trace.get("nodes", [])
-    replies = [n["message"].get("content") or "" for n in nodes if n.get("message", {}).get("role") == "assistant"]
-    calls = trace.get("calls", [])
-    reward = trace.get("rewards", {}).get("wiki-search", {}).get("score")
+    # Errored episodes carry None for most fields
+    trace = (record.get("traces") or [{}])[0] or {}
+    nodes = trace.get("nodes") or []
+    replies = [n["message"].get("content") or "" for n in nodes if (n.get("message") or {}).get("role") == "assistant"]
+    calls = trace.get("calls") or []
+    reward = ((trace.get("rewards") or {}).get("wiki-search") or {}).get("score")
     judge_usage = trace.get("extra_usage") or []
+    errors = (record.get("errors") or []) + (trace.get("errors") or [])
     return {
         "idx": record["task"]["data"]["idx"],
         "ok": bool(record.get("ok")) and reward is not None,
+        "error": str(errors[0])[:120] if errors else None,
         "reward": reward,
-        "tool_calls": sum(1 for n in nodes if n.get("message", {}).get("role") == "tool"),
+        "tool_calls": sum(1 for n in nodes if (n.get("message") or {}).get("role") == "tool"),
         "turns": len(calls),
         "truncated": any(c.get("finish_reason") == "length" for c in calls),
         "final_reply_chars": len(replies[-1]) if replies else 0,
@@ -66,6 +69,7 @@ def main() -> None:
         "run_dir": str(run_dir),
         "episodes": len(episodes),
         "errored": len(episodes) - n,
+        "error_kinds": dict(Counter(e["error"] for e in episodes if not e["ok"]).most_common(5)),
         "all": accuracy(per_question),
         "slide100": accuracy(slide100) if slide100 else None,
         "mean_tool_calls": sum(e["tool_calls"] for e in scored) / n,

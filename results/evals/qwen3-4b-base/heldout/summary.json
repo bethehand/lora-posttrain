@@ -1,0 +1,32 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/qwen3-4b-base/heldout/wiki-search-heldout----mnt--nvme1--bruce--models--qwen3-4b-instruct-2507--null--996d82c2",
+ "episodes": 1960,
+ "errored": 2,
+ "error_kinds": {
+  "{'type': 'TaskError', 'message': 'task TriviaTask scoring: APITimeoutError: Request timed out.', 'traceback': 'Traceback": 2
+ },
+ "all": {
+  "questions": 490,
+  "accuracy": 0.5663265306122449,
+  "ci95": [
+   0.5229591836734694,
+   0.6091836734693877
+  ]
+ },
+ "slide100": {
+  "questions": 100,
+  "accuracy": 0.5675,
+  "ci95": [
+   0.4725,
+   0.665
+  ]
+ },
+ "mean_tool_calls": 3.0051072522982634,
+ "no_tool_call_rate": 0.028089887640449437,
+ "truncation_rate": 0.0005107252298263534,
+ "median_final_reply_chars": 110,
+ "stop_conditions": {
+  "agent_completed": 1960
+ },
+ "judge_tokens_total": 580119
+}
