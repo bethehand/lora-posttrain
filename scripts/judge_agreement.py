@@ -79,7 +79,7 @@ async def main() -> None:
     root = Path(os.environ["ROOT"])
     cache = root / "cache/original_evals"
     cache.mkdir(parents=True, exist_ok=True)
-    out = Path(os.environ["REPO"]) / "results/judge_agreement"
+    out = Path(os.environ["REPO"]) / "results/judge_agreement" / args.model
     out.mkdir(parents=True, exist_ok=True)
 
     judge = WikiSearchJudge(
