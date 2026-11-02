@@ -1,6 +1,6 @@
 # Standalone eval against a local vLLM server, e.g. on GPU 3:
 #   CUDA_VISIBLE_DEVICES=3 uv run inference --vllm.model $ROOT/models/Qwen3-4B-Instruct-2507 \
-#     --vllm.enable-lora --vllm.tool-call-parser hermes
+#     --vllm.enable-lora --vllm.tool-call-parser hermes --server.port 18000
 #   uv run eval @ $REPO/configs/wiki-search/eval.toml --env.taskset.split heldout
 # Sampling follows the model's generation_config, as in the published eval.
 
@@ -8,7 +8,7 @@ model = "/mnt/nvme1/bruce/models/Qwen3-4B-Instruct-2507"
 num_rollouts = 4
 
 [client]
-base_url = "http://localhost:8000/v1"
+base_url = "http://localhost:18000/v1"
 
 [sampling]
 max_tokens = 512

@@ -23,6 +23,10 @@ export WIKI_SEARCH_CACHE="$ROOT/cache/wiki_search"
 export TMPDIR="$ROOT/tmp"
 export PRL_OUTPUT_DIR="$ROOT/outputs"
 
+# Other users' services hold ports 8000 and 8001 on this shared server; 8000 is prime-rl's default
+# inference port. Inference listens on 18000 instead (the engine behind the router on 18100).
+export INFERENCE_PORT=18000
+
 # RTX 4090s have no peer-to-peer over PCIe
 export NCCL_P2P_DISABLE=1
 # W&B is unreachable from this server; prime-rl's file monitor writes metrics.jsonl instead

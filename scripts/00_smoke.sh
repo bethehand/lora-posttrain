@@ -15,5 +15,8 @@ print("bf16 matmul ok", float((x @ x).float().abs().mean()))
 EOF
 
 # Full RL stack on two GPUs: vLLM inference, orchestrator and trainer, 20 steps on Qwen3-0.6B
+# The orchestrator's client URL does not follow inference.server.port, so both are set
 CUDA_VISIBLE_DEVICES=0,1 uv run rl @ configs/basic/reverse-text/rl.toml \
-  --no-monitors.wandb --output-dir "$PRL_OUTPUT_DIR/smoke"
+  --no-monitors.wandb --output-dir "$PRL_OUTPUT_DIR/smoke" \
+  --inference.server.port "$INFERENCE_PORT" \
+  --orchestrator.model.client.base-url "http://localhost:$INFERENCE_PORT/v1"

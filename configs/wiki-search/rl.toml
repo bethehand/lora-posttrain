@@ -33,6 +33,10 @@ initial_inflight = 256
 
 [orchestrator.model.lora]
 
+# Port 8000 is taken on the shared server (setup/env.sh); the client URL does not follow the server port
+[orchestrator.model.client]
+base_url = "http://localhost:18000/v1"
+
 # A local path misses the renderer map's exact-name lookup; without this the default renderer has no tool support
 [orchestrator.renderer]
 name = "qwen3"
@@ -61,6 +65,9 @@ env.agent.harness.id = "null"
 env.agent.runtime.type = "subprocess"
 
 [ckpt]
+
+[inference.server]
+port = 18000
 
 [inference.vllm]
 tool_call_parser = "hermes"
