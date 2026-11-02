@@ -42,8 +42,12 @@ for attempt in 1 2 3 4 5; do
   echo "uv sync failed (attempt $attempt), retrying in 30s" >&2
   sleep 30
 done
-# Our environment variants: editable, so a `scripts/sync.sh push` takes effect without reinstalling.
-# `uv sync` is exact and removes them, so this step always runs after it.
+# Installed after `uv sync`, which is exact and would remove them:
+# - our environment variants, editable so a `scripts/sync.sh push` takes effect without reinstalling;
+# - vllm-router, which `uv run inference` puts in front of vLLM to keep a multi-turn session on one
+#   engine (prefix-cache hits). It ships in the `disagg` extra, whose other packages are for Hopper
+#   or multi-node setups, so only this wheel is installed, at the lock's URL and hash.
 uv pip install --no-deps -e "$REPO/envs/wiki_search_heldout"
+uv pip install --no-deps --require-hashes -r "$REPO/setup/vllm-router.txt"
 
 bash "$REPO/setup/record_versions.sh"
