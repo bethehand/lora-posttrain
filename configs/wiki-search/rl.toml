@@ -1,9 +1,11 @@
 # wiki-search LoRA RL on 4x RTX 4090: 3 GPUs serve the policy, 1 trains. Run with CUDA_VISIBLE_DEVICES=0,1,2,3.
 # Recipe from prime-rl v0.9.0 examples/basic/wiki-search/rl.toml (8 GPUs, batch 512, group 16, 200 steps,
-# seq_len 4096). Changes, all decided from base-model data before any training result:
+# seq_len 4096, lr 1e-5). Changes, all decided before any training result:
 # - questions: train_mixed, the 174 training questions the base model gets right in some but not all of
 #   8 rollouts (the other 1,597 give zero advantage); held-out pages never trained on
 # - group 8 x 16 questions = 128 rollouts per step, 35 steps: each question drawn about 3 times
+# - lr 3e-5: Adam moves each weight by at most about lr per step, so 35 steps at the recipe's 1e-5 would
+#   move the adapter about a sixth as far as its 200 steps, and LoRA's B starts at zero
 # - seq_len 8192: the base model reads one section and stops (results/audit), and longer reads must not
 #   be truncated to zero reward
 # - DeepSeek judge, local weights, held-out eval at steps 0, 15 and 30
@@ -20,7 +22,7 @@ num_infer_gpus = 3
 name = "/mnt/nvme1/bruce/models/Qwen3-4B-Instruct-2507"
 
 [trainer.optim]
-lr = 1e-5
+lr = 3e-5
 weight_decay = 0.0
 
 [trainer.model.lora]
