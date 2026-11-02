@@ -7,7 +7,7 @@ final reply) triples with our judge, through the production code path
 model's accuracy under both judges.
 
 On the server, from $PRIME_RL_DIR:
-    uv run python $REPO/scripts/judge_agreement.py --model deepseek-chat
+    uv run python $REPO/scripts/judge_agreement.py --model deepseek-flash
 """
 
 import argparse
@@ -70,7 +70,7 @@ def cohen_kappa(a: list[float], b: list[float]) -> float:
 
 async def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default="deepseek-chat")
+    parser.add_argument("--model", default="deepseek-flash")
     parser.add_argument("--base-url", default="https://api.deepseek.com/v1")
     parser.add_argument("--api-key-var", default="DEEPSEEK_API_KEY")
     parser.add_argument("--concurrency", type=int, default=16)

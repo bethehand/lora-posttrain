@@ -14,7 +14,7 @@ Prime Intellect reported that LoRA RL takes Qwen3-4B-Instruct-2507 from 0.55 to 
 | Environment | wiki-search tools, prompt and judge prompt from verifiers b2e4e81 |
 | Questions | willcb/wiki-trivia-questions @ bd21382, split by source page: train 1,771 (331 pages), heldout 490 (88 pages) |
 | splits.json sha256 | TBD at freeze |
-| Judge | DeepSeek, model id TBD after checking the API's model list; agreement with the original gpt-4.1-mini verdicts measured first |
+| Judge | DeepSeek API, `deepseek-flash` or `deepseek-v4-pro` (the two models the API lists), whichever agrees better with the original gpt-4.1-mini verdicts |
 | Trainer | prime-rl v0.9.0 (ab5de8f), LoRA rank 8 on all linear projections, lr 1e-5, group size 16, 512 tokens per turn, seq_len 4096 |
 | Batch and steps | TBD from the pilot |
 | Training seeds | 1 |

@@ -45,7 +45,7 @@ name = "wiki-search-train"
 curriculum = { gates = { zero_advantage = { type = "advantage_range" } } }
 env.taskset.id = "wiki-search-heldout"
 env.taskset.split = "train"
-env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-chat", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
+env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-flash", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
 env.agent.harness.id = "null"
 env.agent.runtime.type = "subprocess"
 
@@ -56,7 +56,7 @@ interval = 50
 name = "wiki-search-heldout"
 env.taskset.id = "wiki-search-heldout"
 env.taskset.split = "heldout"
-env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-chat", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
+env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-flash", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
 env.agent.harness.id = "null"
 env.agent.runtime.type = "subprocess"
 
