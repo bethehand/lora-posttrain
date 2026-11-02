@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # The pre-registered eval suite for one served model on wiki-search-heldout, 4 rollouts per
-# question, judge deepseek-v4-pro: heldout, train_sample, and heldout without tools.
+# question, judge deepseek-v4-pro: heldout, train_sample, train_mixed, and heldout without tools.
 # Needs an inference server, by default on $INFERENCE_PORT (see configs/wiki-search/eval.toml).
 #   bash scripts/eval_suite.sh <model path or adapter name> <results name> [server base url]
 set -euo pipefail
@@ -24,11 +24,12 @@ run() {  # <tag> <extra eval args...>
 }
 
 # TAGS selects a subset, e.g. to resume after a failure
-tags=${TAGS:-heldout train_sample heldout-notools}
+tags=${TAGS:-heldout train_sample train_mixed heldout-notools}
 for tag in $tags; do
   case $tag in
     heldout) run heldout --env.taskset.split heldout ;;
     train_sample) run train_sample --env.taskset.split train_sample ;;
+    train_mixed) run train_mixed --env.taskset.split train_mixed ;;
     heldout-notools) run heldout-notools --env.taskset.split heldout --env.taskset.use-tools false ;;
     *) echo "unknown tag $tag" >&2; exit 1 ;;
   esac
