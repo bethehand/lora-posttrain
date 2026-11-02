@@ -1,0 +1,80 @@
+# wiki-search LoRA RL on 4x RTX 4090: 3 GPUs serve the policy, 1 trains. Run with CUDA_VISIBLE_DEVICES=0,1,2,3.
+# Recipe from prime-rl v0.9.0 examples/basic/wiki-search/rl.toml (8 GPUs, batch 512, group 16, 200 steps,
+# seq_len 4096, lr 1e-5). Changes, all decided before any training result:
+# - questions: train_mixed, the 174 training questions the base model gets right in some but not all of
+#   8 rollouts (the other 1,597 give zero advantage); held-out pages never trained on
+# - group 8 x 16 questions = 128 rollouts per step, 35 steps: each question drawn about 3 times
+# - lr 3e-5: Adam moves each weight by at most about lr per step, so 35 steps at the recipe's 1e-5 would
+#   move the adapter about a sixth as far as its 200 steps, and LoRA's B starts at zero
+# - seq_len 8192: the base model reads one section and stops (results/audit), and longer reads must not
+#   be truncated to zero reward
+# - DeepSeek judge, local weights, held-out eval at steps 0, 15 and 30
+
+max_steps = 35
+seq_len = 8192
+
+[deployment]
+num_train_gpus = 1
+num_infer_gpus = 3
+
+[model]
+# Downloaded from ModelScope and checked against the Hugging Face sha256 of Qwen/Qwen3-4B-Instruct-2507@cdbee75
+name = "/mnt/nvme1/bruce/models/Qwen3-4B-Instruct-2507"
+
+[trainer.optim]
+lr = 3e-5
+weight_decay = 0.0
+
+[trainer.model.lora]
+rank = 8
+dropout = 0.0
+target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+[orchestrator]
+batch_size = 128
+group_size = 8
+
+[orchestrator.concurrency]
+initial_inflight = 256
+
+[orchestrator.model.lora]
+
+# Port 8000 is taken on the shared server (setup/env.sh); the client URL does not follow the server port
+[orchestrator.model.client]
+base_url = "http://localhost:18000/v1"
+
+# A local path misses the renderer map's exact-name lookup; without this the default renderer has no tool support
+[orchestrator.renderer]
+name = "qwen3"
+
+[orchestrator.train.sampling]
+max_completion_tokens = 512
+
+[[orchestrator.train.source]]
+name = "wiki-search-train"
+curriculum = { gates = { zero_advantage = { type = "advantage_range" } } }
+env.taskset.id = "wiki-search-heldout"
+env.taskset.split = "train_mixed"
+env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-flash", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
+env.agent.harness.id = "null"
+env.agent.runtime.type = "subprocess"
+
+[orchestrator.eval]
+interval = 15
+
+[[orchestrator.eval.source]]
+name = "wiki-search-heldout"
+env.taskset.id = "wiki-search-heldout"
+env.taskset.split = "heldout"
+env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-flash", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
+env.agent.harness.id = "null"
+env.agent.runtime.type = "subprocess"
+
+[ckpt]
+
+[inference.server]
+port = 18000
+
+[inference.vllm]
+tool_call_parser = "hermes"
+max_model_len = 8192

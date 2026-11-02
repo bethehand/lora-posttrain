@@ -1,0 +1,41 @@
+step  1: reward=0.5515 trunc=0.02941 turns=4.118 orch_s=146.3 mem=18.02 ent=0.06289 kl=0.0007811 fb=100.4
+step  2: reward=0.5368 trunc=0 turns=3.882 orch_s=15.3 mem=18.14 ent=0.1171 kl=0.001059 fb=113.1
+step  3: reward=0.5197 trunc=0.01316 turns=4.092 orch_s=23.46 mem=18.14 ent=0.0823 kl=0.001602 fb=107.9
+step  4: reward=0.6447 trunc=0 turns=4.349 orch_s=65.8 mem=18.14 ent=0.1178 kl=0.001037 fb=139
+step  5: reward=0.4375 trunc=0.0125 turns=4.375 orch_s=248.9 mem=18.14 ent=0.08192 kl=0.002118 fb=99.44
+step  6: reward=0.4886 trunc=0 turns=4.176 orch_s=28.72 mem=18.14 ent=0.1077 kl=0.001619 fb=114.5
+step  7: reward=0.3641 trunc=0 turns=4.098 orch_s=221.7 mem=18.14 ent=0.07631 kl=0.001796 fb=94.28
+step  8: reward=0.4375 trunc=0.005682 turns=4.216 orch_s=14.94 mem=18.14 ent=0.09332 kl=0.001913 fb=106
+step  9: reward=0.6324 trunc=0.04412 turns=4.066 orch_s=177.5 mem=18.14 ent=0.179 kl=0.003848 fb=106.4
+step 10: reward=0.6974 trunc=0.03947 turns=4.099 orch_s=97.12 mem=18.14 ent=0.06289 kl=0.002522 fb=121.2
+step 11: reward=0.6307 trunc=0.01136 turns=4.062 orch_s=129.4 mem=18.14 ent=0.1008 kl=0.002723 fb=120.9
+step 12: reward=0.7292 trunc=0 turns=4.417 orch_s=19.78 mem=18.14 ent=0.09811 kl=0.001986 fb=118.1
+step 13: reward=0.66 trunc=0.02 turns=4.455 orch_s=228.5 mem=18.14 ent=0.1152 kl=0.001761 fb=118.9
+step 14: reward=0.5388 trunc=0 turns=4.065 orch_s=26.5 mem=18.14 ent=0.06198 kl=0.001383 fb=109.5
+step 15: reward=0.525 trunc=0 turns=4.25 orch_s=218.7 mem=18.14 ent=0.07071 kl=0.002627 fb=98.24
+step 16: reward=0.599 trunc=0 turns=4.078 orch_s=15.47 mem=18.14 ent=0.05451 kl=0.00129 fb=119.5
+step 17: reward=0.7155 trunc=0.01293 turns=4.056 orch_s=232.6 mem=18.14 ent=0.09922 kl=0.002696 fb=105.7
+step 18: reward=0.7875 trunc=0.004167 turns=4.15 orch_s=17.69 mem=18.14 ent=0.08168 kl=0.001001 fb=108.3
+step 19: reward=0.7621 trunc=0.004032 turns=4.177 orch_s=172.8 mem=18.14 ent=0.0749 kl=0.000812 fb=104.8
+step 20: reward=0.6528 trunc=0 turns=4.267 orch_s=23.56 mem=18.14 ent=0.09516 kl=0.001354 fb=123
+step 21: reward=0.5511 trunc=0.005682 turns=4.227 orch_s=176.4 mem=18.14 ent=0.09658 kl=0.0007955 fb=108
+step 22: reward=0.599 trunc=0.005208 turns=4.214 orch_s=17.32 mem=18.14 ent=0.09758 kl=0.001385 fb=97.22
+step 23: reward=0.7831 trunc=0.01838 turns=4.037 orch_s=230.1 mem=18.14 ent=0.1383 kl=0.001377 fb=126.3
+step 24: reward=0.7708 trunc=0 turns=4.179 orch_s=26 mem=18.14 ent=0.1034 kl=0.002491 fb=126.4
+step 25: reward=0.7688 trunc=0.00625 turns=4.228 orch_s=213.8 mem=18.14 ent=0.05308 kl=0.001017 fb=95.14
+step 26: reward=0.6964 trunc=0 turns=4.08 orch_s=23.66 mem=18.14 ent=0.08379 kl=0.001114 fb=114.9
+step 27: reward=0.6324 trunc=0 turns=4.309 orch_s=163.8 mem=18.14 ent=0.06927 kl=0.001397 fb=101.3
+step 28: reward=0.7344 trunc=0.02083 turns=4.109 orch_s=29.39 mem=18.14 ent=0.152 kl=0.001652 fb=108.6
+step 29: reward=0.8531 trunc=0.00625 turns=4.016 orch_s=234.6 mem=18.14 ent=0.1129 kl=0.0008584 fb=112.7
+step 30: reward=0.7407 trunc=0.009259 turns=4.38 orch_s=21.72 mem=17.98 ent=0.08936 kl=0.002133 fb=123.3
+step 31: reward=0.7536 trunc=0 turns=4.336 orch_s=151 mem=18.14 ent=0.04693 kl=0.002299 fb=114
+step 32: reward=0.7148 trunc=0 turns=4.105 orch_s=192.6 mem=18.14 ent=0.122 kl=0.001496 fb=101.2
+step 33: reward=0.81 trunc=0.0075 turns=4.165 orch_s=34.1 mem=18.14 ent=0.1375 kl=0.001307 fb=131.3
+step 34: reward=0.8824 trunc=0.003676 turns=4.062 orch_s=141.1 mem=18.14 ent=0.07847 kl=0.0005704 fb=126
+step 35: reward=0.7905 trunc=0.006757 turns=4.473 orch_s=62.32 mem=18.14 ent=0.09486 kl=0.00191 fb=121.7
+GUARD PASSED for steps 1-10
+online eval at step 0: heldout reward 0.5694 (judge deepseek-flash, 1 rollout per question)
+online eval at step 15: heldout reward 0.5959 (judge deepseek-flash, 1 rollout per question)
+online eval at step 30: heldout reward 0.6367 (judge deepseek-flash, 1 rollout per question)
+online eval at step 35: heldout reward 0.6429 (judge deepseek-flash, 1 rollout per question)
+run dir: /mnt/nvme1/bruce/outputs/wiki-search/wiki-search-train--qwen3-4b-instruct-2507--e31eeffe/
