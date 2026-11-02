@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Install uv and prime-rl at a pinned commit under $ROOT. Safe to re-run.
+set -euo pipefail
+source "$(dirname "$0")/env.sh"
+
+UV_VERSION=0.13.6
+# prime-rl v0.9.0 (2026-08-25): the last release on CUDA 12 wheels. v0.10.0 moved to CUDA 13,
+# which needs driver >= 580; this server runs 550.
+PRIME_RL_COMMIT=ab5de8fff44b2c4a5c85e24b6e6e3f7d57eee7b1
+
+if ! uv --version 2>/dev/null | grep -q "$UV_VERSION"; then
+  curl -LsSf "https://astral.sh/uv/$UV_VERSION/install.sh" \
+    | env UV_INSTALL_DIR="$ROOT/bin" UV_NO_MODIFY_PATH=1 sh
+fi
+uv --version
+
+if [ ! -d "$PRIME_RL_DIR/.git" ]; then
+  git clone --filter=blob:none https://github.com/PrimeIntellect-ai/prime-rl.git "$PRIME_RL_DIR"
+fi
+cd "$PRIME_RL_DIR"
+git fetch --tags origin
+git checkout --detach "$PRIME_RL_COMMIT"
+# Submodules are declared with SSH URLs; fetch them over HTTPS so no GitHub key is needed here
+git -c url."https://github.com/".insteadOf="git@github.com:" \
+  submodule update --init -- deps/verifiers deps/renderers deps/prime-envs deps/pydantic-config
+
+# Locked dependencies plus the two environments we use
+uv sync --locked --all-extras --package prime-rl --package reverse-text --package wiki-search
+
+bash "$REPO/setup/record_versions.sh"

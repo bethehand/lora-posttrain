@@ -1,0 +1,11 @@
+.env.local
+.secrets.env
+*.env
+__pycache__/
+.venv/
+outputs/
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+.DS_Store
