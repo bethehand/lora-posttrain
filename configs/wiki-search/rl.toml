@@ -71,3 +71,5 @@ port = 18000
 
 [inference.vllm]
 tool_call_parser = "hermes"
+# The model's own 262k context needs 36 GiB of KV cache for one request; match the training seq_len
+max_model_len = 4096
