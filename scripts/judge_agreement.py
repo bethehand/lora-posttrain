@@ -17,7 +17,10 @@ import os
 import urllib.request
 from pathlib import Path
 
+import openai
 from wiki_search.judge import WikiSearchJudge, WikiSearchJudgeConfig
+
+RETRYABLE = (openai.APITimeoutError, openai.APIConnectionError, openai.RateLimitError, openai.InternalServerError)
 
 COMMIT = "baea257d230e0b981d787dc051254901ef641cc6"
 # model directory name -> run id, as printed on the slide
@@ -49,15 +52,20 @@ def triple(row: dict) -> tuple[str, str, str]:
     return question, str(row["answer"]), replies[-1] if replies else ""
 
 
-async def grade(judge: WikiSearchJudge, sem: asyncio.Semaphore, q: str, a: str, r: str) -> float | None:
+async def grade(judge: WikiSearchJudge, sem: asyncio.Semaphore, q: str, a: str, r: str) -> float | str:
+    """1.0 or 0.0, else "unparseable" (no yes/no in the reply) or "failed" (API errors persisted)."""
     if not r.strip():
         return 0.0  # the production judge scores an empty reply 0 without a call
     async with sem:
-        try:
-            result = await judge.evaluate(question=q, answer=a, response=r, positive="yes", negative="no")
-        except ValueError:
-            return None  # unparseable verdict
-    return float(result.parsed)
+        for attempt in range(5):
+            try:
+                result = await judge.evaluate(question=q, answer=a, response=r, positive="yes", negative="no")
+                return float(result.parsed)
+            except ValueError:
+                return "unparseable"
+            except RETRYABLE:
+                await asyncio.sleep(10 * 2**attempt)
+    return "failed"
 
 
 def cohen_kappa(a: list[float], b: list[float]) -> float:
@@ -73,7 +81,7 @@ async def main() -> None:
     parser.add_argument("--model", default="deepseek-flash")
     parser.add_argument("--base-url", default="https://api.deepseek.com/v1")
     parser.add_argument("--api-key-var", default="DEEPSEEK_API_KEY")
-    parser.add_argument("--concurrency", type=int, default=16)
+    parser.add_argument("--concurrency", type=int, default=8)
     args = parser.parse_args()
 
     root = Path(os.environ["ROOT"])
@@ -87,24 +95,33 @@ async def main() -> None:
     )
     sem = asyncio.Semaphore(args.concurrency)
 
-    theirs, ours, per_model = [], [], {}
+    theirs, ours, per_model, disagreements = [], [], {}, []
     for model, run in RUNS.items():
         rows = load_rows(model, run, cache)
         triples = [triple(row) for row in rows]
         verdicts = await asyncio.gather(*(grade(judge, sem, *t) for t in triples))
+        records = [
+            {"model": model, "example_id": row["example_id"], "question": q, "answer": a,
+             "reply": r, "theirs": row["judge_reward_func"], "ours": v}
+            for row, (q, a, r), v in zip(rows, triples, verdicts)
+        ]
         with (out / f"{model}.jsonl").open("w") as f:
-            for row, (q, a, r), v in zip(rows, triples, verdicts):
-                f.write(json.dumps({"example_id": row["example_id"], "question": q, "answer": a,
-                                    "reply": r, "theirs": row["judge_reward_func"], "ours": v}) + "\n")
-        ok = [(row["judge_reward_func"], v) for row, v in zip(rows, verdicts) if v is not None]
+            f.writelines(json.dumps(rec) + "\n" for rec in records)
+        ok = [rec for rec in records if isinstance(rec["ours"], float)]
+        disagreements += [rec for rec in ok if rec["ours"] != rec["theirs"]]
         per_model[model] = {
             "n": len(rows),
-            "unparseable": len(rows) - len(ok),
-            "acc_theirs": sum(t for t, _ in ok) / len(ok),
-            "acc_ours": sum(v for _, v in ok) / len(ok),
+            "unparseable": verdicts.count("unparseable"),
+            "failed": verdicts.count("failed"),
+            "acc_theirs": sum(rec["theirs"] for rec in ok) / len(ok),
+            "acc_ours": sum(rec["ours"] for rec in ok) / len(ok),
         }
-        theirs += [t for t, _ in ok]
-        ours += [v for _, v in ok]
+        theirs += [rec["theirs"] for rec in ok]
+        ours += [rec["ours"] for rec in ok]
+        print(f"{model}: {per_model[model]}", flush=True)
+
+    with (out / "disagreements.jsonl").open("w") as f:
+        f.writelines(json.dumps(rec) + "\n" for rec in disagreements)
 
     summary = {
         "judge": {"model": args.model, "base_url": args.base_url},
