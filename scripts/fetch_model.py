@@ -34,7 +34,8 @@ def main() -> None:
     snapshot_download(MODEL, local_dir=str(target))
 
     url = f"https://huggingface.co/api/models/{MODEL}/tree/{HF_REVISION}"
-    expected = json.load(urllib.request.urlopen(url))
+    # .gitattributes holds each hub's own LFS rules, not model content
+    expected = [e for e in json.load(urllib.request.urlopen(url)) if e["path"] != ".gitattributes"]
     bad = []
     for entry in expected:
         path = target / entry["path"]
