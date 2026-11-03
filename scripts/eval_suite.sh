@@ -3,6 +3,9 @@
 # question, judge deepseek-v4-pro: heldout, train_sample, train_mixed, and heldout without tools.
 # Needs an inference server, by default on $INFERENCE_PORT (see configs/wiki-search/eval.toml).
 #   bash scripts/eval_suite.sh <model path or adapter name> <results name> [server base url]
+# Prereg 02 (OLMo, section environment):
+#   EVAL_EXTRA="--env.taskset.read-arg section" TAGS="heldout train_sample train_mixed_olmo \
+#     heldout-notools heldout-sectionid" bash scripts/eval_suite.sh <model> <name>
 set -euo pipefail
 source "$(dirname "$0")/../setup/env.sh"
 model=$1
@@ -10,7 +13,8 @@ name=$2
 base_url=${3:-http://localhost:$INFERENCE_PORT/v1}
 cd "$PRIME_RL_DIR"
 
-# EVAL_EXTRA adds arguments to every eval, e.g. "--env.taskset.read-arg section"
+# EVAL_EXTRA adds arguments to every eval, e.g. "--env.taskset.read-arg section"; a tag's own
+# arguments come after it and win
 read -ra extra <<< "${EVAL_EXTRA:-}"
 
 run() {  # <tag> <extra eval args...>
@@ -19,7 +23,7 @@ run() {  # <tag> <extra eval args...>
   local dir="$ROOT/outputs/evals/$name/$tag"
   rm -rf "$dir"
   uv run eval @ "$REPO/configs/wiki-search/eval.toml" -m "$model" --client.base-url "$base_url" \
-    --output-dir "$dir" --no-rich "$@" "${extra[@]}"
+    --output-dir "$dir" --no-rich "${extra[@]}" "$@"
   uv run python "$REPO/scripts/summarize_eval.py" "$(ls -d "$dir"/*/ | head -1)" "$name/$tag"
 }
 
@@ -30,7 +34,9 @@ for tag in $tags; do
     heldout) run heldout --env.taskset.split heldout ;;
     train_sample) run train_sample --env.taskset.split train_sample ;;
     train_mixed) run train_mixed --env.taskset.split train_mixed ;;
+    train_mixed_olmo) run train_mixed_olmo --env.taskset.split train_mixed_olmo ;;
     heldout-notools) run heldout-notools --env.taskset.split heldout --env.taskset.use-tools false ;;
+    heldout-sectionid) run heldout-sectionid --env.taskset.split heldout --env.taskset.read-arg section_id ;;
     *) echo "unknown tag $tag" >&2; exit 1 ;;
   esac
 done
