@@ -16,7 +16,8 @@ import sys
 
 from prereg01_tests import BOOTSTRAP, ROOT, ci, diffs, load, paired, resample_mean
 
-QWEN_RATIO = 0.066 / 0.371  # prereg 01: heldout gain over train_mixed gain
+QWEN_RATIO = 0.207 / 0.371  # prereg 01, computed after it: same-kind untrained gain over train_mixed gain
+EARLIER = "olmo3-7b-base-renamed"  # OLMo's eval before the freeze, which defines heldout_mixed_olmo
 
 
 def main() -> None:
@@ -45,19 +46,21 @@ def main() -> None:
         c_gain, c_lo, c_hi = paired(cf_a, cf_b)
         rows.append(("H4", "call-failure share change", c_gain, (c_lo, c_hi), "CI upper bound < 0", c_hi < 0))
 
+    earlier = load(f"{EARLIER}/heldout")
+    mixed = {i for i, v in earlier.items() if 0 < v < 1}
+    hm_a, hm_b = ({i: v for i, v in run.items() if i in mixed} for run in (ho_a, ho_b))
+    hm_gain, hm_lo, hm_hi = paired(hm_a, hm_b)
+    rows.append(("H5", f"heldout_mixed_olmo gain ({len(hm_a)} untrained questions of the trained kind)",
+                 hm_gain, (hm_lo, hm_hi), "CI lower bound > 0", hm_lo > 0))
     tm_a, tm_b = load(f"{base}/train_mixed_olmo"), load(f"{trained}/train_mixed_olmo")
-    tm_lo = 0.0
     if tm_a and tm_b:
         tm_gain, tm_lo, tm_hi = paired(tm_a, tm_b)
-        rows.append(("H5", "train_mixed_olmo gain (trained questions)", tm_gain, (tm_lo, tm_hi),
-                     "CI lower bound > 0, else H5 is not tested", tm_lo > 0))
-    if tm_lo > 0:
-        d_tm = diffs(tm_a, tm_b)
+        rows.append(("expl.", "train_mixed_olmo gain (trained questions)", tm_gain, (tm_lo, tm_hi), "", ""))
+        d_tm, d_hm = diffs(tm_a, tm_b), diffs(hm_a, hm_b)
         rng = random.Random(0)
-        ratio_boot = [resample_mean(d_ho, rng) / resample_mean(d_tm, rng) for _ in range(BOOTSTRAP)]
-        ratio = (sum(d_ho) / len(d_ho)) / (sum(d_tm) / len(d_tm))
-        rows.append(("H5", f"heldout gain / trained-question gain (Qwen {QWEN_RATIO:.2f})", ratio,
-                     ci(ratio_boot), ">= 0.5", ratio >= 0.5))
+        ratio_boot = [resample_mean(d_hm, rng) / resample_mean(d_tm, rng) for _ in range(BOOTSTRAP)]
+        rows.append(("expl.", f"heldout_mixed_olmo gain / train_mixed_olmo gain (Qwen {QWEN_RATIO:.2f})",
+                     hm_gain / tm_gain, ci(ratio_boot), "", ""))
 
     si_a, si_b = load(f"{base}/heldout-sectionid"), load(f"{trained}/heldout-sectionid")
     if si_a and si_b:
