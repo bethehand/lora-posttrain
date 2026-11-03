@@ -1,0 +1,24 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg01-base/heldout/wiki-search-heldout----mnt--nvme1--bruce--models--qwen3-4b-instruct-2507--null--e29aab61",
+ "episodes": 1960,
+ "counts": {
+  "correct, gold in tool output, a read returned text": 846,
+  "correct, gold not in tool output, a read returned text": 231,
+  "correct, gold not in tool output, no read returned text": 35,
+  "garbled after a read over 4,000 characters": 0,
+  "garbled reply": 6,
+  "listed sections": 1855,
+  "read": 1822,
+  "read over 4,000 characters": 213,
+  "read without listing sections": 0,
+  "wrong, gold in tool output, a read returned text": 70,
+  "wrong, gold not in tool output, a read returned text": 675,
+  "wrong, gold not in tool output, no read returned text": 103
+ },
+ "error_episodes": {
+  "Error executing tool view_sections: X": 6
+ },
+ "error_calls": {
+  "Error executing tool view_sections: X": 6
+ }
+}

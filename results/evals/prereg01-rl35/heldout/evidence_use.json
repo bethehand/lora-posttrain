@@ -1,0 +1,27 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg01-rl35/heldout/wiki-search-heldout--wiki-search-rl35--null--29cb0524",
+ "episodes": 1960,
+ "counts": {
+  "correct, gold in tool output, a read returned text": 932,
+  "correct, gold not in tool output, a read returned text": 285,
+  "correct, gold not in tool output, no read returned text": 24,
+  "garbled after a read over 4,000 characters": 0,
+  "garbled reply": 6,
+  "listed sections": 1920,
+  "read": 1899,
+  "read over 4,000 characters": 222,
+  "read without listing sections": 0,
+  "wrong, gold in tool output, a read returned text": 69,
+  "wrong, gold in tool output, no read returned text": 3,
+  "wrong, gold not in tool output, a read returned text": 612,
+  "wrong, gold not in tool output, no read returned text": 35
+ },
+ "error_episodes": {
+  "Error executing tool view_sections: X": 30,
+  "Error executing tool read_section: X": 1
+ },
+ "error_calls": {
+  "Error executing tool view_sections: X": 49,
+  "Error executing tool read_section: X": 1
+ }
+}
