@@ -1,10 +1,14 @@
-"""Per-step summary of a prime-rl run and the prereg 01 instability guard (steps 1-10).
+"""Per-step summary of a prime-rl run and the instability guard of the preregs (steps 1-10):
+mismatch KL above 0.01, or entropy outside a band, for two consecutive steps. The band is
+prereg 01's 0.02-0.5 unless given; prereg 02 (OLMo) uses 0.3-6.0.
 
-    python3 scripts/run_steps.py <run dir>/metrics.jsonl
+    python3 scripts/run_steps.py <run dir>/metrics.jsonl [entropy low] [entropy high]
 """
 
 import json
 import sys
+
+ENT_LO, ENT_HI = (float(x) for x in (sys.argv[2:4] if len(sys.argv) > 3 else ("0.02", "0.5")))
 
 KEYS = [("train/agg/all/agent/reward/mean", "reward"), ("train/agg/all/agent/is_truncated/mean", "trunc"),
         ("train/agg/all/agent/num_turns/mean", "turns"), ("entropy/all/mean", "ent"), ("mismatch_kl/all/mean", "kl"),
@@ -22,7 +26,7 @@ for s in sorted(steps):
     print(f"step {s:>2}: " + " ".join(f"{k}={v:.4g}" for k, v in steps[s].items()))
 done = [s for s in sorted(steps) if 1 <= s <= 10 and "ent" in steps[s] and "kl" in steps[s]]
 kl_bad = {s: steps[s]["kl"] > 0.01 for s in done}
-ent_bad = {s: not 0.02 <= steps[s]["ent"] <= 0.5 for s in done}
+ent_bad = {s: not ENT_LO <= steps[s]["ent"] <= ENT_HI for s in done}
 trig = [s for s in done if (kl_bad[s] and kl_bad.get(s + 1)) or (ent_bad[s] and ent_bad.get(s + 1))]
 if trig:
     print("GUARD TRIGGER at steps", trig)
