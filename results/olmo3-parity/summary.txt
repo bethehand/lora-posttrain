@@ -1,0 +1,10 @@
+# scripts/olmo3_parity.py on 300 prompts from olmo3-7b-base-renamed/heldout (seed 0), 2026-11-03T02:41Z
+# server: scripts/serve.sh with --vllm.tool-call-parser olmo3; renderer: default + tool_parser olmo3
+edge cases: 22/22 agree
+    300  parse match
+    300  prompt match
+     16  training path ended on ['<|endoftext|>']
+     10  training path hit the length limit
+    274  training path stopped on <|im_end|>
+    242  vllm called tools
+     58  vllm no tool call

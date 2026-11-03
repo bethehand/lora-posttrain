@@ -3,8 +3,8 @@
 Upstream wiki-search (verifiers b2e4e81) trains and evaluates on the same 20 questions.
 This taskset loads the full question bank and serves one split from splits.json
 (made by scripts/make_splits.py): `train`, `heldout`, `slide100` (the 100 questions behind
-Prime Intellect's published eval), `train_sample`, or `train_mixed` (training questions with a
-learning signal for the base model, added by scripts/make_train_filter.py). Tools, system prompt and judge are
+Prime Intellect's published eval), `train_sample`, or `train_mixed` and `train_mixed_olmo` (training
+questions with a learning signal for Qwen3-4B and for OLMo 3 7B, added by scripts/make_train_filter.py). Tools, system prompt and judge are
 upstream's. `use_tools = false` removes the tools, to measure how much a model answers from
 memory: the judge only sees the final reply, so a remembered answer scores like a searched one.
 `read_arg = "section"` renames read_section's argument from `section_id` (see servers.py).
@@ -25,7 +25,7 @@ NO_TOOLS_SYSTEM = "Answer the question from your own knowledge. Reply with a con
 
 
 class HeldoutConfig(WikiSearchConfig):
-    split: Literal["train", "heldout", "slide100", "train_sample", "train_mixed"] = "train"
+    split: Literal["train", "heldout", "slide100", "train_sample", "train_mixed", "train_mixed_olmo"] = "train"
     use_tools: bool = True
     read_arg: Literal["section_id", "section"] = "section_id"
     # Serve every num_shards-th question starting at shard, to split one eval across servers
