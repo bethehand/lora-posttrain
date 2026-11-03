@@ -9,6 +9,10 @@
 # - renderer: OLMo's chat template through renderers' default renderer, tool calls read by
 #   setup/renderers_olmo3.py (setup/install_olmo3_parser.sh), which reads them as vLLM's olmo3 tool
 #   parser does at eval (scripts/olmo3_parity.py: 300 of 300 prompts and parses identical)
+# - GPUs: 2 serve the policy and 2 train, instead of 3 and 1. The trainer keeps fp32 weights, 29 GB
+#   for OLMo's 7.3B parameters, which do not fit one 4090 (pilot: out of memory while loading); two
+#   FSDP shards peak at 18.3 GiB each. bf16 weights would round away updates at lr 3e-5, and full
+#   optimizer offload turns gradient clipping off, so both would change the recipe
 # Everything else is rl.toml's: LoRA rank 8 on all linear projections, lr 3e-5, group 8 x 16
 # questions, 35 steps, 512 tokens per turn, 8,192 per episode, judge deepseek-flash.
 
@@ -16,8 +20,8 @@ max_steps = 35
 seq_len = 8192
 
 [deployment]
-num_train_gpus = 1
-num_infer_gpus = 3
+num_train_gpus = 2
+num_infer_gpus = 2
 
 [model]
 name = "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct"
