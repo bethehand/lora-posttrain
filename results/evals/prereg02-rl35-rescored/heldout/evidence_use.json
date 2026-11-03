@@ -1,0 +1,50 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-rl35-rescored/heldout/wiki-search-heldout--olmo-rl35--null--4114f73c",
+ "episodes": 1960,
+ "counts": {
+  "correct, gold in tool output, a read returned text": 114,
+  "correct, gold in tool output, no read returned text": 17,
+  "correct, gold not in tool output, a read returned text": 87,
+  "correct, gold not in tool output, no read returned text": 135,
+  "garbled after a read over 4,000 characters": 44,
+  "garbled reply": 122,
+  "listed sections": 971,
+  "read": 1728,
+  "read over 4,000 characters": 83,
+  "read without listing sections": 939,
+  "wrong, gold in tool output, a read returned text": 130,
+  "wrong, gold in tool output, no read returned text": 48,
+  "wrong, gold not in tool output, a read returned text": 663,
+  "wrong, gold not in tool output, no read returned text": 766
+ },
+ "error_episodes": {
+  "Error executing tool read_section: not enough values to unpack (expected 2, got 1)": 834,
+  "error: unknown tool X": 357,
+  "Error executing tool read_section: X": 346,
+  "Error executing tool view_sections: X": 209,
+  "Error executing tool read_section: 1 validation error validation error": 3,
+  "Error executing tool view_sections: 'list_of_waltdisney_studios_films__20_20to_20_20presen": 1,
+  "Error executing tool read_section: 'taylor_swift_ s i n g l e s _ d i s c o r d i g o g r": 1,
+  "Error executing tool read_section: \"norah o'donnell\"": 1,
+  "Error executing tool read_section: \"Guns_N' Roses\"": 1,
+  "Error executing tool read_section: \"Trader Joe's\"": 1,
+  "Error executing tool view_sections: 'list_of_people_who_disappeared_mysteriously_19_90–pre": 1,
+  "Error executing tool view_sections: \"karma__taylor's_songs\"": 1,
+  "Error executing tool view_sections: 'list_ of_ films_ impacted_ by_ the_ covid-19_ pandemi": 1
+ },
+ "error_calls": {
+  "Error executing tool read_section: not enough values to unpack (expected 2, got 1)": 1222,
+  "Error executing tool read_section: X": 482,
+  "error: unknown tool X": 366,
+  "Error executing tool view_sections: X": 233,
+  "Error executing tool read_section: 1 validation error validation error": 3,
+  "Error executing tool view_sections: 'list_of_waltdisney_studios_films__20_20to_20_20presen": 1,
+  "Error executing tool read_section: 'taylor_swift_ s i n g l e s _ d i s c o r d i g o g r": 1,
+  "Error executing tool read_section: \"norah o'donnell\"": 1,
+  "Error executing tool read_section: \"Guns_N' Roses\"": 1,
+  "Error executing tool read_section: \"Trader Joe's\"": 1,
+  "Error executing tool view_sections: 'list_of_people_who_disappeared_mysteriously_19_90–pre": 1,
+  "Error executing tool view_sections: \"karma__taylor's_songs\"": 1,
+  "Error executing tool view_sections: 'list_ of_ films_ impacted_ by_ the_ covid-19_ pandemi": 1
+ }
+}
