@@ -1,6 +1,6 @@
 # Pre-registration 02: OLMo 3 7B on wiki-search with the recipe of prereg 01
 
-**Status: DRAFT, not frozen.** The commit that changes this line to FROZEN is the freeze; the sha256 values below pin the data split, the configs and the tool parser. Anything decided after that commit is reported as exploratory, and changes are listed under Deviations.
+**Status: FROZEN on 2026-11-03, before the main training run started.** The commit that adds this text is the freeze; the sha256 values below pin the data split, the configs and the tool parser. Anything decided after that commit is reported as exploratory, and changes are listed under Deviations.
 
 ## Question
 
