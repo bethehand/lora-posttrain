@@ -232,6 +232,17 @@ Training reward on `train_mixed_olmo` (deepseek-flash, all rollouts) averages 0.
 
 **Transfer looks higher for OLMo, but the comparison is descriptive.** OLMo's gain on comparable untrained questions is 0.68 of its trained-question gain against Qwen's 0.56, but OLMo trained on each question about a third as often, which by itself shrinks the trained-question gain. And much of OLMo's transfer is the general habit of answering from memory, which carries to any question.
 
+### What this says about the wiki-search setup
+
+| Part | What worked here | What did not |
+|---|---|---|
+| Environment: search pages, list sections, read a section | Both models gain on pages never trained on, +0.066 and +0.101; Qwen's gain is better retrieval | The interface is brittle. One argument name decides whether OLMo can call the read tool at all; section ids must be written `page_id:section`, and leaving out the page is the most common error; whole-page reads of 10,000 characters and more garble small models' replies |
+| Judge: the final reply against the reference answer | Judges agree with each other on 96 to 99% of episodes; replies that hedge across candidates are judged wrong; no judge gaming found | It sees only the final reply, so an answer from memory earns what an answer found with the tools earns. Most of OLMo's gain is such answers |
+| Question bank: 2,261 trivia questions | Large enough to split by page for a clean held-out set | For any one model most questions are always or never answered, so only 10% (Qwen) and 28% (OLMo) carry a learning signal; many are answerable without tools, 0.30 and 0.25 accuracy; a few ask about page metadata |
+| Published evaluation | | It scored training questions. This, not the environment, is what made the published gain look like parity with gpt-4.1 |
+
+So the setup gives a real training signal that carries to unseen pages, smaller than published, and its judge rewards the answer rather than the search. What this report cannot say is how much more the same setup gives at the published budget, 23 times our rollouts.
+
 ## 7. Cost on 4× RTX 4090
 
 | Item | Qwen3-4B | OLMo 3 7B |
