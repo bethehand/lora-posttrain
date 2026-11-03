@@ -7,7 +7,7 @@
 Prime Intellect reported that LoRA RL lifts Qwen3-4B-Instruct-2507 from 0.55 to 0.89 on wiki-search, level with gpt-4.1 (0.88). The 100 questions behind those numbers are rows 0-99 of the question bank the model trained on. We split the bank by source page, froze four hypotheses in a pre-registration, and trained one LoRA adapter for 35 steps on four RTX 4090s in 72 minutes.
 
 - **Held-out pages: a real but small gain.** On 490 questions from 88 pages never trained on, accuracy goes from 0.567 to 0.633, a gain of +0.066 (95% CI +0.042 to +0.090). H1 passes; H1b, a gain of at least 0.20, fails. The gain is about a fifth of the published one.
-- **Trained questions: the published size.** On the 174 questions it trained on, accuracy goes from 0.483 to 0.853 (+0.371). Untrained questions gain about the same whether or not their page was seen in training (+0.058 against +0.066), so the large gain belongs to the questions, not the pages.
+- **Trained questions: the published size.** On the 174 questions it trained on, accuracy goes from 0.483 to 0.853 (+0.371). Untrained questions gain about the same whether or not their page was seen in training (+0.058 against +0.066), so the large gain belongs to the questions, not the pages. Our trained questions are ones the base model sometimes answers; seven tenths of the published gain is on questions it never answers, where the published adapter, trained on them, scores 0.78 and ours 0.13.
 - **The mechanism is section choice, not more reading.** The adapter does not read further into a page (0.94 to 0.99 section reads per episode; H4 fails its threshold of 1.5), but it reads the right section more often: wrong-section failures fall from 30.1% to 25.9% of episodes, two thirds of the drop in failures.
 - **The gain survives the checks.** It is the same under the training judge (+0.069) and with a renamed tool argument (+0.065), it is not memory (+0.016 without tools), and 50 trajectories read by hand show no judge gaming.
 
@@ -82,6 +82,16 @@ The base model gets nearly every held-out question either right 4 times out of 4
 | 4 of 4 | 262 | 1.000 | 0.981 | -0.010 |
 
 Grouping and measuring with the same base rollouts invites regression to the mean, but with so few mixed questions the effect is small. Nearly the whole gain is on questions the base model never answers, and 43 of those 196 are now answered at least once. The adapter trained only on mixed questions, so this is transfer to harder questions, not practice on the same ones.
+
+The same grouping splits the published gain on `slide100`. The published columns are the published rollouts, one per question with the published prompt, re-graded by v4-pro.
+
+| `slide100` by our base score | Questions | Our base | Our adapter | Published base | Published adapter | Contribution to the published gain |
+|---|---|---|---|---|---|---|
+| 0 of 4 | 36 | 0.000 | 0.125 | 0.111 | 0.778 | +0.240 |
+| 1 to 3 of 4 | 9 | 0.389 | 0.583 | 0.556 | 0.778 | +0.020 |
+| 4 of 4 | 55 | 1.000 | 0.995 | 0.836 | 0.982 | +0.080 |
+
+Seven tenths of the published gain, +0.24 of +0.34, is on the 36 questions our base model never answers. The published adapter trained on these questions and answers 0.78 of them; ours, which trained on no question its base model never answers, answers 0.13. Both adapter columns are measured apart from the base rollouts that form the groups. So the two gains on trained questions, +0.371 on `train_mixed` and the published +0.34, are not the same measurement: `train_mixed` holds only questions the base model sometimes answers, the easiest to move. Whether reaching the never-answered questions needs training on them, or only a larger budget, is what a longer run on all training questions would show. `scripts/by_base_score.py` makes both tables (`results/by_base_score.md`).
 
 The navigation metrics (`scripts/navigation_metrics.py`) say how. An episode still makes about three calls, search, list sections, read one section: 2.98 calls per episode before and 3.12 after. What changes is which section. The share of episodes that read the source page, never see the answer in any tool output, and fail falls from 30.1% to 25.9%. The published adapter, trained on about 23 times as many rollouts, reads 1.85 sections per episode in its published rollouts; ours reads 0.99. Whether a longer run would also learn to read further is open.
 
