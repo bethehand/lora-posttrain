@@ -1,0 +1,27 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/olmo3-7b-base-filter/train/merged",
+ "episodes": 14168,
+ "errored": 18,
+ "error_kinds": {
+  "{'type': 'TaskError', 'message': 'task TriviaTask scoring: APITimeoutError: Request timed out.', 'traceback': 'Traceback": 17,
+  "{'type': 'TaskError', 'message': \"task TriviaTask scoring: AttributeError: 'NoneType' object has no attribute 'choices'\"": 1
+ },
+ "all": {
+  "questions": 1771,
+  "accuracy": 0.08853956602403806,
+  "ci95": [
+   0.07997902718399613,
+   0.09740259740259741
+  ]
+ },
+ "slide100": null,
+ "mean_tool_calls": 5.046713780918728,
+ "no_tool_call_rate": 0.014982332155477032,
+ "truncation_rate": 0.11844522968197879,
+ "median_final_reply_chars": 279,
+ "stop_conditions": {
+  "agent_completed": 13861,
+  "context_length": 307
+ },
+ "judge_tokens_total": 4765357
+}
