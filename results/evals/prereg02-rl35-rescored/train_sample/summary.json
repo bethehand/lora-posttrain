@@ -1,0 +1,24 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-rl35-rescored/train_sample/wiki-search-heldout--olmo-rl35--null--4960637d",
+ "episodes": 1200,
+ "errored": 0,
+ "error_kinds": {},
+ "all": {
+  "questions": 300,
+  "accuracy": 0.19583333333333333,
+  "ci95": [
+   0.16083333333333333,
+   0.23166666666666666
+  ]
+ },
+ "slide100": null,
+ "mean_tool_calls": 3.279166666666667,
+ "no_tool_call_rate": 0.0075,
+ "truncation_rate": 0.0775,
+ "median_final_reply_chars": 322,
+ "stop_conditions": {
+  "agent_completed": 1189,
+  "context_length": 11
+ },
+ "judge_tokens_total": 390143
+}

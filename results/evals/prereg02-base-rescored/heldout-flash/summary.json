@@ -1,0 +1,17 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-base-rescored/heldout/wiki-search-heldout----mnt--nvme1--bruce--models--olmo-3-7b-instruct--null--4c2a2006",
+ "judge": "deepseek-flash",
+ "episodes": 1960,
+ "unparseable": 0,
+ "failed": 0,
+ "all": {
+  "questions": 490,
+  "accuracy": 0.08622448979591837,
+  "ci95": [
+   0.06938775510204082,
+   0.10408163265306122
+  ]
+ },
+ "agreement_with_run_judge": 0.988265306122449,
+ "kappa_with_run_judge": 0.9228441547772271
+}

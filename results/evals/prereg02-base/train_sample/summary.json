@@ -1,0 +1,26 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-base/train_sample/wiki-search-heldout----mnt--nvme1--bruce--models--olmo-3-7b-instruct--null--879312a9",
+ "episodes": 1200,
+ "errored": 1,
+ "error_kinds": {
+  "{'type': 'TaskError', 'message': \"task TriviaTask scoring: AttributeError: 'NoneType' object has no attribute 'choices'\"": 1
+ },
+ "all": {
+  "questions": 300,
+  "accuracy": 0.0875,
+  "ci95": [
+   0.06583333333333333,
+   0.11083333333333334
+  ]
+ },
+ "slide100": null,
+ "mean_tool_calls": 5.030025020850709,
+ "no_tool_call_rate": 0.011676396997497914,
+ "truncation_rate": 0.12260216847372811,
+ "median_final_reply_chars": 282,
+ "stop_conditions": {
+  "agent_completed": 1177,
+  "context_length": 23
+ },
+ "judge_tokens_total": 436036
+}

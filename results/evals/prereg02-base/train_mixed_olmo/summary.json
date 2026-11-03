@@ -1,0 +1,24 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-base/train_mixed_olmo/wiki-search-heldout----mnt--nvme1--bruce--models--olmo-3-7b-instruct--null--3128afc9",
+ "episodes": 1956,
+ "errored": 0,
+ "error_kinds": {},
+ "all": {
+  "questions": 489,
+  "accuracy": 0.26278118609406953,
+  "ci95": [
+   0.2367075664621677,
+   0.2883435582822086
+  ]
+ },
+ "slide100": null,
+ "mean_tool_calls": 5.271472392638037,
+ "no_tool_call_rate": 0.005623721881390593,
+ "truncation_rate": 0.09611451942740286,
+ "median_final_reply_chars": 278,
+ "stop_conditions": {
+  "agent_completed": 1918,
+  "context_length": 38
+ },
+ "judge_tokens_total": 890326
+}

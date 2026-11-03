@@ -72,4 +72,7 @@ All results are reported whether or not they pass.
 
 ## Deviations
 
-None yet.
+Recorded after the run; no hypothesis, threshold or setting above changed.
+
+- **Judge outage during the evaluation.** The DeepSeek API timed out on most judge calls for episodes that started between 16:50 and 18:20 on 2026-11-03: 942 of the base model's 1,960 `heldout` episodes and 666 of the adapter's, 1 and 128 in `train_sample`, 9 and 0 in `heldout-notools`, 2 and 0 in `heldout-sectionid`. The rollouts finished; only their scoring failed. With failed calls dropped, as the metric above says, 275 `heldout` questions are scored by both runs. After the run the failed calls were retried with the same judge, prompt and inputs, keeping every verdict the run gave (`scripts/rescore_failed.py`, run by `scripts/prereg02_rescore.sh`); re-grading 200 already-scored episodes per affected set agreed with their original verdicts in 98.5 to 100%. Both versions are reported: `results/prereg02_tests-prereg02-rl35.md` with failed calls dropped, `results/prereg02_tests-prereg02-rl35-rescored.md` with them retried. Every verdict is the same in both.
+- The analysis scripts' output names and their handling of questions missing from one run were changed after the evaluation, to report both versions; no definitions changed.

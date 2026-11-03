@@ -1,0 +1,17 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-rl35-rescored/heldout/wiki-search-heldout--olmo-rl35--null--4114f73c",
+ "judge": "deepseek-flash",
+ "episodes": 1960,
+ "unparseable": 0,
+ "failed": 0,
+ "all": {
+  "questions": 490,
+  "accuracy": 0.19285714285714287,
+  "ci95": [
+   0.1663265306122449,
+   0.22040816326530613
+  ]
+ },
+ "agreement_with_run_judge": 0.9770408163265306,
+ "kappa_with_run_judge": 0.9243497682461154
+}

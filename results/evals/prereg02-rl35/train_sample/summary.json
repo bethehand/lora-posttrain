@@ -1,0 +1,26 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-rl35/train_sample/wiki-search-heldout--olmo-rl35--null--4960637d",
+ "episodes": 1200,
+ "errored": 128,
+ "error_kinds": {
+  "{'type': 'TaskError', 'message': \"task TriviaTask scoring: TypeError: 'NoneType' object is not subscriptable\", 'tracebac": 128
+ },
+ "all": {
+  "questions": 268,
+  "accuracy": 0.20055970149253732,
+  "ci95": [
+   0.1623134328358209,
+   0.23973880597014927
+  ]
+ },
+ "slide100": null,
+ "mean_tool_calls": 3.291044776119403,
+ "no_tool_call_rate": 0.0046641791044776115,
+ "truncation_rate": 0.07929104477611941,
+ "median_final_reply_chars": 314,
+ "stop_conditions": {
+  "agent_completed": 1189,
+  "context_length": 11
+ },
+ "judge_tokens_total": 390143
+}

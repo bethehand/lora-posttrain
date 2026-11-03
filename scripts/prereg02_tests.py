@@ -2,7 +2,7 @@
 
 Reads results/evals/<base>/<set>/questions.jsonl and the same for the trained model (written by
 summarize_eval.py, call_failures.jsonl by call_failures.py, <set>-flash by rejudge.py), prints a
-table and writes results/prereg02_tests.md. Sets are evaluated in the section environment unless
+table and writes results/prereg02_tests-<trained name>.md. Sets are evaluated in the section environment unless
 named -sectionid. Differences are trained minus base over the questions both runs scored, with
 95% bootstrap CIs over questions (10,000 resamples).
 
@@ -86,7 +86,7 @@ def main() -> None:
     table = "\n".join(lines)
     print(table)
     header = f"# Prereg 02 tests\n\nBase `{base}`, trained `{trained}`; `python3 scripts/prereg02_tests.py`.\n\n"
-    (ROOT / "results/prereg02_tests.md").write_text(header + table + "\n")
+    (ROOT / f"results/prereg02_tests-{trained}.md").write_text(header + table + "\n")
 
 
 if __name__ == "__main__":

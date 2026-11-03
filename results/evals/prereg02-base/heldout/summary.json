@@ -1,0 +1,37 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-base/heldout/wiki-search-heldout----mnt--nvme1--bruce--models--olmo-3-7b-instruct--null--4c2a2006",
+ "episodes": 1960,
+ "errored": 942,
+ "error_kinds": {
+  "{'type': 'TaskError', 'message': \"task TriviaTask scoring: TypeError: 'NoneType' object is not subscriptable\", 'tracebac": 741,
+  "{'type': 'TaskError', 'message': \"task TriviaTask scoring: AttributeError: 'NoneType' object has no attribute 'choices'\"": 130,
+  "{'type': 'TaskError', 'message': \"task TriviaTask scoring: InternalServerError: Error code: 500 - {'error': {'message': ": 50,
+  "{'type': 'TaskError', 'message': 'task TriviaTask scoring: APITimeoutError: Request timed out.', 'traceback': 'Traceback": 11,
+  "{'type': 'TaskError', 'message': \"task TriviaTask scoring: InternalServerError: Error code: 503 - {'error': {'message': ": 10
+ },
+ "all": {
+  "questions": 282,
+  "accuracy": 0.08628841607565012,
+  "ci95": [
+   0.06382978723404255,
+   0.11022458628841607
+  ]
+ },
+ "slide100": {
+  "questions": 100,
+  "accuracy": 0.09333333333333334,
+  "ci95": [
+   0.055,
+   0.1375
+  ]
+ },
+ "mean_tool_calls": 4.829076620825147,
+ "no_tool_call_rate": 0.014734774066797643,
+ "truncation_rate": 0.08546168958742632,
+ "median_final_reply_chars": 258,
+ "stop_conditions": {
+  "agent_completed": 1929,
+  "context_length": 31
+ },
+ "judge_tokens_total": 372660
+}

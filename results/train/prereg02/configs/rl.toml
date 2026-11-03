@@ -1,0 +1,88 @@
+# wiki-search LoRA RL for OLMo 3 7B Instruct on 4x RTX 4090, prereg 02: the recipe of rl.toml
+# (prereg 01, Qwen3-4B) with only what the model requires changed:
+# - model: OLMo-3-7B-Instruct @ 6e5971d
+# - read_section's argument renamed from section_id to section, for training and the online eval.
+#   OLMo 3 writes `section_ "..."` for section_id (results/olmo-tool-call-diagnosis); Qwen3-4B scores
+#   the same under both names (0.566 and 0.568 base, +0.066 and +0.065 after RL)
+# - questions: train_mixed_olmo, the training questions OLMo gets right in some but not all of 8
+#   rollouts, by the rule that made train_mixed for Qwen
+# - renderer: OLMo's chat template through renderers' default renderer, tool calls read by
+#   setup/renderers_olmo3.py (setup/install_olmo3_parser.sh), which reads them as vLLM's olmo3 tool
+#   parser does at eval (scripts/olmo3_parity.py: 300 of 300 prompts and parses identical)
+# - GPUs: 2 serve the policy and 2 train, instead of 3 and 1. The trainer keeps fp32 weights, 29 GB
+#   for OLMo's 7.3B parameters, which do not fit one 4090 (pilot: out of memory while loading); two
+#   FSDP shards peak at 18.3 GiB each. bf16 weights would round away updates at lr 3e-5, and full
+#   optimizer offload turns gradient clipping off, so both would change the recipe
+# Everything else is rl.toml's: LoRA rank 8 on all linear projections, lr 3e-5, group 8 x 16
+# questions, 35 steps, 512 tokens per turn, 8,192 per episode, judge deepseek-flash.
+
+max_steps = 35
+seq_len = 8192
+
+[deployment]
+num_train_gpus = 2
+num_infer_gpus = 2
+
+[model]
+name = "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct"
+
+[trainer.optim]
+lr = 3e-5
+weight_decay = 0.0
+
+[trainer.model.lora]
+rank = 8
+dropout = 0.0
+target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+[orchestrator]
+batch_size = 128
+group_size = 8
+
+[orchestrator.concurrency]
+initial_inflight = 256
+
+[orchestrator.model.lora]
+
+# Port 8000 is taken on the shared server (setup/env.sh); the client URL does not follow the server port
+[orchestrator.model.client]
+base_url = "http://localhost:18000/v1"
+
+# renderers 0.1.10 has no OLMo renderer: the default one applies the model's chat template
+[orchestrator.renderer]
+name = "default"
+tool_parser = "olmo3"
+
+[orchestrator.train.sampling]
+max_completion_tokens = 512
+
+[[orchestrator.train.source]]
+name = "wiki-search-train"
+curriculum = { gates = { zero_advantage = { type = "advantage_range" } } }
+env.taskset.id = "wiki-search-heldout"
+env.taskset.split = "train_mixed_olmo"
+env.taskset.read_arg = "section"
+env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-flash", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
+env.agent.harness.id = "null"
+env.agent.runtime.type = "subprocess"
+
+[orchestrator.eval]
+interval = 15
+
+[[orchestrator.eval.source]]
+name = "wiki-search-heldout"
+env.taskset.id = "wiki-search-heldout"
+env.taskset.split = "heldout"
+env.taskset.read_arg = "section"
+env.taskset.task.judges = [{ id = "wiki-search", model = "deepseek-flash", base_url = "https://api.deepseek.com/v1", api_key_var = "DEEPSEEK_API_KEY" }]
+env.agent.harness.id = "null"
+env.agent.runtime.type = "subprocess"
+
+[ckpt]
+
+[inference.server]
+port = 18000
+
+[inference.vllm]
+tool_call_parser = "olmo3"
+max_model_len = 8192

@@ -1,0 +1,108 @@
+{
+  "env": {
+    "id": "",
+    "taskset": {
+      "id": "wiki-search-heldout",
+      "task": {
+        "judges": [
+          {
+            "base_url": "https://api.deepseek.com/v1",
+            "api_key_var": "DEEPSEEK_API_KEY",
+            "headers": {},
+            "id": "wiki-search",
+            "name": "",
+            "weight": 1.0,
+            "model": "deepseek-flash",
+            "sampling": {
+              "temperature": null,
+              "top_p": null,
+              "reasoning_effort": null,
+              "max_tokens": null
+            },
+            "prompt": null,
+            "answer_field": "answer",
+            "question_field": "",
+            "view": "last_reply",
+            "choices": [
+              "yes",
+              "no"
+            ]
+          }
+        ],
+        "stops": {},
+        "metrics": {},
+        "rewards": {}
+      },
+      "system_prompt": null,
+      "tools": {
+        "runtime": {
+          "type": "subprocess"
+        },
+        "url": null
+      },
+      "split": "heldout",
+      "use_tools": true,
+      "read_arg": "section",
+      "num_shards": 1,
+      "shard": 0
+    },
+    "timeout": {
+      "episode": null,
+      "finalize": null
+    },
+    "retries": {
+      "max_retries": 0,
+      "include": [],
+      "exclude": []
+    },
+    "max_concurrent_agents": 1,
+    "interception": {
+      "type": "elastic",
+      "multiplex": 32
+    },
+    "agent": {
+      "harness": {
+        "id": "null",
+        "env": {},
+        "forward_env": [],
+        "tool_timeout": 600.0,
+        "disabled_tools": null,
+        "skills": []
+      },
+      "runtime": {
+        "type": "subprocess"
+      },
+      "model": null,
+      "client": null,
+      "sampling": null,
+      "max_turns": null,
+      "max_input_tokens": null,
+      "max_output_tokens": null,
+      "max_total_tokens": null,
+      "timeout": {
+        "setup": null,
+        "rollout": null,
+        "finalize": null,
+        "scoring": null
+      },
+      "retries": {
+        "max_retries": 0,
+        "include": [],
+        "exclude": []
+      }
+    }
+  },
+  "serve": {
+    "pool": {
+      "type": "elastic",
+      "max_workers": null,
+      "multiplex": 128
+    },
+    "address": "tcp://127.0.0.1:5001",
+    "max_concurrent": null
+  },
+  "log": {
+    "level": "info",
+    "json_logging": false
+  }
+}

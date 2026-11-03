@@ -1,0 +1,32 @@
+{
+ "run_dir": "/mnt/nvme1/bruce/outputs/evals/prereg02-base/heldout-notools/wiki-search-heldout----mnt--nvme1--bruce--models--olmo-3-7b-instruct--null--d622b61a",
+ "episodes": 1960,
+ "errored": 9,
+ "error_kinds": {
+  "{'type': 'TaskError', 'message': 'task TriviaTask scoring: APITimeoutError: Request timed out.', 'traceback': 'Traceback": 9
+ },
+ "all": {
+  "questions": 490,
+  "accuracy": 0.2488095238095238,
+  "ci95": [
+   0.21462585034013607,
+   0.2841836734693878
+  ]
+ },
+ "slide100": {
+  "questions": 100,
+  "accuracy": 0.23,
+  "ci95": [
+   0.1575,
+   0.305
+  ]
+ },
+ "mean_tool_calls": 0.0,
+ "no_tool_call_rate": 1.0,
+ "truncation_rate": 0.0025627883136852894,
+ "median_final_reply_chars": 40,
+ "stop_conditions": {
+  "agent_completed": 1960
+ },
+ "judge_tokens_total": 560574
+}

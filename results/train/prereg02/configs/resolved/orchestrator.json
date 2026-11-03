@@ -1,0 +1,373 @@
+{
+  "algo": {
+    "sampling": {
+      "source": "policy"
+    },
+    "type": "grpo",
+    "length_penalty": null
+  },
+  "model": {
+    "name": "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct",
+    "trust_remote_code": false,
+    "vlm": null,
+    "lora": {
+      "rank": 8,
+      "alpha": 32.0
+    },
+    "client": {
+      "wait_for_ready_timeout": 1800,
+      "base_url": "http://localhost:18000/v1",
+      "api_key_var": "VLLM_API_KEY",
+      "headers": {},
+      "headers_from_env": {},
+      "skip_model_check": false,
+      "admin_base_url": [
+        "http://localhost:18100/v1"
+      ]
+    }
+  },
+  "train": {
+    "source": [
+      {
+        "env": {
+          "id": "",
+          "taskset": {
+            "id": "wiki-search-heldout",
+            "task": {
+              "judges": [
+                {
+                  "base_url": "https://api.deepseek.com/v1",
+                  "api_key_var": "DEEPSEEK_API_KEY",
+                  "headers": {},
+                  "id": "wiki-search",
+                  "name": "",
+                  "weight": 1.0,
+                  "model": "deepseek-flash",
+                  "sampling": {
+                    "temperature": null,
+                    "top_p": null,
+                    "reasoning_effort": null,
+                    "max_tokens": null
+                  },
+                  "prompt": null,
+                  "answer_field": "answer",
+                  "question_field": "",
+                  "view": "last_reply",
+                  "choices": [
+                    "yes",
+                    "no"
+                  ]
+                }
+              ],
+              "stops": {},
+              "metrics": {},
+              "rewards": {}
+            },
+            "system_prompt": null,
+            "tools": {
+              "runtime": {
+                "type": "subprocess"
+              },
+              "url": null
+            },
+            "split": "train_mixed_olmo",
+            "use_tools": true,
+            "read_arg": "section",
+            "num_shards": 1,
+            "shard": 0
+          },
+          "timeout": {
+            "episode": null,
+            "finalize": null
+          },
+          "retries": {
+            "max_retries": 0,
+            "include": [],
+            "exclude": []
+          },
+          "max_concurrent_agents": 1,
+          "interception": {
+            "type": "elastic",
+            "multiplex": 32
+          },
+          "agent": {
+            "harness": {
+              "id": "null",
+              "env": {},
+              "forward_env": [],
+              "tool_timeout": 600.0,
+              "disabled_tools": null,
+              "skills": []
+            },
+            "runtime": {
+              "type": "subprocess"
+            },
+            "model": null,
+            "client": null,
+            "sampling": null,
+            "max_turns": null,
+            "max_input_tokens": null,
+            "max_output_tokens": null,
+            "max_total_tokens": null,
+            "timeout": {
+              "setup": null,
+              "rollout": null,
+              "finalize": null,
+              "scoring": null
+            },
+            "retries": {
+              "max_retries": 0,
+              "include": [],
+              "exclude": []
+            }
+          }
+        },
+        "serve": {
+          "pool": {
+            "type": "elastic",
+            "max_workers": null,
+            "multiplex": 128
+          },
+          "address": null,
+          "max_concurrent": null
+        },
+        "name": "wiki-search-train",
+        "ratio": 1.0,
+        "sampling": {
+          "temperature": 1.0,
+          "max_completion_tokens": 512,
+          "extra_body": {
+            "top_k": -1,
+            "min_p": 0.0,
+            "return_token_ids": true
+          }
+        },
+        "group_size": 8,
+        "algo": {
+          "sampling": {
+            "source": "policy"
+          },
+          "type": "grpo",
+          "length_penalty": null
+        },
+        "curriculum": {
+          "sampler": {
+            "type": "standard"
+          },
+          "gates": {
+            "zero_advantage": {
+              "type": "advantage_range",
+              "reject_min": 0.0,
+              "reject_max": 0.0
+            }
+          }
+        }
+      }
+    ],
+    "sampling": {
+      "temperature": 1.0,
+      "max_completion_tokens": 512,
+      "extra_body": {}
+    },
+    "filter_zero_advantages": true
+  },
+  "tokenizer": {
+    "name": "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct",
+    "trust_remote_code": false,
+    "chat_template": null
+  },
+  "renderer": {
+    "thinking_retention": null,
+    "name": "default",
+    "tool_parser": "olmo3",
+    "reasoning_parser": null
+  },
+  "eval": {
+    "source": [
+      {
+        "env": {
+          "id": "",
+          "taskset": {
+            "id": "wiki-search-heldout",
+            "task": {
+              "judges": [
+                {
+                  "base_url": "https://api.deepseek.com/v1",
+                  "api_key_var": "DEEPSEEK_API_KEY",
+                  "headers": {},
+                  "id": "wiki-search",
+                  "name": "",
+                  "weight": 1.0,
+                  "model": "deepseek-flash",
+                  "sampling": {
+                    "temperature": null,
+                    "top_p": null,
+                    "reasoning_effort": null,
+                    "max_tokens": null
+                  },
+                  "prompt": null,
+                  "answer_field": "answer",
+                  "question_field": "",
+                  "view": "last_reply",
+                  "choices": [
+                    "yes",
+                    "no"
+                  ]
+                }
+              ],
+              "stops": {},
+              "metrics": {},
+              "rewards": {}
+            },
+            "system_prompt": null,
+            "tools": {
+              "runtime": {
+                "type": "subprocess"
+              },
+              "url": null
+            },
+            "split": "heldout",
+            "use_tools": true,
+            "read_arg": "section",
+            "num_shards": 1,
+            "shard": 0
+          },
+          "timeout": {
+            "episode": null,
+            "finalize": null
+          },
+          "retries": {
+            "max_retries": 0,
+            "include": [],
+            "exclude": []
+          },
+          "max_concurrent_agents": 1,
+          "interception": {
+            "type": "elastic",
+            "multiplex": 32
+          },
+          "agent": {
+            "harness": {
+              "id": "null",
+              "env": {},
+              "forward_env": [],
+              "tool_timeout": 600.0,
+              "disabled_tools": null,
+              "skills": []
+            },
+            "runtime": {
+              "type": "subprocess"
+            },
+            "model": null,
+            "client": null,
+            "sampling": null,
+            "max_turns": null,
+            "max_input_tokens": null,
+            "max_output_tokens": null,
+            "max_total_tokens": null,
+            "timeout": {
+              "setup": null,
+              "rollout": null,
+              "finalize": null,
+              "scoring": null
+            },
+            "retries": {
+              "max_retries": 0,
+              "include": [],
+              "exclude": []
+            }
+          }
+        },
+        "serve": {
+          "pool": {
+            "type": "elastic",
+            "max_workers": null,
+            "multiplex": 128
+          },
+          "address": null,
+          "max_concurrent": null
+        },
+        "name": "wiki-search-heldout",
+        "ratio": 1.0,
+        "sampling": {
+          "temperature": null,
+          "top_p": null,
+          "top_k": null,
+          "min_p": null,
+          "max_completion_tokens": null,
+          "reasoning_effort": null,
+          "extra_body": {}
+        },
+        "num_examples": -1,
+        "group_size": 1,
+        "interval": 15
+      }
+    ],
+    "sampling": {
+      "temperature": null,
+      "top_p": null,
+      "top_k": null,
+      "min_p": null,
+      "max_completion_tokens": null,
+      "reasoning_effort": null,
+      "extra_body": {}
+    },
+    "num_examples": -1,
+    "group_size": 1,
+    "interval": 15,
+    "skip_first_step": false,
+    "retrigger_on_resume": false
+  },
+  "log": {
+    "level": "info",
+    "vf_level": "info",
+    "json_logging": false,
+    "log_data": false,
+    "interval": 10.0
+  },
+  "env_vars": {},
+  "monitors": {
+    "wandb": null,
+    "file": {
+      "path": "metrics.jsonl"
+    },
+    "prime": null
+  },
+  "collect_inference_metrics": true,
+  "inference_metrics_roles": null,
+  "ckpt": {
+    "interval": null,
+    "wait_for_weights_timeout": null,
+    "keep_last": null,
+    "keep_interval": null,
+    "skip_progress": false
+  },
+  "resume": null,
+  "weight_broadcast": {
+    "timeout": 1200,
+    "type": "filesystem"
+  },
+  "rollout_transport": {
+    "type": "zmq",
+    "host": "localhost",
+    "port": 5555,
+    "hwm": 10
+  },
+  "output_dir": "/mnt/nvme1/bruce/outputs/wiki-search-olmo/wiki-search-train--olmo-3-7b-instruct--d16074fa",
+  "tasks_per_minute": null,
+  "env_server_base_port": 5000,
+  "batch_size": 128,
+  "token_batch_size": null,
+  "concurrency": {
+    "initial_inflight": 256,
+    "min_inflight": 1,
+    "max_inflight": 1024
+  },
+  "group_size": 8,
+  "seq_len": 8192,
+  "num_train_workers": 2,
+  "pad_to_multiple_of": 1,
+  "max_steps": 35,
+  "max_off_policy_steps": 8,
+  "heartbeat": null
+}

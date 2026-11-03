@@ -36,6 +36,7 @@ def breakdown(title: str, base: dict[int, float], runs: dict[str, dict[int, floa
     """Rows of the questions in `base` grouped by their base score: each run's mean, and each
     group's contribution to runs[gain[1]] minus runs[gain[0]]."""
     names = list(runs)
+    base = {i: s for i, s in base.items() if all(i in runs[n] for n in names)}  # questions every run scored
     before, after = runs[gain[0]], runs[gain[1]]
     lines = [f"## {title}", "",
              "| Base on the question | Questions | " + " | ".join(names) + f" | Contribution to {gain[1]} minus {gain[0]} |",
@@ -60,7 +61,7 @@ def against_trained(early_name: str, early: dict[int, float], base: dict[int, fl
              f"| `{set_name}`, trained | {len(d_set)} | {sum(set_base.values()) / len(set_base):.3f} | "
              f"{sum(set_trained.values()) / len(set_trained):.3f} | {set_gain:+.3f} | |"]
     for label, member in GROUPS:
-        ids = [i for i in base if i in early and member(early[i])]
+        ids = [i for i in base if i in early and i in trained and member(early[i])]
         d = [trained[i] - base[i] for i in ids]
         gain = sum(d) / len(d)
         rng = random.Random(0)
