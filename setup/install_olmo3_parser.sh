@@ -18,5 +18,15 @@ from renderers.olmo3_tool_parser import Olmo3ToolParser  # noqa: E402
 TOOL_PARSERS["olmo3"] = Olmo3ToolParser
 EOF
 fi
+marker2="# lora-posttrain: OLMo 3 tool parser keeping text before calls"
+if ! grep -qF "$marker2" "$pkg/parsers.py"; then
+  cat >> "$pkg/parsers.py" <<EOF
+
+$marker2
+from renderers.olmo3_tool_parser import Olmo3KeepTextToolParser  # noqa: E402
+
+TOOL_PARSERS["olmo3_keep_text"] = Olmo3KeepTextToolParser
+EOF
+fi
 cd "$PRIME_RL_DIR"
 uv run python -c "from renderers.parsers import TOOL_PARSERS; assert 'olmo3' in TOOL_PARSERS; print('olmo3 tool parser registered')"

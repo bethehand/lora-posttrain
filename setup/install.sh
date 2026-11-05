@@ -48,6 +48,7 @@ done
 #   engine (prefix-cache hits). It ships in the `disagg` extra, whose other packages are for Hopper
 #   or multi-node setups, so only this wheel is installed, at the lock's URL and hash.
 uv pip install --no-deps -e "$REPO/envs/wiki_search_heldout"
+uv pip install --no-deps -e "$REPO/envs/factor_idea"
 uv pip install --no-deps --require-hashes -r "$REPO/setup/vllm-router.txt"
 
 # Build the wiki corpus and search index now; on first use the tool server would do it and time out

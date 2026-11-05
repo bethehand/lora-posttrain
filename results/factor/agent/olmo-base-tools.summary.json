@@ -1,0 +1,117 @@
+{
+ "name": "olmo-base-tools",
+ "episodes": 124,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   124
+  ]
+ ],
+ "has_answer": 0.532258064516129,
+ "parsed": 0.12903225806451613,
+ "computes": 0.12903225806451613,
+ "passed": 0.008064516129032258,
+ "reward_mean": 0.005475972658713171,
+ "ic_mean_among_passed": 0.0024874808297514262,
+ "ic_median_among_passed": 0.0024874808297514262,
+ "tests_per_episode": 0.7983870967741935,
+ "tests_distribution": [
+  [
+   0,
+   83
+  ],
+  [
+   1,
+   10
+  ],
+  [
+   2,
+   11
+  ],
+  [
+   3,
+   14
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   5,
+   1
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.14516129032258066,
+ "tool_results": [
+  [
+   "expression error",
+   80
+  ],
+  [
+   "computed",
+   18
+  ],
+  [
+   "does not compute",
+   1
+  ]
+ ],
+ "turns_truncated": 7,
+ "turns": 223,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   58
+  ],
+  [
+   "parse",
+   50
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   8
+  ],
+  [
+   "depends_on_price_units",
+   5
+  ],
+  [
+   "moves_against_the_idea",
+   2
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 0,
+  "candle_body_up": 0,
+  "close_high_up": 0.25,
+  "close_low_bounce": 0,
+  "dispersion_down": 0,
+  "extreme_day_down": 0,
+  "high_vol_up": 0,
+  "illiquid_up": 0,
+  "liquid_up": 0,
+  "low_vol_up": 0,
+  "lower_shadow_up": 0,
+  "momentum_1m": 0,
+  "momentum_3m": 0,
+  "near_high_up": 0,
+  "range_down": 0,
+  "range_up": 0,
+  "reversal_1d": 0,
+  "reversal_1w": 0,
+  "taker_exhausted": 0,
+  "taker_sell_bounce": 0,
+  "taker_up": 0,
+  "trade_size_down": 0,
+  "trade_size_up": 0,
+  "trades_level_up": 0,
+  "trades_surge_down": 0,
+  "upper_shadow_down": 0,
+  "volume_dry_up": 0,
+  "volume_level_down": 0,
+  "volume_level_up": 0,
+  "volume_surge_down": 0,
+  "volume_surge_up": 0
+ }
+}

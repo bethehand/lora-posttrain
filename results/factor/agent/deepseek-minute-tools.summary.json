@@ -1,0 +1,82 @@
+{
+ "name": "deepseek-minute-tools",
+ "episodes": 48,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   45
+  ],
+  [
+   "max_turns",
+   3
+  ]
+ ],
+ "has_answer": 0.9375,
+ "parsed": 0.9375,
+ "computes": 0.9375,
+ "passed": 0.9166666666666666,
+ "reward_mean": 0.6792451653124638,
+ "ic_mean_among_passed": 0.007799547925321297,
+ "ic_median_among_passed": 0.0072690500487421605,
+ "tests_per_episode": 4.1875,
+ "tests_distribution": [
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   2
+  ],
+  [
+   3,
+   5
+  ],
+  [
+   4,
+   15
+  ],
+  [
+   5,
+   24
+  ]
+ ],
+ "episodes_with_a_computed_test": 1.0,
+ "tool_results": [
+  [
+   "computed",
+   195
+  ],
+  [
+   "expression error",
+   6
+  ]
+ ],
+ "turns_truncated": 0,
+ "turns": 249,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   3
+  ],
+  [
+   "moves_against_the_idea",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "flow_asia_session": 1,
+  "flow_bursts": 0.5,
+  "flow_down_share": 0.75,
+  "flow_late_center": 1,
+  "flow_spike_share": 1,
+  "flow_up_share": 1,
+  "flow_us_session": 1,
+  "path_down_early": 1,
+  "path_down_late": 1,
+  "path_up_late": 1,
+  "sync_market": 1,
+  "sync_own_way": 0.75
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "name": "deepseek-daily-newprompt-tools",
+ "episodes": 124,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   101
+  ],
+  [
+   "max_turns",
+   23
+  ]
+ ],
+ "has_answer": 0.8064516129032258,
+ "parsed": 0.8064516129032258,
+ "computes": 0.8064516129032258,
+ "passed": 0.7096774193548387,
+ "reward_mean": 0.5358009178093377,
+ "ic_mean_among_passed": 0.009030134057045818,
+ "ic_median_among_passed": 0.008615108644994655,
+ "tests_per_episode": 4.620967741935484,
+ "tests_distribution": [
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   4,
+   26
+  ],
+  [
+   5,
+   89
+  ]
+ ],
+ "episodes_with_a_computed_test": 1.0,
+ "tool_results": [
+  [
+   "computed",
+   567
+  ],
+  [
+   "expression error",
+   3
+  ],
+  [
+   "does not compute",
+   3
+  ]
+ ],
+ "turns_truncated": 1,
+ "turns": 695,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   24
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   8
+  ],
+  [
+   "driven_by_unrelated_data",
+   3
+  ],
+  [
+   "moves_against_the_idea",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 1,
+  "candle_body_up": 0.5,
+  "close_high_up": 0.5,
+  "close_low_bounce": 0.5,
+  "dispersion_down": 1,
+  "extreme_day_down": 1,
+  "high_vol_up": 1,
+  "illiquid_up": 0.5,
+  "liquid_up": 0.5,
+  "low_vol_up": 0.75,
+  "lower_shadow_up": 0.75,
+  "momentum_1m": 1,
+  "momentum_3m": 0.25,
+  "near_high_up": 0.75,
+  "range_down": 1,
+  "range_up": 0.75,
+  "reversal_1d": 0.25,
+  "reversal_1w": 0.75,
+  "taker_exhausted": 0.25,
+  "taker_sell_bounce": 0.75,
+  "taker_up": 0.75,
+  "trade_size_down": 0.5,
+  "trade_size_up": 0.75,
+  "trades_level_up": 0.75,
+  "trades_surge_down": 1,
+  "upper_shadow_down": 1,
+  "volume_dry_up": 0.75,
+  "volume_level_down": 0.75,
+  "volume_level_up": 0.75,
+  "volume_surge_down": 1,
+  "volume_surge_up": 0.25
+ }
+}

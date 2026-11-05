@@ -7,6 +7,8 @@ Post-training small open models with LoRA (SFT and RL) on one 4× RTX 4090 machi
 - [x] **Chapter 1: wiki-search with Qwen3-4B.** Prime Intellect's result (Qwen3-4B-Instruct-2507, LoRA RL, tool-use search over Wikipedia) rerun on a held-out split by source page, pre-registered in [prereg/01-wiki-search.md](prereg/01-wiki-search.md). On pages never trained on, accuracy rises from 0.567 to 0.633 (+0.066, 95% CI +0.042 to +0.090), from reading the right section; trained questions gain +0.371, held-out questions of the same kind +0.207.
 - [x] **Chapter 2: wiki-search with OLMo 3 7B.** The same recipe on AI2's OLMo-3-7B-Instruct, pre-registered in [prereg/02-olmo-wiki-search.md](prereg/02-olmo-wiki-search.md). Held-out accuracy rises from 0.080 to 0.180 (+0.101, +0.079 to +0.122) and all six hypotheses pass, but most of the gain is answers from memory after failed tool calls, not retrieval.
 
+- [ ] **Chapter 3: from a one-sentence idea to a factor, on OLMo 3 7B.** In progress: the sandbox, the verifier exam and the first baselines are in [results/factor/week1.md](results/factor/week1.md).
+
 See [REPORT.md](REPORT.md).
 
 ## Hardware
@@ -18,7 +20,8 @@ See [REPORT.md](REPORT.md).
 | Path | Contents |
 |---|---|
 | `setup/` | Environment variables, install script, version recording |
-| `envs/` | Environment variants (held-out wiki-search) |
+| `envs/` | Environment variants (held-out wiki-search; the factor sandbox and its tests) |
+| `task/` | Chapter 3's research manual, ideas and seed factors |
 | `configs/` | Training and evaluation configs for 4× 4090 |
 | `scripts/` | Smoke test, data preparation, training, evaluation, analysis |
 | `prereg/` | Hypotheses and pass criteria, committed before each run |
