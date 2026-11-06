@@ -1,0 +1,36 @@
+== H1: s1-heldout against v2-olmo-tools
+heldout: 31 ideas; later 124 episodes, earlier 124
+  pass: later +0.5161, earlier +0.0000, difference +0.5161 (95% CI +0.4194 to +0.6129) over 31 ideas
+  reward_ic: later +0.3407, earlier +0.0000, difference +0.3407 (95% CI +0.2750 to +0.4090) over 31 ideas
+  ic_among_passes: no idea has a value in both
+  faithful_among_passes: no idea has a value in both
+  by family, pass rate later / earlier:
+    illiquidity        0.21 / 0.00 (6 ideas)
+    market_relative    0.45 / 0.00 (5 ideas)
+    taker_flow         0.68 / 0.00 (7 ideas)
+    trade_count        0.65 / 0.00 (5 ideas)
+    trend_position     0.56 / 0.00 (8 ideas)
+== H3: s2-heldout against s1-heldout
+heldout: 31 ideas; later 124 episodes, earlier 124
+  pass: later +0.4435, earlier +0.5161, difference -0.0726 (95% CI -0.1774 to +0.0242) over 31 ideas
+  reward_ic: later +0.3048, earlier +0.3407, difference -0.0359 (95% CI -0.1072 to +0.0285) over 31 ideas
+  ic_among_passes: later +0.0036, earlier +0.0018, difference +0.0017 (95% CI -0.0010 to +0.0044) over 25 ideas
+  faithful_among_passes: later +0.6467, earlier +0.6400, difference +0.0067 (95% CI -0.1200 to +0.1200) over 25 ideas
+  by family, pass rate later / earlier:
+    illiquidity        0.29 / 0.21 (6 ideas)
+    market_relative    0.30 / 0.45 (5 ideas)
+    taker_flow         0.75 / 0.68 (7 ideas)
+    trade_count        0.50 / 0.65 (5 ideas)
+    trend_position     0.34 / 0.56 (8 ideas)
+== H4: s3p-ic-heldout against s2-heldout
+heldout: 31 ideas; later 124 episodes, earlier 124
+  pass: later +0.5968, earlier +0.4435, difference +0.1532 (95% CI +0.0565 to +0.2419) over 31 ideas
+  reward_ic: later +0.3945, earlier +0.3048, difference +0.0898 (95% CI +0.0257 to +0.1494) over 31 ideas
+  ic_among_passes: later +0.0004, earlier +0.0042, difference -0.0038 (95% CI -0.0063 to -0.0014) over 24 ideas
+  faithful_among_passes: later +0.7882, earlier +0.7153, difference +0.0729 (95% CI -0.0590 to +0.2222) over 24 ideas
+  by family, pass rate later / earlier:
+    illiquidity        0.42 / 0.29 (6 ideas)
+    market_relative    0.40 / 0.30 (5 ideas)
+    taker_flow         0.86 / 0.75 (7 ideas)
+    trade_count        0.60 / 0.50 (5 ideas)
+    trend_position     0.62 / 0.34 (8 ideas)

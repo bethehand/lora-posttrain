@@ -8,3 +8,5 @@
 - s3p-ic: `8557a72135790ddea9b5deac5bca02d11c1a0344302351ff43b93bc887e1c98d`, from `/mnt/nvme1/bruce/outputs/sft/s3p-ic/s3p-ic/broadcasts/step_64`
 - s3p-gates: `85a5331907942e1b3d3f625f0ebbce99913d9af3d77a5f401f630ea2dc647d7c`, from `/mnt/nvme1/bruce/outputs/sft/s3p-gates/s3p-gates/broadcasts/step_16`
 - s3p-judged: `77bf9db573c4ec1c58d0bbfc2ccef716d6be562416e32cedb456f6c37803823e`, from `/mnt/nvme1/bruce/outputs/sft/s3p-judged/s3p-judged/broadcasts/step_34`
+- s4-ic-seed1: `91bfe9cf10c0c74ab9d5dfa6db8bb6943e3ac03b41f328f5b8861f874d101889`, from `/mnt/nvme1/bruce/outputs/factor-s4-ic-seed1/factor-idea-train--olmo-3-7b-instruct--18911557/broadcasts/step_35`
+- s4-judged-seed1: `172384477d2e925abc3207d678488096e30cde24fc3320b6e18e7b05df506e67`, from `/mnt/nvme1/bruce/outputs/factor-s4-judged-seed1/factor-idea-train--olmo-3-7b-instruct--e3c66f0b/broadcasts/step_35`

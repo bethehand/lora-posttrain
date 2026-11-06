@@ -1,12 +1,28 @@
 """The rules that choose rank, steps and when to stop online RL, as prereg 03 states them."""
+import json
 import pathlib
 import sys
 
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[3] / "scripts" / "factor"))
+REPO = pathlib.Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO / "scripts" / "factor"))
 
+from heldout_online import mirrored, unsigned  # noqa: E402
 from run_stages import earliest_within, guard_trips, half_epoch, needs_rank_128, pick_rank, reward_falls, summarize  # noqa: E402
+
+
+def test_a_formula_loses_only_its_sign_and_the_brackets_round_it():
+    assert unsigned("-1 * (a + b)") == "a+b"
+    assert unsigned("-(a)") == "a"
+    assert unsigned("(a) * (b)") == "(a)*(b)"
+    assert unsigned("-1 * a.div(b)") == "a.div(b)"
+
+
+def test_sixteen_held_out_ideas_are_in_mirrored_pairs_as_prereg_03_says():
+    with open(REPO / "task" / "ideas_v2.jsonl") as f:
+        ideas = [json.loads(line) for line in f]
+    assert len(mirrored(ideas)) == 16
 
 
 def test_the_earliest_checkpoint_close_to_the_best_wins():

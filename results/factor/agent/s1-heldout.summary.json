@@ -1,0 +1,109 @@
+{
+ "name": "s1-heldout",
+ "episodes": 124,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   116
+  ],
+  [
+   "max_turns",
+   8
+  ]
+ ],
+ "has_answer": 0.9193548387096774,
+ "parsed": 0.9193548387096774,
+ "computes": 0.9193548387096774,
+ "passed": 0.5161290322580645,
+ "reward_mean": 0.3407140219157645,
+ "ic_mean_among_passed": 0.0008685786395823163,
+ "ic_median_among_passed": -0.0005457642866662689,
+ "tests_per_episode": 3.8225806451612905,
+ "tests_distribution": [
+  [
+   0,
+   1
+  ],
+  [
+   3,
+   46
+  ],
+  [
+   4,
+   49
+  ],
+  [
+   5,
+   28
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9919354838709677,
+ "tool_results": [
+  [
+   "computed",
+   441
+  ],
+  [
+   "does not compute",
+   19
+  ],
+  [
+   "expression error",
+   14
+  ]
+ ],
+ "turns_truncated": 0,
+ "turns": 598,
+ "failure_reasons": [
+  [
+   "does_not_respond_to_the_idea",
+   26
+  ],
+  [
+   "moves_against_the_idea",
+   21
+  ],
+  [
+   "no factor tag",
+   10
+  ],
+  [
+   "depends_on_price_units",
+   3
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 0.75,
+  "above_ma_up": 0.5,
+  "beat_market_days_up": 0.25,
+  "excess_momentum_up": 0.5,
+  "excess_reversal_down": 0.5,
+  "fresh_high_up": 0.25,
+  "high_beta_down": 0.5,
+  "high_beta_up": 0.5,
+  "illiquid_long_up": 0.5,
+  "illiquid_up": 0,
+  "impact_rising_down": 0.25,
+  "impact_rising_up": 0,
+  "liquid_up": 0,
+  "ma_cross_up": 0.5,
+  "near_high_up": 0.5,
+  "near_low_bounce": 0.5,
+  "range_per_dollar_up": 0.5,
+  "range_position_down": 1,
+  "range_position_up": 0.5,
+  "taker_exhausted": 1,
+  "taker_imbalance_up": 0.25,
+  "taker_long_up": 0.5,
+  "taker_sell_bounce": 0.75,
+  "taker_surge_down": 0.5,
+  "taker_surge_up": 0.75,
+  "taker_up": 1,
+  "trades_level_up": 0.5,
+  "trades_low_up": 0.25,
+  "trades_surge_down": 1,
+  "trades_surge_up": 0.75,
+  "trades_trend_up": 0.75
+ }
+}

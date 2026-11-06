@@ -258,6 +258,46 @@ Each checkpoint has 60 episodes with none failed and no missing verdict, and rec
 
 The rules picked the first checkpoint for arms A and C, half an epoch at lr 3e-5, so both have moved little from S2. Any difference between the arms will have to come mostly from online RL. In all three arms the kept adapter equals its checkpoint, byte for byte.
 
+## Held-out ideas, after the freeze
+
+Prereg 03 froze at b898b72, with no held-out result on disk. Each model then answered the 31 held-out ideas 4 times, 124 episodes with none failed, and recounting gives the driver's numbers.
+
+| Model | Passed | Answered | Reward, arm B | IC among passes | Judged faithful |
+|---|---|---|---|---|---|
+| OLMo untrained, tools | 0.0% | 33.9% | 0.000 | none | |
+| Qwen, tools | 25.8% | 88.7% | 0.172 | +0.0014 | |
+| DeepSeek, tools | 79.0% | 83.9% | 0.551 | +0.0041 | |
+| S1 | 51.6% | 91.9% | 0.341 | +0.0009 | 48 of 64 |
+| S2 | 44.4% | 79.8% | 0.305 | +0.0032 | 42 of 55 |
+| S3 arm A | 55.6% | 93.5% | 0.355 | -0.0011 | 49 of 69 |
+| S3 arm B | 59.7% | 96.0% | 0.395 | +0.0010 | 58 of 74 |
+| S3 arm C | 52.4% | 97.6% | 0.353 | +0.0021 | 54 of 65 |
+
+**H1 passes.** S1 minus S0, pass rate +51.6 points (95% CI +41.9 to +61.3), reward +0.341 (+0.275 to +0.409). By family S1 passes 21% on `illiquidity`, 45% on `market_relative`, 56% on `trend_position`, 65% on `trade_count` and 68% on `taker_flow`.
+
+**H3 does not pass.** S2 minus S1, IC among passes +0.0017 (-0.0010 to +0.0044) over 25 ideas. Pass rate -7.3 points (-17.7 to +2.4) and reward -0.036 (-0.107 to +0.029). S2 hands in less often, 79.8% against 91.9%, and tests more, 4.31 against 3.82, so more of its episodes end with no answer.
+
+**H4 does not pass, and points the other way.** S3 arm B minus S2, IC among passes -0.0038 (-0.0063 to -0.0014) over 24 ideas. It passes more, +15.3 points (+5.7 to +24.2), and earns more reward, +0.090 (+0.026 to +0.149). That is the case the prereg warned of, more reward with no better formula. Arms A and C are lower than S2 on IC among passes too, -0.0048 (-0.0075 to -0.0024) and -0.0024 (-0.0046 to -0.0004). S2's own IC may be flattered, since it passes the fewest; that reading isn't tested.
+
+Val flattered every stage. Pass rates fall from 75.0% to 51.6% for S1, and from 73.3% to 59.7% for S3 arm B. IC among passes falls from about +0.008 to about +0.001. Part of that is the families and not the student: DeepSeek's own IC falls from +0.0093 on val to +0.0041 here. Against DeepSeek on held-out ideas S1 is clearly behind, pass rate -27.4 points (-41.1 to -13.7), where val showed no difference. So SFT taught the task on families it never saw, about two thirds as well as the teacher does it. It didn't teach signal: on these ideas the student's formulas add little beyond the five known styles.
+
+Why arm B could pass more without earning more IC: its offline weights mostly say whether a trajectory passed. A failure earns 0 and a pass at least 0.3, while 0.01 more IC adds only 0.117. Of the squared weight in `s3-ic`, 90.1% is explained by pass or fail alone. Of the positive weight, 80.9% comes from the 76 of 200 groups that have a failure, and in those groups 144 of the 420 rows with a positive weight have an IC at or below 0, copies of known styles among them. So this S3 mostly teaches passing. That is a reading of the data, and nothing has tested it. Online RL has the same shape while many rollouts fail, which may leave H6 little room.
+
+Online RL differs from the first S3 in a way this log hadn't noted. S3 uses the SFT trainer: cross-entropy times the weight, with no limit on how far a token's probability can go. prime-rl's online loss, `default_loss_fn`, masks tokens whose probability has already moved too far from what the rollout saw, and adds a squared log-ratio penalty that pulls back toward it. So a negative advantage there can't run away the way a negative weight did here. That comes from reading the code; online RL on this task hasn't run yet.
+
+## Online RL, the first seeds
+
+Both runs started from their arm's S3, as their logs say, and each kept adapter equals its step 35 byte for byte. Neither guard tripped: the highest mismatch KL was 0.0038 against a limit of 0.01, entropy stayed between 0.71 and 1.07, and no rollout had an error, so the judge had no outage in arm C's run. Each took about 1.9 hours, since steps get faster as the student tests less.
+
+| Run | Train pass, steps 1-5 to 31-35 | Val passed | Answered | Reward, arm B | IC among passes | Tests | Judged faithful |
+|---|---|---|---|---|---|---|---|
+| S3 arm B | | 73.3% | 91.7% | 0.541 | +0.0075 | 4.22 | |
+| S4 arm B, seed 1 | 52.7% to 69.5% | 76.7% | 100.0% | 0.562 | +0.0072 | 2.68 | |
+| S3 arm C | | 66.7% | 91.7% | 0.491 | +0.0074 | 4.07 | 34 of 40 |
+| S4 arm C, seed 1 | 54.8% to 73.3% | 81.7% | 100.0% | 0.585 | +0.0057 | 2.90 | 44 of 49 |
+
+Negative advantages did not break the syntax here, as they did in S3's first version, which fits the reading above but doesn't prove it. So far RL has made the student more reliable: it always hands in, and it passes more often. It hasn't raised IC among passes on val. It also tests less, 2.7 to 2.9 times against 4.1 to 4.2, which nothing in the reward asks for directly. A failed answer earns 0, so fewer tests may just mean fewer ways to run out of turns; I haven't checked that. These are single seeds on 60 val episodes, and the held-out evals come after all six runs.
+
 ## A second guard for online RL
 
 The guard from prereg 02 watches entropy and mismatch KL, and neither is about whether the student can still do the task. So online RL now also stops if the mean reward over any five steps running is more than 30% below the mean over steps 1 to 3. At S2's level that is about 72% passed falling to 50%. As with the first guard, the run then starts again once at lr 1e-5, and a second trip stops the whole flow with the GPUs free. This was added before any online result on this task.
