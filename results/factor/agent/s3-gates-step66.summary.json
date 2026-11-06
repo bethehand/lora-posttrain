@@ -1,0 +1,105 @@
+{
+ "name": "s3-gates-step66",
+ "episodes": 60,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   59
+  ],
+  [
+   "max_turns",
+   1
+  ]
+ ],
+ "has_answer": 0.95,
+ "parsed": 0.75,
+ "computes": 0.7166666666666667,
+ "passed": 0.4666666666666667,
+ "reward_mean": 0.3360645527880176,
+ "ic_mean_among_passed": 0.006011856634533848,
+ "ic_median_among_passed": 0.003759080954354726,
+ "tests_per_episode": 3.5,
+ "tests_distribution": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   2,
+   1
+  ],
+  [
+   3,
+   31
+  ],
+  [
+   4,
+   16
+  ],
+  [
+   5,
+   10
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.7666666666666667,
+ "tool_results": [
+  [
+   "computed",
+   127
+  ],
+  [
+   "expression error",
+   70
+  ],
+  [
+   "does not compute",
+   13
+  ]
+ ],
+ "turns_truncated": 1,
+ "turns": 270,
+ "failure_reasons": [
+  [
+   "parse",
+   12
+  ],
+  [
+   "moves_against_the_idea",
+   9
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   6
+  ],
+  [
+   "no factor tag",
+   3
+  ],
+  [
+   "too_few_coins_or_constant",
+   2
+  ]
+ ],
+ "passed_by_idea": {
+  "candle_body_up": 1,
+  "close_above_vwap_down": 0.75,
+  "close_high_up": 1,
+  "doji_down": 0.5,
+  "down_volume_share_down": 0,
+  "downside_vol_down": 0.25,
+  "range_down": 0.75,
+  "reversal_1d": 0.75,
+  "skew_up": 0,
+  "taker_on_down_days_up": 0.25,
+  "trade_size_surge_down": 0.5,
+  "up_days_down": 0,
+  "volume_level_down": 0.5,
+  "volume_own_low_up": 0.25,
+  "volume_record_down": 0.5
+ }
+}

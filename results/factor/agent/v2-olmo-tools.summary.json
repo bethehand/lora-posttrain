@@ -1,0 +1,209 @@
+{
+ "name": "v2-olmo-tools",
+ "episodes": 460,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   459
+  ],
+  [
+   "max_turns",
+   1
+  ]
+ ],
+ "has_answer": 0.33043478260869563,
+ "parsed": 0.09130434782608696,
+ "computes": 0.09130434782608696,
+ "passed": 0.015217391304347827,
+ "reward_mean": 0.009659376577072871,
+ "ic_mean_among_passed": -0.0013063686679160714,
+ "ic_median_among_passed": -1.7576377822544542e-08,
+ "tests_per_episode": 0.7260869565217392,
+ "tests_distribution": [
+  [
+   0,
+   340
+  ],
+  [
+   1,
+   12
+  ],
+  [
+   2,
+   32
+  ],
+  [
+   3,
+   52
+  ],
+  [
+   4,
+   18
+  ],
+  [
+   5,
+   6
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.07608695652173914,
+ "tool_results": [
+  [
+   "expression error",
+   296
+  ],
+  [
+   "computed",
+   35
+  ],
+  [
+   "does not compute",
+   3
+  ]
+ ],
+ "turns_truncated": 8,
+ "turns": 794,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   308
+  ],
+  [
+   "parse",
+   110
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   27
+  ],
+  [
+   "moves_against_the_idea",
+   4
+  ],
+  [
+   "depends_on_price_units",
+   3
+  ],
+  [
+   "driven_by_unrelated_data",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 0,
+  "above_ma_up": 0,
+  "beat_market_days_up": 0,
+  "candle_body_up": 0.25,
+  "close_above_vwap_down": 0,
+  "close_above_vwap_up": 0,
+  "close_high_up": 0,
+  "close_low_bounce": 0,
+  "continuation_1d": 0.25,
+  "continuation_1w": 0,
+  "doji_down": 0,
+  "doji_up": 0,
+  "down_volume_share_down": 0,
+  "down_volume_share_up": 0,
+  "downside_vol_down": 0,
+  "excess_momentum_up": 0,
+  "excess_reversal_down": 0,
+  "extreme_day_down": 0,
+  "fat_tail_down": 0,
+  "flow_beats_price_down": 0,
+  "flow_beats_price_up": 0,
+  "fresh_high_up": 0,
+  "high_beta_down": 0,
+  "high_beta_up": 0,
+  "high_vol_up": 0,
+  "illiquid_long_up": 0,
+  "illiquid_up": 0,
+  "impact_rising_down": 0,
+  "impact_rising_up": 0,
+  "liquid_up": 0,
+  "low_vol_long": 0,
+  "low_vol_up": 0,
+  "lower_shadow_down": 0,
+  "lower_shadow_up": 0,
+  "ma_cross_up": 0,
+  "max_day_down": 0,
+  "max_day_up": 0.75,
+  "momentum_1m": 0,
+  "momentum_1m_down": 0,
+  "momentum_3m": 0,
+  "momentum_3m_down": 0,
+  "momentum_6m": 0,
+  "momentum_skip_week": 0,
+  "near_high_up": 0,
+  "near_low_bounce": 0,
+  "pv_corr_down": 0,
+  "pv_corr_up": 0,
+  "range_contract_up": 0,
+  "range_down": 0,
+  "range_long_down": 0,
+  "range_per_dollar_up": 0,
+  "range_position_down": 0,
+  "range_position_up": 0,
+  "range_robust_down": 0,
+  "range_up": 0,
+  "reversal_1d": 0,
+  "reversal_1w": 0,
+  "reversal_2w": 0,
+  "reversal_3d": 0,
+  "rise_without_buyers_down": 0,
+  "rsi_high_down": 0,
+  "rsi_high_up": 0,
+  "rsi_low_bounce": 0,
+  "skew_down": 0,
+  "skew_up": 0,
+  "solid_body_down": 0,
+  "solid_body_up": 0,
+  "straight_rise_down": 0,
+  "straight_rise_up": 0,
+  "surge_no_rise_down": 0,
+  "taker_exhausted": 0,
+  "taker_imbalance_up": 0,
+  "taker_long_up": 0,
+  "taker_on_down_days_up": 0,
+  "taker_on_up_days_up": 0,
+  "taker_sell_bounce": 0,
+  "taker_surge_down": 0,
+  "taker_surge_up": 0,
+  "taker_up": 0,
+  "trade_size_down": 0,
+  "trade_size_falling_up": 0,
+  "trade_size_surge_down": 0,
+  "trade_size_surge_up": 0,
+  "trade_size_up": 0,
+  "trades_level_up": 0,
+  "trades_low_up": 0,
+  "trades_surge_down": 0,
+  "trades_surge_up": 0,
+  "trades_trend_up": 0,
+  "up_days_down": 0.25,
+  "up_days_up": 0,
+  "up_volume_share_down": 0,
+  "up_volume_share_up": 0,
+  "upper_shadow_down": 0,
+  "upper_shadow_up": 0,
+  "upside_vol_up": 0,
+  "vol_rising_down": 0,
+  "vol_rising_up": 0,
+  "volume_dry_up": 0,
+  "volume_fade_weak": 0,
+  "volume_level_down": 0,
+  "volume_level_up": 0,
+  "volume_longrun_down": 0,
+  "volume_longrun_up": 0.25,
+  "volume_own_high_up": 0,
+  "volume_own_low_up": 0,
+  "volume_record_down": 0,
+  "volume_surge_down": 0,
+  "volume_surge_up": 0,
+  "volume_two_week_up": 0,
+  "volume_unstable_down": 0,
+  "volume_unstable_up": 0,
+  "vwap_gap_longer_up": 0,
+  "worst_day_bounce": 0,
+  "worst_day_weak": 0
+ }
+}

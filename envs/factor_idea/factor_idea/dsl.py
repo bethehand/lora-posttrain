@@ -199,7 +199,10 @@ def _compile(node: ast.AST) -> Node:
 def _constant(node: ast.Constant) -> Const:
     if isinstance(node.value, bool) or not isinstance(node.value, (int, float)):
         raise DslError(f"unsupported literal: {node.value!r}")
-    return Const(float(node.value))
+    try:
+        return Const(float(node.value))
+    except OverflowError:
+        raise DslError("number is too large") from None
 
 
 def _unary(node: ast.UnaryOp) -> Node:
@@ -401,6 +404,9 @@ def _check_ranges(method: str, bound: dict[str, Any]) -> None:
     reach = window if window is not None else (None if span is None else 10 * span)
     if min_periods is not None and reach is not None and min_periods > reach:
         raise DslError(f"{method}(): min_periods must not exceed window")
+    # Longer than the gates' history and a formula could stay blank through them, then switch on when scored.
+    if min_periods is not None and min_periods > MAX_WINDOW:
+        raise DslError(f"{method}(): min_periods must be at most {MAX_WINDOW}")
     if "q" in bound and not 0.0 <= bound["q"] <= 1.0:
         raise DslError(f"{method}(): q must be between 0 and 1")
     if method == "clip" and bound["lower"] is None and bound["upper"] is None:

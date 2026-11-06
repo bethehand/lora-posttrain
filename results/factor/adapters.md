@@ -1,0 +1,10 @@
+- s1: `9bebbd843147f55b44d3bdce6d0a2d93737adbc98b5c7603c7d8b8dbbf8b0199`, from `/mnt/nvme1/bruce/outputs/sft/s1-r32/s1-r32/broadcasts/step_350`
+- s2: `e2af1b3f12f712967cbe631b8fe768edf3a606875ba9c614bb63de886e36e003`, from `/mnt/nvme1/bruce/outputs/sft/s2/s2/broadcasts/step_35`
+- s3-gates: `ef5f084aa0537dcc32fb5a17fea3dc823c96b7be5f15865747298d30f350d86b`, from `/mnt/nvme1/bruce/outputs/sft/s3-gates/s3-gates/broadcasts/step_22`
+- s3-ic: `472f38ad134506122961ee2098edb45457c7ccbe4212ce2a087d50f583032918`, from `/mnt/nvme1/bruce/outputs/sft/s3-ic/s3-ic/broadcasts/step_280`
+- s3-judged: `d04255ac5263b652a747fe42d612d40a20c2e8ffb6a44f1a95c1f4a9ddd61f20`, from `/mnt/nvme1/bruce/outputs/sft/s3-judged/s3-judged/broadcasts/step_56`
+- s1: `9bebbd843147f55b44d3bdce6d0a2d93737adbc98b5c7603c7d8b8dbbf8b0199`, from `/mnt/nvme1/bruce/outputs/sft/s1-r32/s1-r32/broadcasts/step_350`
+- s2: `e2af1b3f12f712967cbe631b8fe768edf3a606875ba9c614bb63de886e36e003`, from `/mnt/nvme1/bruce/outputs/sft/s2/s2/broadcasts/step_35`
+- s3p-ic: `8557a72135790ddea9b5deac5bca02d11c1a0344302351ff43b93bc887e1c98d`, from `/mnt/nvme1/bruce/outputs/sft/s3p-ic/s3p-ic/broadcasts/step_64`
+- s3p-gates: `85a5331907942e1b3d3f625f0ebbce99913d9af3d77a5f401f630ea2dc647d7c`, from `/mnt/nvme1/bruce/outputs/sft/s3p-gates/s3p-gates/broadcasts/step_16`
+- s3p-judged: `77bf9db573c4ec1c58d0bbfc2ccef716d6be562416e32cedb456f6c37803823e`, from `/mnt/nvme1/bruce/outputs/sft/s3p-judged/s3p-judged/broadcasts/step_34`

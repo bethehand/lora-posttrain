@@ -19,8 +19,8 @@ def tasks(**config):
 
 def test_every_idea_becomes_one_task():
     loaded = tasks()
-    assert len(loaded) == 31
-    assert len({t.key for t in loaded}) == 31
+    assert len(loaded) == 30
+    assert len({t.key for t in loaded}) == 30
     illiquid = next(t for t in loaded if t.key == "illiquid_up")
     assert illiquid.data.also == ["price"] and illiquid.data.direction == -1
     assert "test_factor" in illiquid.data.prompt
@@ -164,3 +164,101 @@ def test_keep_text_parsers_agree():
     assert served.extract_tool_calls(text, None).content == text
     ids, parsed = trained.extract(tok(text, add_special_tokens=False)["input_ids"])
     assert tok.decode(ids) == text and not parsed
+
+
+def graded_by_judge(monkeypatch, verdict, tests=3):
+    monkeypatch.setattr(ts.workers, "score", passing_score)
+    asked = []
+
+    async def fake_judge(idea, formula, **kwargs):
+        asked.append((idea, formula))
+        return verdict
+
+    monkeypatch.setattr(ts, "judge", fake_judge)
+    trace = FakeTrace("<factor>Factor('close')</factor>", tests=tests)
+    return grade(trace, "judged"), trace, asked
+
+
+def test_arm_c_pays_as_arm_b_when_the_judge_agrees(monkeypatch):
+    reward, trace, asked = graded_by_judge(monkeypatch, True)
+    assert reward == pytest.approx(0.825) and trace.metrics["faithful"] == 1.0 and len(asked) == 1
+
+
+def test_arm_c_pays_nothing_when_the_judge_disagrees(monkeypatch):
+    reward, trace, _ = graded_by_judge(monkeypatch, False)
+    assert reward == 0.0 and trace.metrics["faithful"] == 0.0
+
+
+def test_arm_c_doesnt_pay_for_a_judgement_it_doesnt_need(monkeypatch):
+    reward, _, asked = graded_by_judge(monkeypatch, True, tests=6)
+    assert reward == 0.0 and asked == []
+
+
+def test_a_verdict_is_read_from_the_end_of_the_reply():
+    from factor_idea.judge import verdict_of
+
+    assert verdict_of("VERDICT: NOT, at first. Then again.\nVERDICT: FAITHFUL") is True
+    assert verdict_of("reasons\n**VERDICT: NOT FAITHFUL**") is False
+    assert verdict_of("VERDICT: **NOT**") is False
+    assert verdict_of("no line at the end") is None and verdict_of(None) is None
+
+
+def judged_by_replies(monkeypatch, replies):
+    from types import SimpleNamespace
+
+    from factor_idea import judge as jd
+
+    limits = []
+
+    async def create(**kwargs):
+        limits.append(kwargs["max_tokens"])
+        return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=replies.pop(0)))])
+
+    client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    monkeypatch.setattr(jd, "_client", lambda *_: client)
+    monkeypatch.setattr(jd, "_known", {})
+    return jd.judge("an idea", "Factor('close')"), limits
+
+
+def test_a_reply_cut_off_while_thinking_gets_more_room_next_time(monkeypatch):
+    verdict, limits = judged_by_replies(monkeypatch, ["", None, "VERDICT: NOT"])
+    assert asyncio.run(verdict) is False and limits == [4000, 8000, 16000]
+
+
+def test_the_judge_raises_rather_than_make_up_a_verdict(monkeypatch):
+    verdict, limits = judged_by_replies(monkeypatch, ["", "", ""])
+    with pytest.raises(RuntimeError, match="no verdict"):
+        asyncio.run(verdict)
+    assert len(limits) == 3
+
+
+def test_a_killed_worker_doesnt_take_every_later_call_with_it(monkeypatch):
+    from concurrent.futures import Executor, Future
+    from concurrent.futures.process import BrokenProcessPool
+
+    from factor_idea import workers
+
+    class Pool(Executor):
+        def __init__(self, broken):
+            self.broken = broken
+
+        def submit(self, function, *args, **kwargs):
+            future = Future()
+            if self.broken:
+                future.set_exception(BrokenProcessPool("a worker died"))
+            else:
+                future.set_result(function(*args))
+            return future
+
+    pools = []
+
+    def fresh():
+        if workers._pool is None:
+            workers._pool = Pool(broken=not pools)
+            pools.append(workers._pool)
+        return workers._pool
+
+    monkeypatch.setattr(workers, "_pool", None)
+    monkeypatch.setattr(workers, "_executor", fresh)
+    assert asyncio.run(workers._run(str, 1)) == "1"
+    assert len(pools) == 2 and workers._pool is pools[1]

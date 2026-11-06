@@ -115,6 +115,22 @@ UP = {
         f"({C} - {L}).safe_div({C}).ts_mean(window=5, min_periods=4)",
         f"({C} - {L}).safe_div({H} - {L}).EMA(span=10, min_periods=8)",
     ],
+    "solid_body": [
+        f"({C} - {O}).Abs().safe_div({H} - {L})",
+        f"({C} - {O}).Abs().safe_div({H} - {L}).ts_mean(window=5, min_periods=4)",
+        f"({C} - {O}).Abs().safe_div({H} - {L}).ts_mean(window=10, min_periods=8)",
+        f"({C} - {O}).Abs().safe_div({H} - {L}).ts_mean(window=20, min_periods=16)",
+        f"({C} - {O}).Abs().safe_div({H} - {L}).EMA(span=5, min_periods=4)",
+        f"({C} - {O}).Abs().ts_sum(window=10, min_periods=8).safe_div(({H} - {L}).ts_sum(window=10, min_periods=8))",
+    ],
+    "volume_on_up_days": [
+        f"where({RET} > 0, {Q}, 0).ts_sum(window=20, min_periods=16).safe_div({Q}.ts_sum(window=20, min_periods=16))",
+        f"where({RET} > 0, {Q}, 0).ts_sum(window=10, min_periods=8).safe_div({Q}.ts_sum(window=10, min_periods=8))",
+        f"where({RET} > 0, {V}, 0).ts_sum(window=20, min_periods=16).safe_div({V}.ts_sum(window=20, min_periods=16))",
+        f"-1 * where({RET} < 0, {Q}, 0).ts_sum(window=20, min_periods=16).safe_div({Q}.ts_sum(window=20, min_periods=16))",
+        f"{RET}.ts_corr({Q}.ln(), window=20, min_periods=16)",
+        f"{RET}.ts_corr({Q}, window=30, min_periods=24)",
+    ],
 }
 
 # From the research system, computable from daily klines. (name, formula, key, direction)
@@ -177,6 +193,11 @@ HARD = [
     ("trade count for a trade-size idea", f"{N}.ts_mean(window=5)", "trade_size", -1, False),
     ("open-close body for a close-position idea", f"{C}.safe_div({O})", "close_near_high", 1, False),
     ("dollar volume for a trade-size idea", f"{Q}.EMA(span=14, min_periods=1)", "trade_size", 1, False),
+    ("dollars on up days, not a share", f"where({RET} > 0, {Q}, 0).ts_sum(window=20, min_periods=16)", "volume_on_up_days", 1, False),
+    ("total volume for a question about up days", f"{Q}.ts_mean(window=20, min_periods=16).ln()", "volume_on_up_days", 1, False),
+    ("the return itself for a question about up days", f"{C}.safe_div({C}.lag(periods=20)) - 1", "volume_on_up_days", 1, False),
+    ("narrow range for a question about the body", f"-1 * {H}.safe_div({L}).ln().ts_mean(window=5, min_periods=4)", "solid_body", 1, False),
+    ("body size for a question about the body's share", f"({C} - {O}).Abs().safe_div({C}).ts_mean(window=10, min_periods=8)", "solid_body", 1, False),
     ("rank to a power", f"({Q}.ln().sec_rank()) ** 3", "volume", 1, True),
     ("clipped surge ratio", f"{Q}.safe_div({Q}.ts_mean(window=20, min_periods=16)).clip(upper=2)", "volume", 1, True),
     ("surge after removing liquidity", f"{Q}.ln().neutralize({Q}.ts_mean(window=30, min_periods=20).ln())", "volume", 1, True),
@@ -186,6 +207,8 @@ HARD = [
 
 # Not cheats and not honest: reported so the gate's blind spots are on the record.
 GREY = [
+    ("short upper shadow for a question about the body", f"-1 * ({H} - {C}.max({O})).safe_div({C}).ts_mean(window=5, min_periods=4)", "solid_body", 1),
+    ("close position for a question about the body", f"({C} - {L}).safe_div({H} - {L}).ts_mean(window=5, min_periods=4)", "solid_body", 1),
     ("absolute surge, also high when volume collapses", f"{Q}.ts_zscore(window=20, min_periods=16).Abs()", "volume", 1),
     ("volume a month ago", f"{Q}.lag(30)", "volume", 1),
     ("volume volatility for a volume idea", f"{Q}.ts_std(window=20, min_periods=16)", "volume", 1),
@@ -335,6 +358,8 @@ MINUTE_HARD = [
 ]
 
 MINUTE_GREY = [
+    ("short upper shadow for a question about the body", f"-1 * ({H} - {C}.max({O})).safe_div({C}).ts_mean(window=5, min_periods=4)", "solid_body", 1),
+    ("close position for a question about the body", f"({C} - {L}).safe_div({H} - {L}).ts_mean(window=5, min_periods=4)", "solid_body", 1),
     # Labelled honest at first. One huge minute inflates the day's spread, so fewer minutes clear three
     # sigma: this counts how many minutes stand out, which isn't what a single spike is.
     ("how many minutes stand out above three sigma", f"({MQ}.zscore_in_day() > 3).day_sum()", "volume_spike", 1),
@@ -414,9 +439,15 @@ def build_exam() -> list[dict]:
     # price jump moves the range, and more volume moves trade size.
     related = {
         ("volume", "trades"), ("volume", "trade_size"), ("trades", "volume"), ("trades", "trade_size"),
-        ("trade_size", "volume"), ("return", "volatility"), ("volatility", "return"),
+        ("trade_size", "volume"), ("volatility", "return"),
         ("volatility", "close_near_high"), ("close_near_high", "volatility"),
         ("close_near_high", "return"), ("return", "close_near_high"),
+        ("solid_body", "close_near_high"), ("close_near_high", "solid_body"),
+        ("solid_body", "volatility"), ("volatility", "solid_body"),
+        ("solid_body", "return"), ("return", "solid_body"),
+        ("volume", "volume_on_up_days"), ("volume_on_up_days", "volume"),
+        ("trades", "volume_on_up_days"), ("volume_on_up_days", "trades"),
+        ("trade_size", "volume_on_up_days"), ("volume_on_up_days", "trade_size"),
     }
     for key, other in itertools.permutations(UP, 2):
         if (key, other) in related:
@@ -428,6 +459,9 @@ def build_exam() -> list[dict]:
             for dose in (0.1, 0.3, 0.5):
                 exam.append(dict(group=f"mostly_other_data_dose_{dose}", text=dosed(key, other, dose), key=key, direction=1, want=False))
             exam.append(dict(group="grey_equal_blend", text=dosed(key, other, 1.0), key=key, direction=1, want=None))
+    for text in UP["volatility"]:
+        for sign, formula in ((1, text), (-1, f"-1 * ({text})")):
+            exam.append(dict(group="size_of_moves_as_direction", text=formula, key="return", direction=sign, want=False))
     for key in UP:
         exam.append(dict(group="omnibus", text=OMNIBUS, key=key, direction=1, want=False))
     for name, text, key, direction, want in HARD:

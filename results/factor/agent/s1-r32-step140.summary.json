@@ -1,0 +1,105 @@
+{
+ "name": "s1-r32-step140",
+ "episodes": 60,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   54
+  ],
+  [
+   "max_turns",
+   6
+  ]
+ ],
+ "has_answer": 0.8666666666666667,
+ "parsed": 0.7666666666666667,
+ "computes": 0.75,
+ "passed": 0.3333333333333333,
+ "reward_mean": 0.252919571834089,
+ "ic_mean_among_passed": 0.009322175614480024,
+ "ic_median_among_passed": 0.011526691183902043,
+ "tests_per_episode": 3.85,
+ "tests_distribution": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   2,
+   4
+  ],
+  [
+   3,
+   13
+  ],
+  [
+   4,
+   22
+  ],
+  [
+   5,
+   19
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9166666666666666,
+ "tool_results": [
+  [
+   "computed",
+   168
+  ],
+  [
+   "expression error",
+   43
+  ],
+  [
+   "does not compute",
+   20
+  ]
+ ],
+ "turns_truncated": 0,
+ "turns": 291,
+ "failure_reasons": [
+  [
+   "moves_against_the_idea",
+   17
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   8
+  ],
+  [
+   "no factor tag",
+   8
+  ],
+  [
+   "parse",
+   6
+  ],
+  [
+   "too_few_coins_or_constant",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "candle_body_up": 0.5,
+  "close_above_vwap_down": 0.25,
+  "close_high_up": 0.25,
+  "doji_down": 0,
+  "down_volume_share_down": 0,
+  "downside_vol_down": 1,
+  "range_down": 0.5,
+  "reversal_1d": 0.25,
+  "skew_up": 0,
+  "taker_on_down_days_up": 0.25,
+  "trade_size_surge_down": 0.25,
+  "up_days_down": 0.75,
+  "volume_level_down": 0.25,
+  "volume_own_low_up": 0.25,
+  "volume_record_down": 0.5
+ }
+}

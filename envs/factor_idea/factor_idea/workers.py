@@ -10,6 +10,7 @@ import multiprocessing
 import os
 import threading
 from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures.process import BrokenProcessPool
 
 # One BLAS thread per process: the pool is the parallelism, and the server is shared.
 for _name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
@@ -56,9 +57,22 @@ def _executor() -> ProcessPoolExecutor:
     return _pool
 
 
+async def _run(function, *args):
+    """One killed worker breaks a pool for good, and every later call would fail with it, so start another."""
+    global _pool
+    loop = asyncio.get_running_loop()
+    pool = _executor()
+    try:
+        return await loop.run_in_executor(pool, function, *args)
+    except BrokenProcessPool:
+        if _pool is pool:
+            _pool = None
+        return await loop.run_in_executor(_executor(), function, *args)
+
+
 async def report(text: str) -> str:
-    return await asyncio.get_running_loop().run_in_executor(_executor(), _report, text)
+    return await _run(_report, text)
 
 
 async def score(text: str, key: str, direction: int, also: tuple[str, ...] = ()):
-    return await asyncio.get_running_loop().run_in_executor(_executor(), _score, text, key, direction, also)
+    return await _run(_score, text, key, direction, also)

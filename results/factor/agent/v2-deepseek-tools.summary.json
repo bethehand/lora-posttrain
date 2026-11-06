@@ -1,0 +1,205 @@
+{
+ "name": "v2-deepseek-tools",
+ "episodes": 460,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   402
+  ],
+  [
+   "max_turns",
+   58
+  ]
+ ],
+ "has_answer": 0.8652173913043478,
+ "parsed": 0.8652173913043478,
+ "computes": 0.8652173913043478,
+ "passed": 0.7804347826086957,
+ "reward_mean": 0.5528448720053684,
+ "ic_mean_among_passed": 0.005004052794859398,
+ "ic_median_among_passed": 0.004457040029423783,
+ "tests_per_episode": 4.397826086956521,
+ "tests_distribution": [
+  [
+   0,
+   2
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   16
+  ],
+  [
+   3,
+   42
+  ],
+  [
+   4,
+   128
+  ],
+  [
+   5,
+   269
+  ],
+  [
+   6,
+   1
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9956521739130435,
+ "tool_results": [
+  [
+   "computed",
+   1953
+  ],
+  [
+   "expression error",
+   50
+  ],
+  [
+   "does not compute",
+   20
+  ]
+ ],
+ "turns_truncated": 4,
+ "turns": 2468,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   62
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   19
+  ],
+  [
+   "moves_against_the_idea",
+   11
+  ],
+  [
+   "driven_by_unrelated_data",
+   9
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 1,
+  "above_ma_up": 0.5,
+  "beat_market_days_up": 1,
+  "candle_body_up": 0.25,
+  "close_above_vwap_down": 0.5,
+  "close_above_vwap_up": 0.75,
+  "close_high_up": 1,
+  "close_low_bounce": 0.75,
+  "continuation_1d": 0.25,
+  "continuation_1w": 1,
+  "doji_down": 0.75,
+  "doji_up": 0.25,
+  "down_volume_share_down": 0.25,
+  "down_volume_share_up": 0.75,
+  "downside_vol_down": 0.75,
+  "excess_momentum_up": 1,
+  "excess_reversal_down": 1,
+  "extreme_day_down": 1,
+  "fat_tail_down": 0.5,
+  "flow_beats_price_down": 0,
+  "flow_beats_price_up": 1,
+  "fresh_high_up": 0.75,
+  "high_beta_down": 0.25,
+  "high_beta_up": 0.75,
+  "high_vol_up": 1,
+  "illiquid_long_up": 0.75,
+  "illiquid_up": 0.5,
+  "impact_rising_down": 1,
+  "impact_rising_up": 1,
+  "liquid_up": 0.75,
+  "low_vol_long": 1,
+  "low_vol_up": 1,
+  "lower_shadow_down": 1,
+  "lower_shadow_up": 1,
+  "ma_cross_up": 1,
+  "max_day_down": 1,
+  "max_day_up": 0.5,
+  "momentum_1m": 0.75,
+  "momentum_1m_down": 1,
+  "momentum_3m": 1,
+  "momentum_3m_down": 1,
+  "momentum_6m": 1,
+  "momentum_skip_week": 1,
+  "near_high_up": 1,
+  "near_low_bounce": 0.75,
+  "pv_corr_down": 1,
+  "pv_corr_up": 0.5,
+  "range_contract_up": 1,
+  "range_down": 1,
+  "range_long_down": 1,
+  "range_per_dollar_up": 0.75,
+  "range_position_down": 0.75,
+  "range_position_up": 0.25,
+  "range_robust_down": 1,
+  "range_up": 0.75,
+  "reversal_1d": 0.5,
+  "reversal_1w": 1,
+  "reversal_2w": 1,
+  "reversal_3d": 1,
+  "rise_without_buyers_down": 0.25,
+  "rsi_high_down": 1,
+  "rsi_high_up": 0.5,
+  "rsi_low_bounce": 1,
+  "skew_down": 1,
+  "skew_up": 0.75,
+  "solid_body_down": 0.5,
+  "solid_body_up": 0,
+  "straight_rise_down": 0.5,
+  "straight_rise_up": 0.75,
+  "surge_no_rise_down": 0.5,
+  "taker_exhausted": 0.25,
+  "taker_imbalance_up": 1,
+  "taker_long_up": 1,
+  "taker_on_down_days_up": 0.5,
+  "taker_on_up_days_up": 0.25,
+  "taker_sell_bounce": 0.75,
+  "taker_surge_down": 0.25,
+  "taker_surge_up": 1,
+  "taker_up": 1,
+  "trade_size_down": 0.75,
+  "trade_size_falling_up": 1,
+  "trade_size_surge_down": 1,
+  "trade_size_surge_up": 1,
+  "trade_size_up": 0.75,
+  "trades_level_up": 1,
+  "trades_low_up": 1,
+  "trades_surge_down": 0.75,
+  "trades_surge_up": 0.75,
+  "trades_trend_up": 1,
+  "up_days_down": 1,
+  "up_days_up": 1,
+  "up_volume_share_down": 1,
+  "up_volume_share_up": 1,
+  "upper_shadow_down": 1,
+  "upper_shadow_up": 1,
+  "upside_vol_up": 0.25,
+  "vol_rising_down": 1,
+  "vol_rising_up": 0.5,
+  "volume_dry_up": 1,
+  "volume_fade_weak": 1,
+  "volume_level_down": 1,
+  "volume_level_up": 1,
+  "volume_longrun_down": 1,
+  "volume_longrun_up": 0,
+  "volume_own_high_up": 1,
+  "volume_own_low_up": 1,
+  "volume_record_down": 0.75,
+  "volume_surge_down": 1,
+  "volume_surge_up": 1,
+  "volume_two_week_up": 1,
+  "volume_unstable_down": 0.75,
+  "volume_unstable_up": 0.5,
+  "vwap_gap_longer_up": 1,
+  "worst_day_bounce": 0.25,
+  "worst_day_weak": 0.5
+ }
+}

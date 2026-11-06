@@ -59,6 +59,10 @@ GOOD = [
     ('(2 * Factor("taker_base_vol") - Factor("volume")) / Factor("volume")', "taker_buy", 1),
     ('((Factor("close") - Factor("low")) / (Factor("high") - Factor("low"))).ts_mean(5)', "close_near_high", 1),
     ('-1 * ((Factor("high") - Factor("close")) / Factor("close")).ts_mean(5)', "close_near_high", 1),
+    ('(Factor("close") - Factor("open")).Abs().safe_div(Factor("high") - Factor("low")).ts_mean(10)', "solid_body", 1),
+    ('(Factor("close") - Factor("open")).Abs().ts_sum(10).safe_div((Factor("high") - Factor("low")).ts_sum(10))', "solid_body", 1),
+    (f'where({RET} > 0, Factor("quote_volume"), 0).ts_sum(20).safe_div(Factor("quote_volume").ts_sum(20))', "volume_on_up_days", 1),
+    (f'-1 * where({RET} < 0, Factor("quote_volume"), 0).ts_sum(20).safe_div(Factor("quote_volume").ts_sum(20))', "volume_on_up_days", 1),
 ]
 
 ILLIQUIDITY = [
@@ -157,6 +161,38 @@ def test_perturbations_keep_each_bar_consistent(box):
             for name in FIELDS:
                 if name not in changed:
                     assert f[name] is panel.fields[name]
+
+
+def test_volume_on_up_days_only_rearranges_a_windows_volume(box):
+    panel = box.gate_panel
+    f = box._perturbed("volume_on_up_days", 20)
+    t, coins = box.plan[3]
+    rows = np.arange(t - 19, t + 1)
+    for name in ("quote_volume", "volume", "num_trades", "taker_quote_vol"):
+        before, after = panel.fields[name][np.ix_(rows, coins)], f[name][np.ix_(rows, coins)]
+        np.testing.assert_array_equal(np.sort(before, axis=0), np.sort(after, axis=0))
+        assert (before != after).any()
+    assert f["close"] is panel.fields["close"]
+
+
+def test_solid_body_keeps_the_open_and_close(box):
+    panel = box.gate_panel
+    f = box._perturbed("solid_body", 5)
+    t, coins = box.plan[3]
+    rows = np.arange(t - 4, t + 1)
+    assert f["open"] is panel.fields["open"] and f["close"] is panel.fields["close"]
+    assert (f["high"][np.ix_(rows, coins)] <= panel.fields["high"][np.ix_(rows, coins)]).all()
+    assert (f["low"][np.ix_(rows, coins)] >= panel.fields["low"][np.ix_(rows, coins)]).all()
+
+
+def test_a_narrow_range_is_not_a_solid_body(box):
+    _, idea = verdict(box, '-1 * (Factor("high") / Factor("low")).ln().ts_mean(5)', "solid_body", 1)
+    assert not idea.ok
+
+
+def test_dollars_on_up_days_are_not_a_share(box):
+    _, idea = verdict(box, f'where({RET} > 0, Factor("quote_volume"), 0).ts_sum(20)', "volume_on_up_days", 1)
+    assert not idea.ok
 
 
 def test_perturbations_do_not_touch_the_panel(box):
@@ -394,3 +430,54 @@ def test_the_tool_prompt_uses_quotes_a_tool_call_can_hold():
 
 def test_the_example_in_the_prompt_is_valid():
     parse("Factor('close').safe_div(Factor('close').lag(periods=5)) - 1")
+
+
+VOLATILITY = 'Factor("close").pct_change(periods=1).ts_std(window=60, min_periods=48)'
+MOMENTUM = 'Factor("close").safe_div(Factor("close").lag(periods=20)) - 1'
+
+
+@pytest.mark.parametrize("text, direction", [(VOLATILITY, 1), (f"-1 * ({VOLATILITY})", -1)])
+def test_the_size_of_moves_does_not_pass_for_their_direction(box, text, direction):
+    """A rally makes a coin more volatile, and so does a fall."""
+    _, idea = verdict(box, text, "return", direction)
+    assert not idea.ok and idea.reason == "measures_move_size_not_direction"
+
+
+@pytest.mark.parametrize("text, direction", [(MOMENTUM, 1), (f"-1 * ({MOMENTUM})", -1)])
+def test_a_return_formula_survives_the_fall(box, text, direction):
+    _, idea = verdict(box, text, "return", direction)
+    assert idea.ok
+
+
+def test_the_fall_is_no_idea_key():
+    assert "fall" not in sb.KEYS and "fall" in sb.SHOCKS and sb.FALL < 1 < sb.JUMP
+
+
+def test_a_chain_of_slow_steps_still_runs_out_of_time(box):
+    import time
+
+    chain = 'Factor("close")' + '.ts_median(window=365, min_periods=200)' * 40
+    started = time.monotonic()
+    with pytest.raises(sb.EvalTimeout):
+        evaluate(parse(chain), box.gate_panel.fields, deadline=started + 0.05)
+    assert time.monotonic() - started < 5
+
+
+def test_running_out_of_time_while_scoring_earns_nothing(box, monkeypatch):
+    real = box.incremental_ic
+
+    def too_slow(*args, **kwargs):
+        raise sb.EvalTimeout("expression took too long to compute")
+
+    monkeypatch.setattr(box, "incremental_ic", too_slow)
+    result = box.score(MOMENTUM, "return", 1)
+    monkeypatch.setattr(box, "incremental_ic", real)
+    assert result.reason == "too_slow" and result.reward("gates") == 0.0 and result.reward("ic") == 0.0
+
+
+def test_a_formula_blank_when_scored_earns_nothing(box, monkeypatch):
+    real = box.incremental_ic
+    monkeypatch.setattr(box, "incremental_ic", lambda *a, **k: sb.ICResult(0.02, 0.02, 3, 1.0))
+    result = box.score(MOMENTUM, "return", 1)
+    monkeypatch.setattr(box, "incremental_ic", real)
+    assert result.reason == "too_few_coins_or_constant_when_scored" and result.reward("ic") == 0.0

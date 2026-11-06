@@ -133,3 +133,15 @@ def test_skeleton_ignores_numbers():
 
 def test_fields_of():
     assert dsl.fields_of(parse('Factor("close").ts_corr(Factor("volume"), 5) + 1')) == {"close", "volume"}
+
+
+def test_a_number_too_large_for_a_float_is_a_parse_error():
+    with pytest.raises(DslError, match="too large"):
+        parse('Factor("close") * 1' + "0" * 400)
+
+
+def test_min_periods_cannot_outlast_the_gates_history():
+    """A formula blank through 2024 would pass the gates on its other branch and switch on when scored."""
+    with pytest.raises(DslError, match="min_periods must be at most"):
+        parse('Factor("close").EMA(span=120, min_periods=1101)')
+    parse('Factor("close").EMA(span=120, min_periods=96)')

@@ -44,6 +44,9 @@ def _eval(node: Node, fields, deadline, memo, minutes):
         memo[node] = out
         return out
     args = [_eval(a, fields, deadline, memo, minutes) for a in node.args]
+    # A chain does all its work on the way back up, after the check above has passed at every level.
+    if deadline is not None and time.monotonic() > deadline:
+        raise EvalTimeout("expression took too long to compute")
     with np.errstate(all="ignore"):
         out = ops.clean(ops.TABLE[node.name](*args, **dict(node.params)))
     out.setflags(write=False)

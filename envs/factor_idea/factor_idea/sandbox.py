@@ -44,6 +44,7 @@ MIN_GOOD_DAYS = 0.9
 
 SCALE = 3.0
 JUMP = 1.5  # tripling a price is a far rarer event than tripling a day's volume; +50% is comparable
+FALL = 0.5  # the same size of daily move the other way, as a simple return
 WINDOWS = (1, 5, 20, 60)
 AS_OF_DATES = 12
 COIN_SHARE = 0.10
@@ -87,17 +88,25 @@ def _scale_trade_size(f, rows, coins):
         f[name][np.ix_(rows, coins)] *= SCALE
 
 
-def _jump_price(f, rows, coins):
-    """A rally on the window's first day: every price after its open is JUMP times higher.
+def _shift_prices(f, rows, coins, factor):
+    """Every price after the open of the window's first day is ``factor`` times what it was.
 
     The first bar's low moves with its high, so the day's range is unchanged and a
-    range formula doesn't pass for a return formula. That bar's low sits above its open.
+    range formula doesn't pass for a return formula. After a rally that bar's low sits above its open.
     """
     first, later = rows[:1], rows[1:]
     for name in ("close", "high", "low"):
-        f[name][np.ix_(first, coins)] *= JUMP
+        f[name][np.ix_(first, coins)] *= factor
     for name in _PRICE:
-        f[name][np.ix_(later, coins)] *= JUMP
+        f[name][np.ix_(later, coins)] *= factor
+
+
+def _jump_price(f, rows, coins):
+    _shift_prices(f, rows, coins, JUMP)
+
+
+def _fall_price(f, rows, coins):
+    _shift_prices(f, rows, coins, FALL)
 
 
 def _amplify_moves(f, rows, coins):
@@ -130,6 +139,23 @@ def _close_toward_high(f, rows, coins):
     f["low"][np.ix_(rows, coins)] = np.maximum(bottom - SCALE * (bottom - l), 0.01 * bottom)
 
 
+def _solid_body(f, rows, coins):
+    """Same open and close: both shadows get shorter, so the body is more of the day's range."""
+    o, c = f["open"][np.ix_(rows, coins)], f["close"][np.ix_(rows, coins)]
+    h, l = f["high"][np.ix_(rows, coins)], f["low"][np.ix_(rows, coins)]
+    top, bottom = np.maximum(o, c), np.minimum(o, c)
+    f["high"][np.ix_(rows, coins)] = top + (h - top) / SCALE
+    f["low"][np.ix_(rows, coins)] = bottom - (bottom - l) / SCALE
+
+
+def _volume_on_up_days(f, rows, coins):
+    """The window's days keep their prices and trade the same volumes, but bigger volumes land on up days."""
+    moves = f["close"][np.ix_(rows, coins)] / f["close"][np.ix_(rows - 1, coins)] - 1.0
+    order = _bigger_on_up(np.nan_to_num(f["quote_volume"][np.ix_(rows, coins)], nan=0.0), np.nan_to_num(moves, nan=0.0))
+    for name in _FLOW:
+        f[name][np.ix_(rows, coins)] = np.take_along_axis(f[name][np.ix_(rows, coins)], order, axis=0)
+
+
 def _no_daily_change(f, rows, coins):
     """The daily bar stays as it is: this key only rearranges minutes inside the day."""
 
@@ -143,6 +169,8 @@ KEYS = {
     "volatility": (_PRICE, _amplify_moves),
     "taker_buy": (("taker_base_vol", "taker_quote_vol"), _raise_taker_buy_share),
     "close_near_high": (("high", "low"), _close_toward_high),
+    "solid_body": (("high", "low"), _solid_body),
+    "volume_on_up_days": ((*_VOLUME, "num_trades"), _volume_on_up_days),
     "volume_late": ((), _no_daily_change),
     "volume_spike": ((), _no_daily_change),
     "volume_on_up": ((), _no_daily_change),
@@ -150,6 +178,10 @@ KEYS = {
     "up_late": ((), _no_daily_change),
     "market_sync": ((), _no_daily_change),
 }
+
+
+# What a rally's mirror image does to a formula. It is no idea's key: see Sandbox._likes_a_fall.
+SHOCKS = {**KEYS, "fall": (_PRICE, _fall_price)}
 
 
 # The same perturbations on minute bars. Each takes a field's name, a reader of the original bars
@@ -347,7 +379,8 @@ MINUTE_KEYS = {
 
 def _changed_by(key: str) -> frozenset[str]:
     """Everything a key's perturbation changes, in the names dsl.fields_of() uses."""
-    return frozenset(KEYS[key][0]) | frozenset(dsl.minute_name(n) for n in MINUTE_KEYS[key][0])
+    minutes = MINUTE_KEYS[key][0] if key in MINUTE_KEYS else ()
+    return frozenset(SHOCKS[key][0]) | frozenset(dsl.minute_name(n) for n in minutes)
 
 
 # Keys in one group legitimately move each other's formulas: a price jump is also a big move,
@@ -360,6 +393,8 @@ KEY_GROUPS = {
     "volatility": "price",
     "close_near_high": "price",
     "taker_buy": "taker",
+    "solid_body": "price",
+    "volume_on_up_days": "flow",
     "volume_late": "flow",
     "volume_spike": "flow",
     "volume_on_up": "flow",
@@ -373,12 +408,13 @@ KEY_GROUPS = {
 # alone. A formula that moves anyway is measuring total volume under the wrong name.
 # The same goes for what a day's minutes do with its volume: a share or a timing doesn't change when
 # the whole day's volume does, and a total that merely happens to respond is measuring volume.
-MUST_IGNORE = {"trade_size": "volume", "volume_late": "volume", "volume_spike": "volume", "volume_on_up": "volume"}
+MUST_IGNORE = {"trade_size": "volume", "volume_on_up_days": "volume", "volume_late": "volume", "volume_spike": "volume", "volume_on_up": "volume"}
 MUST_IGNORE_SHARE = 0.5
 
 # Keys of one group that are still different questions. A formula that moves more for a rival than
 # for its own key is about the rival, even if a dose of the right thing is mixed in.
 RIVALS = {
+    "solid_body": ("volatility", "close_near_high"),
     "volume_late": ("volume_spike", "volume_on_up"),
     "volume_spike": ("volume_late", "volume_on_up"),
     "volume_on_up": ("volume_late", "volume_spike"),
@@ -489,7 +525,7 @@ class Sandbox:
         return ComputeCheck(True, "", share)
 
     def _perturbed(self, key: str, window: int) -> dict[str, np.ndarray]:
-        changed, apply = KEYS[key]
+        changed, apply = SHOCKS[key]
         panel = self.gate_panel
         fields = dict(panel.fields)
         for name in changed:
@@ -500,7 +536,7 @@ class Sandbox:
 
     def _perturbed_minutes(self, node: Node, key: str, window: int, fields: dict[str, np.ndarray], memo: dict | None) -> PatchedMinutes | None:
         """The minute bars of the same event ``_perturbed`` puts in the daily fields."""
-        if self.minutes is None or not dsl.reads_minutes(node):
+        if self.minutes is None or not dsl.reads_minutes(node) or key not in MINUTE_KEYS:
             return None
         rows, coins, first = [], [], []
         for t, chosen in self.plan:
@@ -590,6 +626,8 @@ class Sandbox:
             return IdeaCheck(False, "moves_against_the_idea", windows)
         if not rises:
             return IdeaCheck(False, "does_not_respond_to_the_idea", windows)
+        if key == "return" and self._likes_a_fall(node, direction, base, memo, deadline):
+            return IdeaCheck(False, "measures_move_size_not_direction", windows)
         ignored = MUST_IGNORE.get(key)
         if ignored is not None:
             response = self._response(node, ignored, base, memo, deadline)
@@ -612,6 +650,16 @@ class Sandbox:
         if not unit_median <= UNIT_MEDIAN:
             return IdeaCheck(False, "depends_on_price_units", windows, unit_median, unrelated)
         return IdeaCheck(True, "", windows, unit_median, unrelated)
+
+    def _likes_a_fall(self, node: Node, direction: int, base: np.ndarray, memo: dict | None, deadline) -> bool:
+        """A rally and a fall both make a coin more volatile. A formula that moves the way the idea
+        wants after either one is about the size of moves, not about prices rising."""
+        response = self._response(node, "fall", base, memo, deadline)
+        return any(
+            direction * v["median"] >= RISE_MEDIAN and (v["up"] if direction > 0 else v["down"]) >= RISE_SHARE
+            for v in response.values()
+            if v["n"]
+        )
 
     def _unit_response(self, node: Node, base: np.ndarray, *, deadline=None, memo=None) -> float:
         panel = self.gate_panel
@@ -735,10 +783,14 @@ class Sandbox:
             if not idea.ok:
                 result.reason = idea.reason
                 return result
-            result.matches_idea = True
             panel = ic_panel if ic_panel is not None else self.dev
             values = evaluate(node, panel.fields, deadline=deadline, minutes=ic_minutes if ic_panel is not None else self.minutes)
             result.ic = self.incremental_ic(values, panel, *ic_range)
+            # A formula that goes blank after the gate rows would otherwise be paid on the few days left.
+            if result.ic.days < MIN_GOOD_DAYS * (panel.row(ic_range[1], side="right") - panel.row(ic_range[0])):
+                result.reason = "too_few_coins_or_constant_when_scored"
+                return result
+            result.matches_idea = True
         except EvalTimeout:
             result.reason = "too_slow"
         except NoMinuteData as exc:

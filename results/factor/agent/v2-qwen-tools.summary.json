@@ -1,0 +1,209 @@
+{
+ "name": "v2-qwen-tools",
+ "episodes": 460,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   441
+  ],
+  [
+   "max_turns",
+   19
+  ]
+ ],
+ "has_answer": 0.8434782608695652,
+ "parsed": 0.8434782608695652,
+ "computes": 0.8173913043478261,
+ "passed": 0.20217391304347826,
+ "reward_mean": 0.13273293914301587,
+ "ic_mean_among_passed": 0.0005595871021081121,
+ "ic_median_among_passed": -0.0012047878031949681,
+ "tests_per_episode": 3.1760869565217393,
+ "tests_distribution": [
+  [
+   1,
+   56
+  ],
+  [
+   2,
+   47
+  ],
+  [
+   3,
+   192
+  ],
+  [
+   4,
+   90
+  ],
+  [
+   5,
+   75
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9456521739130435,
+ "tool_results": [
+  [
+   "computed",
+   1091
+  ],
+  [
+   "expression error",
+   211
+  ],
+  [
+   "does not compute",
+   159
+  ]
+ ],
+ "turns_truncated": 1,
+ "turns": 1909,
+ "failure_reasons": [
+  [
+   "does_not_respond_to_the_idea",
+   150
+  ],
+  [
+   "moves_against_the_idea",
+   97
+  ],
+  [
+   "no factor tag",
+   72
+  ],
+  [
+   "depends_on_price_units",
+   19
+  ],
+  [
+   "too_few_coins_or_constant",
+   12
+  ],
+  [
+   "measures_volume_not_trade_size",
+   11
+  ],
+  [
+   "driven_by_unrelated_data",
+   6
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 0.75,
+  "above_ma_up": 0,
+  "beat_market_days_up": 0,
+  "candle_body_up": 0,
+  "close_above_vwap_down": 0,
+  "close_above_vwap_up": 0,
+  "close_high_up": 0.5,
+  "close_low_bounce": 0,
+  "continuation_1d": 0.25,
+  "continuation_1w": 0.5,
+  "doji_down": 0,
+  "doji_up": 0,
+  "down_volume_share_down": 0,
+  "down_volume_share_up": 0,
+  "downside_vol_down": 1,
+  "excess_momentum_up": 0,
+  "excess_reversal_down": 0,
+  "extreme_day_down": 0,
+  "fat_tail_down": 0,
+  "flow_beats_price_down": 0,
+  "flow_beats_price_up": 0,
+  "fresh_high_up": 0.25,
+  "high_beta_down": 0,
+  "high_beta_up": 0,
+  "high_vol_up": 0.25,
+  "illiquid_long_up": 0.75,
+  "illiquid_up": 0,
+  "impact_rising_down": 0,
+  "impact_rising_up": 0,
+  "liquid_up": 0,
+  "low_vol_long": 0,
+  "low_vol_up": 0,
+  "lower_shadow_down": 0.5,
+  "lower_shadow_up": 0,
+  "ma_cross_up": 0,
+  "max_day_down": 0,
+  "max_day_up": 0,
+  "momentum_1m": 0.75,
+  "momentum_1m_down": 0,
+  "momentum_3m": 0.25,
+  "momentum_3m_down": 0.75,
+  "momentum_6m": 0.75,
+  "momentum_skip_week": 1,
+  "near_high_up": 0,
+  "near_low_bounce": 1,
+  "pv_corr_down": 0,
+  "pv_corr_up": 0,
+  "range_contract_up": 0,
+  "range_down": 0,
+  "range_long_down": 0,
+  "range_per_dollar_up": 0,
+  "range_position_down": 0,
+  "range_position_up": 0,
+  "range_robust_down": 0,
+  "range_up": 0.75,
+  "reversal_1d": 0.25,
+  "reversal_1w": 0,
+  "reversal_2w": 0,
+  "reversal_3d": 0,
+  "rise_without_buyers_down": 0,
+  "rsi_high_down": 0.25,
+  "rsi_high_up": 0,
+  "rsi_low_bounce": 0.25,
+  "skew_down": 0,
+  "skew_up": 0,
+  "solid_body_down": 0,
+  "solid_body_up": 0,
+  "straight_rise_down": 0,
+  "straight_rise_up": 0,
+  "surge_no_rise_down": 0,
+  "taker_exhausted": 0,
+  "taker_imbalance_up": 0,
+  "taker_long_up": 0,
+  "taker_on_down_days_up": 0,
+  "taker_on_up_days_up": 0.25,
+  "taker_sell_bounce": 0,
+  "taker_surge_down": 0,
+  "taker_surge_up": 0,
+  "taker_up": 0.75,
+  "trade_size_down": 0,
+  "trade_size_falling_up": 0,
+  "trade_size_surge_down": 0,
+  "trade_size_surge_up": 0,
+  "trade_size_up": 0,
+  "trades_level_up": 0.75,
+  "trades_low_up": 1,
+  "trades_surge_down": 1,
+  "trades_surge_up": 0.75,
+  "trades_trend_up": 1,
+  "up_days_down": 1,
+  "up_days_up": 0.75,
+  "up_volume_share_down": 0,
+  "up_volume_share_up": 0,
+  "upper_shadow_down": 0.25,
+  "upper_shadow_up": 0,
+  "upside_vol_up": 0.25,
+  "vol_rising_down": 0,
+  "vol_rising_up": 0,
+  "volume_dry_up": 0.5,
+  "volume_fade_weak": 0,
+  "volume_level_down": 1,
+  "volume_level_up": 1,
+  "volume_longrun_down": 0,
+  "volume_longrun_up": 0.25,
+  "volume_own_high_up": 0.5,
+  "volume_own_low_up": 0.75,
+  "volume_record_down": 0,
+  "volume_surge_down": 0,
+  "volume_surge_up": 0.5,
+  "volume_two_week_up": 0,
+  "volume_unstable_down": 0,
+  "volume_unstable_up": 0.25,
+  "vwap_gap_longer_up": 0,
+  "worst_day_bounce": 0,
+  "worst_day_weak": 0
+ }
+}
