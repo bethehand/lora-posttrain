@@ -1,0 +1,54 @@
+Student against teacher, same ideas, 2025, per idea
+ Training ideas, rollouts at temperature 1.0 against the teacher's
+  S3 B, steps 1-5          pass  48.9% against  77.9%; IC +0.0024 against +0.0039, minus the teacher -0.0015 (-0.0024 to -0.0006) over 64 ideas
+  S4 B, steps 31-35        pass  67.4% against  77.9%; IC +0.0019 against +0.0039, minus the teacher -0.0020 (-0.0030 to -0.0011) over 65 ideas
+  S3 A, steps 1-5          pass  47.3% against  77.9%; IC +0.0024 against +0.0040, minus the teacher -0.0015 (-0.0027 to -0.0004) over 66 ideas
+  S4 A, steps 31-35        pass  71.2% against  77.9%; IC +0.0017 against +0.0040, minus the teacher -0.0022 (-0.0033 to -0.0012) over 66 ideas
+ val
+  S1                       pass  75.0% against  73.3%; IC +0.0071 against +0.0073, minus the teacher -0.0002 (-0.0019 to +0.0013) over 15 ideas
+  S2                       pass  71.7% against  73.3%; IC +0.0075 against +0.0073, minus the teacher +0.0001 (-0.0018 to +0.0025) over 15 ideas
+  S3 B                     pass  73.3% against  73.3%; IC +0.0058 against +0.0070, minus the teacher -0.0011 (-0.0028 to +0.0005) over 14 ideas
+  S4 B                     pass  79.2% against  73.3%; IC +0.0053 against +0.0073, minus the teacher -0.0020 (-0.0039 to -0.0003) over 15 ideas
+ heldout
+  S1                       pass  51.6% against  79.0%; IC +0.0015 against +0.0032, minus the teacher -0.0017 (-0.0046 to +0.0013) over 28 ideas
+  S2                       pass  44.4% against  79.0%; IC +0.0034 against +0.0036, minus the teacher -0.0001 (-0.0023 to +0.0022) over 27 ideas
+  S3 B                     pass  59.7% against  79.0%; IC +0.0010 against +0.0043, minus the teacher -0.0033 (-0.0059 to -0.0010) over 27 ideas
+  S4 B                     pass  68.5% against  79.0%; IC +0.0008 against +0.0039, minus the teacher -0.0031 (-0.0051 to -0.0010) over 30 ideas
+Search within an episode, passing answers that were tested: research IC of the first test and the answer
+ val
+  S1        first +0.0061 answer +0.0090 gain +0.0029; distinct tests 3.49, gain per extra test +0.0012; answer is its best test 84%
+  S2        first +0.0051 answer +0.0100 gain +0.0048; distinct tests 3.70, gain per extra test +0.0018; answer is its best test 86%
+  S3 A      first +0.0049 answer +0.0092 gain +0.0043; distinct tests 3.61, gain per extra test +0.0017; answer is its best test 73%
+  S3 B      first +0.0065 answer +0.0091 gain +0.0026; distinct tests 3.77, gain per extra test +0.0009; answer is its best test 82%
+  S3 C      first +0.0046 answer +0.0083 gain +0.0037; distinct tests 3.80, gain per extra test +0.0013; answer is its best test 72%
+  S4 A      first +0.0036 answer +0.0070 gain +0.0034; distinct tests 2.40, gain per extra test +0.0024; answer is its best test 89%
+  S4 B      first +0.0040 answer +0.0068 gain +0.0028; distinct tests 2.51, gain per extra test +0.0018; answer is its best test 79%
+  S4 C      first +0.0036 answer +0.0069 gain +0.0033; distinct tests 2.65, gain per extra test +0.0020; answer is its best test 77%
+  DeepSeek  first +0.0067 answer +0.0097 gain +0.0030; distinct tests 3.95, gain per extra test +0.0010; answer is its best test 86%
+ heldout
+  S1        first -0.0003 answer +0.0024 gain +0.0026; distinct tests 3.52, gain per extra test +0.0010; answer is its best test 52%
+  S2        first +0.0013 answer +0.0051 gain +0.0038; distinct tests 3.96, gain per extra test +0.0013; answer is its best test 70%
+  S3 A      first -0.0011 answer -0.0002 gain +0.0009; distinct tests 3.42, gain per extra test +0.0004; answer is its best test 55%
+  S3 B      first -0.0009 answer +0.0014 gain +0.0023; distinct tests 3.56, gain per extra test +0.0009; answer is its best test 64%
+  S3 C      first -0.0001 answer +0.0034 gain +0.0035; distinct tests 3.62, gain per extra test +0.0013; answer is its best test 70%
+  S4 A      first -0.0003 answer +0.0012 gain +0.0015; distinct tests 2.44, gain per extra test +0.0010; answer is its best test 71%
+  S4 B      first -0.0002 answer +0.0015 gain +0.0017; distinct tests 2.40, gain per extra test +0.0012; answer is its best test 63%
+  S4 C      first -0.0005 answer +0.0009 gain +0.0014; distinct tests 2.51, gain per extra test +0.0009; answer is its best test 68%
+  DeepSeek  first +0.0010 answer +0.0055 gain +0.0045; distinct tests 4.33, gain per extra test +0.0014; answer is its best test 85%
+How episodes end
+ val
+  S1        pass 75%  no answer 7%  wrong direction 3%  does not respond 10%  does not parse or compute 3%  other gate 2%
+  S2        pass 72%  no answer 5%  wrong direction 12%  does not respond 7%  does not parse or compute 3%  other gate 2%
+  S3 B      pass 73%  no answer 8%  wrong direction 10%  does not respond 7%  does not parse or compute 0%  other gate 2%
+  S4 B      pass 79%  no answer 0%  wrong direction 7%  does not respond 8%  does not parse or compute 4%  other gate 2%
+  DeepSeek  pass 73%  no answer 20%  wrong direction 3%  does not respond 2%  does not parse or compute 0%  other gate 2%
+ heldout
+  S1        pass 52%  no answer 8%  wrong direction 17%  does not respond 21%  does not parse or compute 0%  other gate 2%
+  S2        pass 44%  no answer 20%  wrong direction 16%  does not respond 17%  does not parse or compute 2%  other gate 1%
+  S3 B      pass 60%  no answer 4%  wrong direction 14%  does not respond 19%  does not parse or compute 3%  other gate 1%
+  S4 B      pass 69%  no answer 2%  wrong direction 6%  does not respond 17%  does not parse or compute 4%  other gate 3%
+  DeepSeek  pass 79%  no answer 16%  wrong direction 3%  does not respond 0%  does not parse or compute 0%  other gate 2%
+Within an idea and a model, IC among passes per extra test, 2025, held-out ideas
+  S1, S2, S3   +0.00189 (+0.00096 to +0.00286) over 27 ideas
+  S4           +0.00011 (-0.00029 to +0.00050) over 31 ideas
+  DeepSeek     +0.00113 (+0.00052 to +0.00233) over 27 ideas

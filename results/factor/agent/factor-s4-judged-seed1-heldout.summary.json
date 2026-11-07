@@ -1,0 +1,125 @@
+{
+ "name": "factor-s4-judged-seed1-heldout",
+ "episodes": 124,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   123
+  ],
+  [
+   "max_turns",
+   1
+  ]
+ ],
+ "has_answer": 0.9919354838709677,
+ "parsed": 0.9758064516129032,
+ "computes": 0.9758064516129032,
+ "passed": 0.6935483870967742,
+ "reward_mean": 0.4488872652106744,
+ "ic_mean_among_passed": -0.00023718848559107155,
+ "ic_median_among_passed": -0.0010228932569619257,
+ "tests_per_episode": 2.846774193548387,
+ "tests_distribution": [
+  [
+   1,
+   5
+  ],
+  [
+   2,
+   33
+  ],
+  [
+   3,
+   63
+  ],
+  [
+   4,
+   22
+  ],
+  [
+   5,
+   1
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9838709677419355,
+ "tool_results": [
+  [
+   "computed",
+   326
+  ],
+  [
+   "expression error",
+   18
+  ],
+  [
+   "does not compute",
+   9
+  ]
+ ],
+ "turns_truncated": 0,
+ "turns": 477,
+ "failure_reasons": [
+  [
+   "does_not_respond_to_the_idea",
+   27
+  ],
+  [
+   "moves_against_the_idea",
+   3
+  ],
+  [
+   "depends_on_price_units",
+   2
+  ],
+  [
+   "driven_by_unrelated_data",
+   2
+  ],
+  [
+   "parse",
+   2
+  ],
+  [
+   "measures_move_size_not_direction",
+   1
+  ],
+  [
+   "no factor tag",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 0.75,
+  "above_ma_up": 1,
+  "beat_market_days_up": 0.25,
+  "excess_momentum_up": 0.25,
+  "excess_reversal_down": 1,
+  "fresh_high_up": 0.25,
+  "high_beta_down": 0.5,
+  "high_beta_up": 1,
+  "illiquid_long_up": 1,
+  "illiquid_up": 0.25,
+  "impact_rising_down": 0.5,
+  "impact_rising_up": 0.25,
+  "liquid_up": 0,
+  "ma_cross_up": 1,
+  "near_high_up": 0.5,
+  "near_low_bounce": 0.25,
+  "range_per_dollar_up": 0.5,
+  "range_position_down": 1,
+  "range_position_up": 0,
+  "taker_exhausted": 0.75,
+  "taker_imbalance_up": 0.5,
+  "taker_long_up": 1,
+  "taker_sell_bounce": 1,
+  "taker_surge_down": 1,
+  "taker_surge_up": 1,
+  "taker_up": 1,
+  "trades_level_up": 1,
+  "trades_low_up": 1,
+  "trades_surge_down": 1,
+  "trades_surge_up": 1,
+  "trades_trend_up": 1
+ }
+}

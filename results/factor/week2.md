@@ -295,9 +295,194 @@ Both runs started from their arm's S3, as their logs say, and each kept adapter 
 | S4 arm B, seed 1 | 52.7% to 69.5% | 76.7% | 100.0% | 0.562 | +0.0072 | 2.68 | |
 | S3 arm C | | 66.7% | 91.7% | 0.491 | +0.0074 | 4.07 | 34 of 40 |
 | S4 arm C, seed 1 | 54.8% to 73.3% | 81.7% | 100.0% | 0.585 | +0.0057 | 2.90 | 44 of 49 |
+| S3 arm A | | 68.3% | 98.3% | 0.509 | +0.0082 | 3.77 | |
+| S4 arm A, seed 1 | 52.5% to 64.4% | 81.7% | 100.0% | 0.586 | +0.0058 | 2.73 | |
+
+Arm A's run came third and was checked the same way, with a highest KL of 0.0054. It rose the slowest on training ideas and still matched arm C on val, so the training curves are a poor guide to who is ahead. At this point the reward with IC in it has not beaten the one that only checks the gates on val.
 
 Negative advantages did not break the syntax here, as they did in S3's first version, which fits the reading above but doesn't prove it. So far RL has made the student more reliable: it always hands in, and it passes more often. It hasn't raised IC among passes on val. It also tests less, 2.7 to 2.9 times against 4.1 to 4.2, which nothing in the reward asks for directly. A failed answer earns 0, so fewer tests may just mean fewer ways to run out of turns; I haven't checked that. These are single seeds on 60 val episodes, and the held-out evals come after all six runs.
 
 ## A second guard for online RL
 
 The guard from prereg 02 watches entropy and mismatch KL, and neither is about whether the student can still do the task. So online RL now also stops if the mean reward over any five steps running is more than 30% below the mean over steps 1 to 3. At S2's level that is about 72% passed falling to 50%. As with the first guard, the run then starts again once at lr 1e-5, and a second trip stops the whole flow with the GPUs free. This was added before any online result on this task.
+
+## Online RL, all six runs
+
+All six ran their 35 steps and no guard tripped, so nothing ran at the lower rate. The highest mismatch KL was 0.0054 against a limit of 0.01, entropy never fell below 0.69, and no rollout had an error. Every step of both arm C runs trained all 128 rollouts, so the judge had no outage, and the pause rule, which I hadn't automated, never came up. Each kept adapter equals its step 35 byte for byte. Each run took 1.8 to 1.9 hours.
+
+| Run | Train pass, steps 1-5 to 31-35 | Val passed | Answered | Reward, arm B | IC among passes | Tests | Judged faithful |
+|---|---|---|---|---|---|---|---|
+| S4 arm A, seed 1 | 52.5% to 64.4% | 81.7% | 100.0% | 0.586 | +0.0058 | 2.73 | |
+| S4 arm A, seed 2 | 52.0% to 65.5% | 70.0% | 96.7% | 0.490 | +0.0043 | 2.62 | |
+| S4 arm B, seed 1 | 52.7% to 69.5% | 76.7% | 100.0% | 0.562 | +0.0072 | 2.68 | |
+| S4 arm B, seed 2 | 53.1% to 67.2% | 81.7% | 100.0% | 0.582 | +0.0054 | 2.68 | |
+| S4 arm C, seed 1 | 54.8% to 73.3% | 81.7% | 100.0% | 0.585 | +0.0057 | 2.90 | 44 of 49 |
+| S4 arm C, seed 2 | 54.7% to 73.4% | 76.7% | 100.0% | 0.554 | +0.0063 | 2.57 | 41 of 46 |
+
+Two seeds of arm A differ by 11.7 points on val, as much as anything between arms, so val can't order the arms.
+
+## Online RL on held-out ideas
+
+Each seed answered the 31 held-out ideas 4 times, 124 episodes with none failed, pooled to 248 per arm as the prereg says. Recounting the rows gives the driver's numbers. `heldout_online.py`, which ran this, was written after the freeze and calls the pinned `compare_stages.py`.
+
+| Model | Passed | Answered | Reward, arm B | IC among passes | Raw IC | Tests | Judged faithful |
+|---|---|---|---|---|---|---|---|
+| S1 | 51.6% | 91.9% | 0.341 | +0.0009 | +0.0023 | 3.82 | 48 of 64 |
+| S2 | 44.4% | 79.8% | 0.305 | +0.0032 | +0.0055 | 4.31 | 42 of 55 |
+| S3 arm B | 59.7% | 96.0% | 0.395 | +0.0010 | -0.0005 | 4.00 | 58 of 74 |
+| S4 arm A | 71.4% | 99.6% | 0.471 | +0.0008 | +0.0016 | 2.76 | 123 of 177 |
+| S4 arm B | 68.5% | 98.4% | 0.453 | +0.0009 | +0.0029 | 2.63 | 120 of 170 |
+| S4 arm C | 65.7% | 99.6% | 0.427 | -0.0000 | -0.0015 | 2.69 | 125 of 163 |
+| DeepSeek, tools | 79.0% | 83.9% | 0.551 | +0.0041 | +0.0088 | | |
+
+The seeds pass 72.6% and 70.2% in arm A, 66.9% and 70.2% in arm B, 69.4% and 62.1% in arm C.
+
+**H5 does not pass.** S4 arm B minus S3 arm B, IC among passes -0.0000 (95% CI -0.0017 to +0.0019) over 27 ideas. Pass rate +8.9 points (-2.0 to +20.2), reward +0.058 (-0.012 to +0.132).
+
+**H6 does not pass.** S4 arm B minus S4 arm A, IC among passes -0.0004 (-0.0019 to +0.0011) over 29 ideas. On the ideas outside mirrored pairs it is +0.0008 (-0.0009 to +0.0030) over 14 ideas. This reward taught no more signal than rewarding the gates alone. That turned out to be a weak test, as "After the exam" explains: IC is 3% of this reward's spread within a group.
+
+RL did make the student more reliable. Arm A passes 15.7 points more than its S3 (+8.1 to +23.8) and arm C 13.3 more (+5.2 to +21.0). Arm B passes 16.9 more than S1 (+7.3 to +26.6) and 24.2 more than S2 (+14.1 to +33.9), with reward +0.112 (+0.045 to +0.180) and +0.148 (+0.081 to +0.215). The price against S2 is IC among passes, -0.0027 (-0.0047 to -0.0008).
+
+It passes more often without reaching more ideas. The share of ideas with at least one pass in 4 rollouts is 87.1% to 96.8% per S4 seed, against 90.3% for S1 and 87.1% for S2. So RL turned ideas the student could sometimes do into ideas it usually does.
+
+Against DeepSeek, arm B's pass rate is -10.5 points (-25.0 to +3.6), where S3 arm B was -19.4 with an interval below 0. Reward is still -0.099 (-0.198 to -0.003) and IC among passes -0.0031 (-0.0051 to -0.0010). By family, arm B against the teacher: 0.35 / 0.79 on `illiquidity`, 0.59 / 0.75 on `trend_position`, 0.70 / 0.80 on `market_relative`, 0.90 / 0.90 on `trade_count`, 0.91 / 0.75 on `taker_flow`. So the student now passes more than the teacher on one family, and its largest gap is illiquidity.
+
+## The audit
+
+Passing held-out formulas of S2 and the three S4 arms, up to 60 per model evenly across ideas, drawn with a fixed seed by `audit.py`. S2 has 55, and all were read. A pair of idea and formula handed in by more than one model was read once, which leaves 163 items from 235 formulas. I read them shuffled, with the idea and the formula only, by the judge's rubric, and wrote the verdicts and my rulings on what the rubric leaves open (`results/factor/audit/reading_rules.md`) before opening the key. `hashes_before_key.txt` holds their hashes. I wrote the verifier and the rubric, and a model's style may have given something away. The owner of the research system hasn't read the sample.
+
+| Model | Reader: faithful | Judge: faithful | Reader and judge agree |
+|---|---|---|---|
+| S2 | 44 of 55, 80.0% | 42 of 55 | 49 of 55 |
+| S4 arm A | 47 of 60, 78.3% | 45 of 60 | 48 of 60 |
+| S4 arm B | 42 of 60, 70.0% | 43 of 60 | 49 of 60 |
+| S4 arm C | 48 of 60, 80.0% | 44 of 60 | 52 of 60 |
+
+**H7 passes exactly on the line, and it isn't robust.** S4 arm B is 10.0 points below S2, and the rule allows no more than 10. One formula fewer would fail it, and the interval beside it runs from -25.6 to +5.6. The first run of the scorer printed "fails": in floats 42/60 minus 44/55 falls just under -0.1. It also counted no borderline items, since a loop variable overwrote them. I fixed both after seeing that output, and the verdict file didn't change.
+
+**H9 does not pass.** S4 arm C minus arm B, +10.0 points (-5.0 to +25.0). Its cost in IC among passes is -0.0001 (-0.0019 to +0.0016).
+
+Other readings of the same verdicts, since 54 items were marked borderline before the key was opened:
+
+| Reading | H7, arm B minus S2 | H9, arm C minus arm B |
+|---|---|---|
+| As read | -10.0, passes | +10.0 (-5.0 to +25.0) |
+| All 54 borderline items not faithful | -0.5, passes | +8.3 (-8.3 to +25.0) |
+| All 54 borderline items faithful | -1.2, passes | +1.7 (-6.7 to +10.0) |
+| Only volatility as beta not faithful | -9.8, passes | +5.0 (-11.7 to +21.7) |
+| Only a level for an idea about a change faithful | +3.2, passes | +0.0 (-13.3 to +13.3) |
+| Only distance from a high for its recency faithful | -8.3, passes | +11.7 (-3.3 to +26.7) |
+| Only a formula against own past for an idea about a level faithful | -17.7 (-31.1 to -4.5), fails | +10.0 (-5.0 to +25.0) |
+
+H9 fails every way. H7 depends on one ruling, that a formula against a coin's own past doesn't answer an idea about a standing level. S2 hands in many of those, 8 of its 11 rejections, and the rubric's "rank" and "ratio" could be read to allow them. One more thing to weigh: the pilot reading earlier in this log called plain volatility "not beta", and this audit accepts it as a proxy, marked borderline. The fourth row shows that doesn't change the result.
+
+The models fail differently. 9 of arm B's 18 rejections and 7 of arm A's 13 are a plain level for an idea about a change, such as the taker share for "suddenly rises above normal". Arm C has 3 of 12 of those, and S2 1 of 11. So RL's student tends to hand in the simple form, which fits it testing less, though I haven't tested that link.
+
+Per idea over the ideas both have, as exploration and not the prereg's bootstrap over formulas: arm C minus arm B +15.5 points (+4.6 to +28.2), arm B minus arm A -12.6 (-22.4 to -4.6), arm B minus S2 -4.9 (-21.6 to +11.7). That hints that a reward with IC in it costs some faithfulness and a judge wins it back. It doesn't settle H9.
+
+The reader and the judge agree on 198 of 235 formulas. On 29 items they differ. The reader is stricter on a level for an idea about a change, 8 items, which the rubric calls fine, and on a formula against own past for an idea about a level, 4. The judge is stricter on a plain return for an idea about the market, 6, on volatility for beta, 6, and on odd forms, 5. IC ranks coins within a day, so a return common to all coins doesn't change the order, which is why I accepted the plain return. So the judge isn't simply right or wrong here: most differences are about how far a proxy may go.
+
+## The sealed exam
+
+`sealed_exam.py` scored all 8 answer files on 2025 first and required each to give back its own verdicts and ICs. All did, with a largest IC change of 0. It then opened the sealed period once per file, at 18:55 UTC on 2026-11-06, on S1, both seeds of each arm and the held-out rows of DeepSeek's file. `sealed_access.log` has those 8 lines and no others. The answers are the same rows and no verdict changed, so pass rates stay as they were. The audit's verdicts were locked before this, and the files the exam relies on match their pins. `panel.py` isn't among the pins, and it equals the freeze commit.
+
+Mean IC among passes per idea with a 95% CI over ideas, which is the prereg's measure, so it differs a little from the per-episode means above:
+
+| Model | Passed | IC, 2025 | IC, 2026 | Raw IC, 2026 |
+|---|---|---|---|---|
+| S1 | 51.6% | +0.0015 | +0.0025 (-0.0006 to +0.0060) | +0.0029 (-0.0056 to +0.0109) |
+| S4 arm A | 71.4% | +0.0012 | +0.0009 (-0.0010 to +0.0026) | +0.0008 (-0.0069 to +0.0081) |
+| S4 arm B | 68.5% | +0.0008 | +0.0012 (-0.0008 to +0.0032) | +0.0019 (-0.0045 to +0.0085) |
+| S4 arm C | 65.7% | +0.0004 | +0.0014 (-0.0009 to +0.0037) | +0.0019 (-0.0058 to +0.0097) |
+| DeepSeek, tools | 79.0% | +0.0042 | +0.0050 (+0.0025 to +0.0075) | +0.0084 (+0.0026 to +0.0143) |
+
+**H8 does not pass.** S4 arm B minus S1, IC among passes -0.0011 (-0.0034 to +0.0011) over 27 ideas. Arm B's own mean is +0.0012, with an interval across 0.
+
+Arm B against arm A is +0.0004 (-0.0013 to +0.0022), and arm C against arm B +0.0002 (-0.0019 to +0.0025), so no reward separates from another on the clean year either. Arm B against DeepSeek is -0.0038 (-0.0068 to -0.0009).
+
+The teacher's result is the one that gives this exam its meaning. On a year nothing here was chosen on, its formulas keep an incremental IC with an interval above 0. So these ideas hold signal and the measure can see it, and the student's flat numbers mean it didn't learn to find it. The student's numbers barely moved from 2025 to 2026, with arm A down 0.0003 and the others up, so RL shows no sign of overfitting its reward year, though there was little to lose.
+
+Reward does hold up, since passing doesn't depend on the year: S4 arm B minus S1 on the 2026 reward, +0.108 (+0.037 to +0.177).
+
+## Why online RL tests less
+
+Exploration, on the rollouts RL trained on and on the 2025 scores.
+
+Reward doesn't count tests up to the limit of five, yet they fell in every run, from 3.5 to 3.9 over the first three steps to 2.6 to 2.9 over the last five. The likely reason is that using all five goes badly. Over steps 1 to 5, across the six runs, an episode with 5 tests hands in 75% of the time, against 97% to 99% with 3 or 4. It passes 29% to 41% of the time, against 53% to 69%. Within a group, on one idea, its advantage under arm B's reward is -0.06 to -0.11, and theirs is positive. So its share falls from 15% to 30% of episodes to 0% to 2%. A better formula found on a fifth test earns little under the reward, and failing to hand in costs everything.
+
+Testing may be where the IC was coming from. Among passes, within one idea and one model, each extra test goes with this much more IC, with whole ideas resampled:
+
+| Models | IC per extra test |
+|---|---|
+| DeepSeek | +0.0011 (+0.0005 to +0.0023) |
+| S1, S2, S3, pooled | +0.0019 (+0.0010 to +0.0029) |
+| S4, pooled | +0.0001 (-0.0003 to +0.0005) |
+
+So after online RL the student tests less, and its tests no longer go with better formulas. This is correlation among formulas that passed, and a formula tested more isn't randomly assigned, so it suggests a cause and doesn't show one. A student who stops early and hands in a plain form fits both this and the audit. It isn't the main reason IC is low, though: IC had already fallen in offline RL with tests near 4, and the fall from 4.00 to 2.63 tests left IC flat. "After the exam" has the numbers.
+
+This also settles a loose end. An idea came up as few as 8 times in a run where the median was 64. `advantage_range` in `configs/factor-idea/rl.toml` rejects a group whose advantage is exactly 0, as when all 8 rollouts earn the same. `rise_without_buyers_down`, whose honest formulas the verifier fails, is the usual case, so RL rarely trains on it, and an idea the student can't pass at all gets no lift from RL.
+
+SFT2's dataset is also settled. It was rebuilt at 01:43 on Nov 6, before training at 05:00, and it matches its pin.
+
+## Where the hypotheses stand
+
+| ID | Result | Number |
+|---|---|---|
+| H1, primary | Passes | Pass rate +51.6 points (+41.9 to +61.3) |
+| H2 | Passes | Pass rate +71.7 points (+58.3 to +83.3), on val, read as an upper bound |
+| H3 | Does not pass | IC among passes +0.0017 (-0.0010 to +0.0044) |
+| H4 | Does not pass, opposite way | -0.0038 (-0.0063 to -0.0014) |
+| H5 | Does not pass | -0.0000 (-0.0017 to +0.0019) |
+| H6 | Does not pass | -0.0004 (-0.0019 to +0.0011) |
+| H7 | Passes on the line, depends on one ruling | -10.0 points, limit 10 |
+| H8 | Does not pass | -0.0011 (-0.0034 to +0.0011) |
+| H9 | Does not pass | +10.0 points (-5.0 to +25.0) |
+
+SFT taught OLMo 3 7B the task on families it never saw, from 0% to 51.6%. RL made it reliable, to about 70%, against the teacher's 79%, and that holds on 2026. No hypothesis on better formulas passed, on 2025 or on the clean year, and the teacher shows there was more to find.
+
+## After the exam
+
+Everything here came after the sealed exam, so it is exploration, and I read the 2026 numbers below knowing prereg 03's results. No panel was reopened: `sealed_access.log` still has its 8 lines, and 2026 ICs come from the exam's own files. The prereg listed research IC against later IC, and variety of formulas, as exploratory; the rest wasn't foreseen. `scripts/factor/explore_after_exam.py` prints all of it, with its output in `results/factor/explore/`.
+
+**The reward could hardly say anything about IC.** Within a group, 97% of arm B's reward spread comes from passing or failing and 2.8% from IC among passes, at the start of a run and at its end. The reward maps IC onto a range of ±0.03, and passes in a group typically differ by about 0.003, which is 0.04 of reward. That is my own fault in scaling it. IC among passes on training ideas didn't rise either, from +0.0023 to +0.0019 in arm B, a change of -0.0004 (-0.0010 to +0.0000), and arm B's change minus arm A's is -0.0001 (-0.0006 to +0.0005). So H6 shows that this reward taught no more signal than the gates did. It says little about whether a reward can.
+
+**Research IC says a lot about later IC.** Among one model's passing formulas for one idea, research IC correlates +0.63 to +0.91 with 2025 and +0.69 to +0.84 with 2026, so what the student reads in a test is a good guide.
+
+**S2's formulas can't be told from the teacher's, and the fall comes with offline RL.** On held-out ideas, per idea:
+
+| Model | Passed | No answer | Wrong direction | Doesn't respond | IC among passes | Minus the teacher | Tests |
+|---|---|---|---|---|---|---|---|
+| S1 | 52% | 8% | 17% | 21% | +0.0015 | -0.0017 (-0.0046 to +0.0013) | 3.82 |
+| S2 | 44% | 20% | 16% | 17% | +0.0034 | -0.0001 (-0.0023 to +0.0022) | 4.31 |
+| S3 arm B | 60% | 4% | 14% | 19% | +0.0010 | -0.0033 (-0.0059 to -0.0010) | 4.00 |
+| S4 arm B | 69% | 2% | 6% | 17% | +0.0008 | -0.0031 (-0.0051 to -0.0010) | 2.63 |
+| DeepSeek | 79% | 16% | 3% | 0% | +0.0042 | | 4.47 |
+
+Val ideas say the same: S2 minus the teacher +0.0001 (-0.0018 to +0.0025), S4 arm B -0.0020 (-0.0039 to -0.0003). The gap isn't about transfer, since on training ideas arm B sits -0.0015 (-0.0024 to -0.0006) below the teacher as RL starts and -0.0020 (-0.0030 to -0.0011) as it ends. These intervals are wide, so S2 isn't shown to equal the teacher, and S2's IC may be flattered because it passes the fewest. With the picking described below, though, S2 passes 83.9% with IC +0.0051 and S4 arm B 83.1% with +0.0016, though S2 spends three times the tests to get there.
+
+This corrects what I wrote earlier in this log. Fewer tests aren't the main reason IC is low: IC fell in offline RL with tests near 4, and online RL's fall in tests left it flat. Offline RL may have done it by mixing ordinary rows into what S2 learned only from the best rows, which nothing has tested.
+
+**Online RL's gain in pass rate is mostly two repairs.** From S2 to S4 arm B, episodes with no answer fall from 20% to 2% and wrong directions from 16% to 6%. "Doesn't respond" stays at 17%, against the teacher's 0%, and most of that is the illiquidity family. Neither repair obviously needs worse formulas.
+
+**The student already writes good formulas, and doesn't pick them.** Take k episodes on an idea and keep one by its research IC. The gates read data through 2024 only, so a real process could run them first. On held-out ideas:
+
+| Process | Tests | Passed | Judged faithful | IC on 2026 | Reward on 2026 |
+|---|---|---|---|---|---|
+| S4 arm B, one episode | 2.6 | 68.5% | 69% | +0.0012 (-0.0009 to +0.0033) | 0.455 |
+| S4 arm B, k=4, gates then research IC | 10.5 | 90.7% | 65% | +0.0040 (+0.0015 to +0.0065) | 0.634 |
+| S4 arm B, k=4, gates and judge then research IC | 10.5 | 90.7% | 81% | +0.0029 (+0.0004 to +0.0052) | 0.622 |
+| S4 arm B, k=8, gates and judge then research IC | 21.1 | 96.8% | 83% | +0.0044 (+0.0015 to +0.0073) | 0.679 |
+| DeepSeek, one episode | 4.5 | 79.0% | | +0.0050 (+0.0025 to +0.0075) | 0.566 |
+| DeepSeek, k=2, gates then research IC | 8.9 | 92.5% | | +0.0057 (+0.0028 to +0.0084) | 0.668 |
+
+At about 10 tests each, S4 arm B minus the teacher is -0.0017 (-0.0051 to +0.0016) on IC and -0.033 (-0.121 to +0.046) on reward. At one episode each it is -0.0038 (-0.0068 to -0.0009) and -0.111 (-0.211 to -0.013). The rule has nothing to tune, each seed alone gains about the same, +0.0028 and +0.0030 at k=4, and val ideas agree on 2025. But this is a model and a process, not the model alone, the teacher with the same process stays ahead on point estimates, and it was found after the exam.
+
+The gates can't be skipped. Picking by research IC alone keeps IC and loses passes: arm A at k=8 falls to 54.8%, and arm B on val to 60.0%. Picking also costs some faithfulness, 69% down to 60% at k=8, and the judge wins it back while keeping most of the gain.
+
+Given the same process, S2 has the higher IC and S4 the higher pass rate. At k=4 and k=8 on held-out ideas, gates first, with about 17 and 21 tests, S2 has +0.0051 and S4 arm B +0.0038 on 2025, and they pass 83.9% and 96.8%. On val, S2 at k=4 matches the teacher at k=4: 100% passed both, IC +0.0085 and +0.0089, reward 0.750 and 0.753. Handing in the best test of one episode, with no more tests, helps less: arm B's IC among passes gains +0.0007 (+0.0002 to +0.0013), and an episode with no answer scored on its best test takes S2 only from 44.4% to 50.8% passed.
+
+**A better-scaled reward wouldn't by itself keep the tests.** On rollouts from the first five steps, a percentile reward with no zero for a missing answer halves the penalty for using all five tests, from -0.068 to -0.031 in mean advantage, and 2 or 3 tests stay best. So tests may still fall. It would raise IC's share of the spread: a percentile table with a floor of 0.3 gives 17% to 21%, and with a floor of 0.1 gives 30% to 36%.
+
+**No form of formula pays everywhere.** Within an idea, EMA goes with higher IC for students and not for the teacher, and more fields goes with higher IC for the teacher and is unclear for students. None of the forms I tried is clear in students on training ideas, students on val and the teacher together, and more fields runs against faithfulness. More tests go with higher IC for students on training ideas, +0.0009 a test (+0.0006 to +0.0012). Of the spread of IC among passes on training ideas, 68% is between ideas and 32% within one. So a reward on IC may teach which formula suits a training idea more than a skill that carries over, and search and picking are the most likely things to carry over.
+
+**So the next thing to try is the simplest.** S2's formulas with online RL's two repairs: online RL straight from S2, skipping offline RL. `prereg/03b-pilot.md` sets that out, with a second run on the better-scaled reward and the rules for going on, before either starts.

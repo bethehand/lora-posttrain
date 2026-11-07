@@ -1,0 +1,10 @@
+Passing answers that were tested: research IC against 2025 and 2026, per episode and within an idea
+  S1        n  63 research +0.0024 2025 +0.0010 2026 +0.0020; within an idea, correlation with 2025 +0.78, with 2026 +0.69
+  S2        n  54 research +0.0051 2025 +0.0034; within an idea, correlation with 2025 +0.81
+  S3 A      n  66 research -0.0002 2025 -0.0008; within an idea, correlation with 2025 +0.91
+  S3 B      n  72 research +0.0014 2025 +0.0011; within an idea, correlation with 2025 +0.77
+  S3 C      n  64 research +0.0034 2025 +0.0021; within an idea, correlation with 2025 +0.74
+  S4 A      n 177 research +0.0012 2025 +0.0008 2026 +0.0007; within an idea, correlation with 2025 +0.77, with 2026 +0.78
+  S4 B      n 169 research +0.0015 2025 +0.0009 2026 +0.0012; within an idea, correlation with 2025 +0.63, with 2026 +0.75
+  S4 C      n 163 research +0.0009 2025 -0.0000 2026 +0.0012; within an idea, correlation with 2025 +0.81, with 2026 +0.77
+  DeepSeek  n  93 research +0.0055 2025 +0.0039 2026 +0.0054; within an idea, correlation with 2025 +0.73, with 2026 +0.84

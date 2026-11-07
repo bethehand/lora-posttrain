@@ -191,4 +191,11 @@ Passing `heldout` formulas of S2 and of S4 arms A, B and C are read once, togeth
 
 ## Deviations
 
-None yet.
+- **Scripts written after the freeze, not pinned.** `scripts/factor/heldout_online.py`, `audit.py` and `sealed_exam.py` carry out the rules above and call the pinned `compare_stages.py` and `rescore_eval.py`. What they settled that the rules left open is listed here.
+- **Judge outages.** The pause rule was not automated. It never came up: every step of both arm C runs trained all 128 rollouts.
+- **Audit, repeats.** A pair of idea and formula handed in by more than one model was read once, and its verdict counts for each of them: 163 items from 235 formulas.
+- **Audit, rulings.** The rubric leaves some cases open. My rulings were written with the verdicts, before the key was opened, in `results/factor/audit/reading_rules.md`, and 54 items were marked borderline at the same time. Other readings of them are reported in `results/factor/week2.md`. H7 fails under one of them.
+- **Audit, scorer.** The first run of `audit.py score` printed "fails" on H7 and counted no borderline items. The first was a float falling just under -0.1 at exactly 10 points, the second a variable overwritten in a loop. Both were fixed after seeing that output. The verdict file didn't change, and its hash was written before the key was opened.
+- **Audit, second reader.** The owner of the research system has not read the sample.
+- **Sealed exam.** DeepSeek's held-out rows were taken from its file of all ideas before scoring, so only held-out answers read the sealed period. `panel.py`, which logs each opening, was never among the pins. It equals the freeze commit.
+- **After the exam.** The exam's stored 2026 scores were read again for exploration, in `results/factor/week2.md` under "After the exam". The sealed panel was not reopened. None of it changes a result above.

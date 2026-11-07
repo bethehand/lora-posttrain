@@ -1,0 +1,99 @@
+Held-out ideas. One of k answers is kept by its research IC
+S4 B
+  one episode              tests  2.6, pass  68.5%, faithful  69%, IC 2025 +0.0008, gain +0.0000 (+0.0000 to +0.0000) over 30 ideas, reward 2025 0.453; IC 2026 +0.0012 (-0.0009 to +0.0033), gain +0.0000 (+0.0000 to +0.0000) over 30 ideas, reward 2026 0.455
+  research, k=2            tests  5.3, pass  71.4%, faithful  67%, IC 2025 +0.0019, gain +0.0010 (+0.0006 to +0.0015) over 30 ideas, reward 2025 0.481; IC 2026 +0.0029 (+0.0006 to +0.0052), gain +0.0016 (+0.0011 to +0.0022) over 30 ideas, reward 2026 0.489
+  research, k=3            tests  7.9, pass  71.2%, faithful  64%, IC 2025 +0.0028, gain +0.0019 (+0.0011 to +0.0027) over 29 ideas, reward 2025 0.488; IC 2026 +0.0041 (+0.0015 to +0.0067), gain +0.0028 (+0.0019 to +0.0037) over 29 ideas, reward 2026 0.498
+  research, k=4            tests 10.5, pass  71.3%, faithful  62%, IC 2025 +0.0033, gain +0.0023 (+0.0013 to +0.0034) over 29 ideas, reward 2025 0.493; IC 2026 +0.0048 (+0.0020 to +0.0075), gain +0.0035 (+0.0023 to +0.0046) over 29 ideas, reward 2026 0.506
+  research, k=8            tests 21.1, pass  74.2%, faithful  65%, IC 2025 +0.0042, gain +0.0032 (+0.0017 to +0.0046) over 23 ideas, reward 2025 0.519; IC 2026 +0.0067 (+0.0036 to +0.0097), gain +0.0049 (+0.0032 to +0.0067) over 23 ideas, reward 2026 0.540
+  gates, k=2               tests  5.3, pass  83.1%, faithful  67%, IC 2025 +0.0016, gain +0.0007 (+0.0004 to +0.0010) over 30 ideas, reward 2025 0.557; IC 2026 +0.0024 (+0.0002 to +0.0046), gain +0.0012 (+0.0008 to +0.0016) over 30 ideas, reward 2026 0.565
+  gates, k=3               tests  7.9, pass  88.6%, faithful  66%, IC 2025 +0.0022, gain +0.0013 (+0.0008 to +0.0020) over 30 ideas, reward 2025 0.600; IC 2026 +0.0033 (+0.0009 to +0.0056), gain +0.0020 (+0.0013 to +0.0028) over 30 ideas, reward 2026 0.611
+  gates, k=4               tests 10.5, pass  90.7%, faithful  65%, IC 2025 +0.0027, gain +0.0019 (+0.0011 to +0.0028) over 30 ideas, reward 2025 0.621; IC 2026 +0.0040 (+0.0015 to +0.0065), gain +0.0028 (+0.0018 to +0.0037) over 30 ideas, reward 2026 0.634
+  gates, k=8               tests 21.1, pass  96.8%, faithful  60%, IC 2025 +0.0038, gain +0.0029 (+0.0017 to +0.0042) over 30 ideas, reward 2025 0.671; IC 2026 +0.0057 (+0.0031 to +0.0085), gain +0.0045 (+0.0030 to +0.0061) over 30 ideas, reward 2026 0.694
+  gates+judge, k=2         tests  5.3, pass  83.1%, faithful  75%, IC 2025 +0.0011, gain +0.0003 (-0.0000 to +0.0006) over 30 ideas, reward 2025 0.552; IC 2026 +0.0019 (-0.0003 to +0.0040), gain +0.0007 (+0.0002 to +0.0012) over 30 ideas, reward 2026 0.560
+  gates+judge, k=3         tests  7.9, pass  88.6%, faithful  78%, IC 2025 +0.0014, gain +0.0006 (-0.0001 to +0.0012) over 30 ideas, reward 2025 0.591; IC 2026 +0.0024 (+0.0001 to +0.0046), gain +0.0012 (+0.0004 to +0.0020) over 30 ideas, reward 2026 0.602
+  gates+judge, k=4         tests 10.5, pass  90.7%, faithful  81%, IC 2025 +0.0017, gain +0.0009 (-0.0000 to +0.0017) over 30 ideas, reward 2025 0.609; IC 2026 +0.0029 (+0.0004 to +0.0052), gain +0.0017 (+0.0006 to +0.0027) over 30 ideas, reward 2026 0.622
+  gates+judge, k=8         tests 21.1, pass  96.8%, faithful  83%, IC 2025 +0.0029, gain +0.0020 (+0.0002 to +0.0037) over 30 ideas, reward 2025 0.662; IC 2026 +0.0044 (+0.0015 to +0.0073), gain +0.0032 (+0.0013 to +0.0051) over 30 ideas, reward 2026 0.679
+S4 A
+  one episode              tests  2.8, pass  71.4%, faithful  69%, IC 2025 +0.0012, gain +0.0000 (+0.0000 to +0.0000) over 30 ideas, reward 2025 0.471; IC 2026 +0.0009 (-0.0010 to +0.0026), gain +0.0000 (+0.0000 to +0.0000) over 30 ideas, reward 2026 0.470
+  research, k=2            tests  5.5, pass  67.0%, faithful  69%, IC 2025 +0.0023, gain +0.0011 (+0.0007 to +0.0016) over 30 ideas, reward 2025 0.452; IC 2026 +0.0024 (+0.0003 to +0.0045), gain +0.0016 (+0.0008 to +0.0025) over 30 ideas, reward 2026 0.456
+  research, k=4            tests 11.0, pass  59.4%, faithful  66%, IC 2025 +0.0034, gain +0.0022 (+0.0012 to +0.0032) over 29 ideas, reward 2025 0.411; IC 2026 +0.0039 (+0.0010 to +0.0068), gain +0.0031 (+0.0013 to +0.0052) over 29 ideas, reward 2026 0.418
+  research, k=8            tests 22.1, pass  54.8%, faithful  59%, IC 2025 +0.0055, gain +0.0040 (+0.0016 to +0.0068) over 17 ideas, reward 2025 0.391; IC 2026 +0.0063 (+0.0012 to +0.0111), gain +0.0044 (+0.0008 to +0.0087) over 17 ideas, reward 2026 0.397
+  gates, k=2               tests  5.5, pass  85.1%, faithful  68%, IC 2025 +0.0020, gain +0.0008 (+0.0004 to +0.0012) over 30 ideas, reward 2025 0.570; IC 2026 +0.0019 (-0.0002 to +0.0039), gain +0.0010 (+0.0003 to +0.0018) over 30 ideas, reward 2026 0.570
+  gates, k=4               tests 11.1, pass  93.5%, faithful  67%, IC 2025 +0.0029, gain +0.0017 (+0.0009 to +0.0027) over 30 ideas, reward 2025 0.638; IC 2026 +0.0032 (+0.0005 to +0.0059), gain +0.0023 (+0.0008 to +0.0042) over 30 ideas, reward 2026 0.641
+  gates, k=8               tests 22.1, pass  96.8%, faithful  67%, IC 2025 +0.0042, gain +0.0030 (+0.0015 to +0.0048) over 30 ideas, reward 2025 0.676; IC 2026 +0.0051 (+0.0018 to +0.0086), gain +0.0042 (+0.0018 to +0.0071) over 30 ideas, reward 2026 0.687
+  gates+judge, k=2         tests  5.5, pass  85.1%, faithful  76%, IC 2025 +0.0016, gain +0.0004 (-0.0001 to +0.0008) over 30 ideas, reward 2025 0.566; IC 2026 +0.0012 (-0.0008 to +0.0031), gain +0.0004 (-0.0004 to +0.0012) over 30 ideas, reward 2026 0.564
+  gates+judge, k=4         tests 11.1, pass  93.5%, faithful  83%, IC 2025 +0.0022, gain +0.0010 (+0.0001 to +0.0021) over 30 ideas, reward 2025 0.631; IC 2026 +0.0022 (-0.0002 to +0.0044), gain +0.0013 (-0.0002 to +0.0031) over 30 ideas, reward 2026 0.631
+  gates+judge, k=8         tests 22.1, pass  96.8%, faithful  87%, IC 2025 +0.0030, gain +0.0018 (+0.0002 to +0.0036) over 30 ideas, reward 2025 0.663; IC 2026 +0.0035 (+0.0006 to +0.0064), gain +0.0027 (+0.0001 to +0.0055) over 30 ideas, reward 2026 0.669
+S4 C
+  one episode              tests  2.7, pass  65.7%, faithful  71%, IC 2025 +0.0004, gain +0.0000 (+0.0000 to +0.0000) over 30 ideas, reward 2025 0.427; IC 2026 +0.0014 (-0.0009 to +0.0038), gain +0.0000 (+0.0000 to +0.0000) over 30 ideas, reward 2026 0.437
+  research, k=2            tests  5.4, pass  64.8%, faithful  69%, IC 2025 +0.0017, gain +0.0013 (+0.0009 to +0.0018) over 30 ideas, reward 2025 0.433; IC 2026 +0.0033 (+0.0010 to +0.0057), gain +0.0019 (+0.0013 to +0.0026) over 30 ideas, reward 2026 0.447
+  research, k=4            tests 10.7, pass  61.3%, faithful  65%, IC 2025 +0.0038, gain +0.0027 (+0.0018 to +0.0036) over 27 ideas, reward 2025 0.421; IC 2026 +0.0058 (+0.0030 to +0.0088), gain +0.0037 (+0.0022 to +0.0052) over 27 ideas, reward 2026 0.438
+  research, k=8            tests 21.5, pass  58.1%, faithful  56%, IC 2025 +0.0048, gain +0.0044 (+0.0024 to +0.0063) over 18 ideas, reward 2025 0.410; IC 2026 +0.0073 (+0.0021 to +0.0125), gain +0.0055 (+0.0019 to +0.0091) over 18 ideas, reward 2026 0.427
+  gates, k=2               tests  5.4, pass  78.6%, faithful  68%, IC 2025 +0.0012, gain +0.0009 (+0.0006 to +0.0012) over 30 ideas, reward 2025 0.522; IC 2026 +0.0026 (+0.0004 to +0.0050), gain +0.0012 (+0.0008 to +0.0017) over 30 ideas, reward 2026 0.538
+  gates, k=4               tests 10.7, pass  89.1%, faithful  65%, IC 2025 +0.0023, gain +0.0019 (+0.0013 to +0.0025) over 30 ideas, reward 2025 0.604; IC 2026 +0.0040 (+0.0015 to +0.0066), gain +0.0026 (+0.0016 to +0.0038) over 30 ideas, reward 2026 0.623
+  gates, k=8               tests 21.5, pass  96.8%, faithful  63%, IC 2025 +0.0040, gain +0.0036 (+0.0021 to +0.0052) over 30 ideas, reward 2025 0.674; IC 2026 +0.0062 (+0.0027 to +0.0098), gain +0.0048 (+0.0024 to +0.0072) over 30 ideas, reward 2026 0.699
+  gates+judge, k=2         tests  5.4, pass  78.6%, faithful  75%, IC 2025 +0.0009, gain +0.0005 (+0.0002 to +0.0009) over 30 ideas, reward 2025 0.519; IC 2026 +0.0020 (-0.0005 to +0.0045), gain +0.0006 (-0.0000 to +0.0012) over 30 ideas, reward 2026 0.530
+  gates+judge, k=4         tests 10.7, pass  89.1%, faithful  78%, IC 2025 +0.0017, gain +0.0013 (+0.0006 to +0.0020) over 30 ideas, reward 2025 0.597; IC 2026 +0.0029 (+0.0002 to +0.0057), gain +0.0016 (+0.0003 to +0.0028) over 30 ideas, reward 2026 0.611
+  gates+judge, k=8         tests 21.5, pass  96.8%, faithful  80%, IC 2025 +0.0033, gain +0.0029 (+0.0015 to +0.0045) over 30 ideas, reward 2025 0.666; IC 2026 +0.0049 (+0.0016 to +0.0084), gain +0.0036 (+0.0013 to +0.0059) over 30 ideas, reward 2026 0.684
+S1
+  one episode              tests  3.8, pass  51.6%, faithful  64%, IC 2025 +0.0015, gain +0.0000 (+0.0000 to +0.0000) over 28 ideas, reward 2025 0.341; IC 2026 +0.0025 (-0.0007 to +0.0060), gain +0.0000 (+0.0000 to +0.0000) over 28 ideas, reward 2026 0.347
+  research, k=2            tests  7.6, pass  53.0%, faithful  65%, IC 2025 +0.0023, gain +0.0007 (+0.0001 to +0.0015) over 28 ideas, reward 2025 0.366; IC 2026 +0.0038 (+0.0003 to +0.0075), gain +0.0013 (+0.0002 to +0.0024) over 28 ideas, reward 2026 0.378
+  research, k=4            tests 15.3, pass  48.4%, faithful  60%, IC 2025 +0.0070, gain +0.0013 (+0.0004 to +0.0023) over 15 ideas, reward 2025 0.354; IC 2026 +0.0094 (+0.0049 to +0.0144), gain +0.0022 (+0.0002 to +0.0047) over 15 ideas, reward 2026 0.368
+  gates, k=2               tests  7.6, pass  74.5%, faithful  64%, IC 2025 +0.0019, gain +0.0004 (+0.0001 to +0.0007) over 28 ideas, reward 2025 0.496; IC 2026 +0.0031 (-0.0004 to +0.0068), gain +0.0005 (-0.0000 to +0.0012) over 28 ideas, reward 2026 0.506
+  gates, k=4               tests 15.3, pass  90.3%, faithful  64%, IC 2025 +0.0026, gain +0.0011 (+0.0002 to +0.0020) over 28 ideas, reward 2025 0.615; IC 2026 +0.0043 (+0.0006 to +0.0083), gain +0.0018 (+0.0004 to +0.0034) over 28 ideas, reward 2026 0.633
+S2
+  one episode              tests  4.3, pass  44.4%, faithful  67%, IC 2025 +0.0034, gain +0.0000 (+0.0000 to +0.0000) over 27 ideas, reward 2025 0.305
+  research, k=2            tests  8.6, pass  52.6%, faithful  64%, IC 2025 +0.0045, gain +0.0005 (+0.0002 to +0.0010) over 26 ideas, reward 2025 0.368
+  research, k=4            tests 17.2, pass  54.8%, faithful  59%, IC 2025 +0.0053, gain +0.0016 (+0.0004 to +0.0030) over 17 ideas, reward 2025 0.391
+  gates, k=2               tests  8.6, pass  64.8%, faithful  66%, IC 2025 +0.0038, gain +0.0004 (+0.0001 to +0.0007) over 27 ideas, reward 2025 0.451
+  gates, k=4               tests 17.2, pass  83.9%, faithful  69%, IC 2025 +0.0051, gain +0.0012 (+0.0003 to +0.0022) over 26 ideas, reward 2025 0.595
+DeepSeek
+  one episode              tests  4.5, pass  79.0%, faithful nan%, IC 2025 +0.0042, gain +0.0000 (+0.0000 to +0.0000) over 31 ideas, reward 2025 0.551; IC 2026 +0.0050 (+0.0025 to +0.0075), gain +0.0000 (+0.0000 to +0.0000) over 31 ideas, reward 2026 0.566
+  research, k=2            tests  8.9, pass  89.1%, faithful nan%, IC 2025 +0.0048, gain +0.0007 (+0.0000 to +0.0014) over 31 ideas, reward 2025 0.632; IC 2026 +0.0058 (+0.0030 to +0.0085), gain +0.0008 (-0.0000 to +0.0016) over 31 ideas, reward 2026 0.647
+  research, k=4            tests 17.9, pass  90.3%, faithful nan%, IC 2025 +0.0059, gain +0.0013 (-0.0002 to +0.0029) over 28 ideas, reward 2025 0.649; IC 2026 +0.0069 (+0.0032 to +0.0102), gain +0.0012 (-0.0007 to +0.0028) over 28 ideas, reward 2026 0.660
+  gates, k=2               tests  8.9, pass  92.5%, faithful nan%, IC 2025 +0.0048, gain +0.0006 (+0.0000 to +0.0013) over 31 ideas, reward 2025 0.654; IC 2026 +0.0057 (+0.0028 to +0.0084), gain +0.0007 (-0.0001 to +0.0015) over 31 ideas, reward 2026 0.668
+  gates, k=4               tests 17.9, pass 100.0%, faithful nan%, IC 2025 +0.0055, gain +0.0013 (-0.0001 to +0.0028) over 31 ideas, reward 2025 0.714; IC 2026 +0.0062 (+0.0028 to +0.0094), gain +0.0012 (-0.0005 to +0.0028) over 31 ideas, reward 2026 0.723
+S4 arm B against the teacher, by the number of tests each spends, 2026
+  one episode each                     reward -0.1109 (-0.2105 to -0.0133), IC -0.0038 (-0.0068 to -0.0009) over 30 ideas, pass -0.1048 (-0.2460 to +0.0363)
+  about 10 tests, gates: k=4 and k=2   reward -0.0332 (-0.1210 to +0.0463), IC -0.0017 (-0.0051 to +0.0016) over 30 ideas, pass -0.0180 (-0.1304 to +0.0849)
+  about 20 tests, gates: k=8 and k=4   reward -0.0291 (-0.0949 to +0.0277), IC -0.0005 (-0.0043 to +0.0033) over 30 ideas, pass -0.0323 (-0.0968 to +0.0000)
+Each seed of S4 arm B alone, k=4, research only, 2026
+  seed 1: gain +0.0028 (+0.0015 to +0.0043) over 21 ideas
+  seed 2: gain +0.0030 (+0.0017 to +0.0045) over 23 ideas
+Val ideas, 2025. Research only and gates, k=8 for S4, k=2 and k=4 for S2 and the teacher
+S4 A
+  one episode              tests  2.7, pass  75.8%, faithful nan%, IC 2025 +0.0042, gain +0.0000 (+0.0000 to +0.0000) over 15 ideas, reward 2025 0.538
+  research, k=8            tests 21.4, pass  73.3%, faithful nan%, IC 2025 +0.0122, gain +0.0054 (+0.0031 to +0.0079) over 11 ideas, reward 2025 0.581
+  gates, k=8               tests 21.4, pass 100.0%, faithful nan%, IC 2025 +0.0087, gain +0.0045 (+0.0026 to +0.0066) over 15 ideas, reward 2025 0.751
+S4 B
+  one episode              tests  2.7, pass  79.2%, faithful nan%, IC 2025 +0.0053, gain +0.0000 (+0.0000 to +0.0000) over 15 ideas, reward 2025 0.572
+  research, k=2            tests  5.4, pass  84.0%, faithful nan%, IC 2025 +0.0061, gain +0.0008 (+0.0001 to +0.0016) over 15 ideas, reward 2025 0.617
+  gates, k=2               tests  5.4, pass  92.3%, faithful nan%, IC 2025 +0.0061, gain +0.0008 (+0.0002 to +0.0016) over 15 ideas, reward 2025 0.669
+  research, k=4            tests 10.7, pass  78.0%, faithful nan%, IC 2025 +0.0067, gain +0.0014 (+0.0001 to +0.0028) over 15 ideas, reward 2025 0.588
+  gates, k=4               tests 10.7, pass  99.3%, faithful nan%, IC 2025 +0.0067, gain +0.0014 (+0.0001 to +0.0027) over 15 ideas, reward 2025 0.723
+  research, k=8            tests 21.5, pass  60.0%, faithful nan%, IC 2025 +0.0118, gain +0.0027 (-0.0004 to +0.0061) over 9 ideas, reward 2025 0.473
+  gates, k=8               tests 21.5, pass 100.0%, faithful nan%, IC 2025 +0.0071, gain +0.0018 (-0.0006 to +0.0045) over 15 ideas, reward 2025 0.733
+S4 C
+  one episode              tests  2.7, pass  79.2%, faithful  90%, IC 2025 +0.0054, gain +0.0000 (+0.0000 to +0.0000) over 15 ideas, reward 2025 0.570
+  research, k=8            tests 21.9, pass  80.0%, faithful  83%, IC 2025 +0.0115, gain +0.0040 (+0.0016 to +0.0069) over 12 ideas, reward 2025 0.628
+  gates, k=8               tests 21.9, pass 100.0%, faithful  87%, IC 2025 +0.0083, gain +0.0029 (+0.0007 to +0.0056) over 15 ideas, reward 2025 0.747
+S2
+  one episode              tests  4.1, pass  71.7%, faithful  84%, IC 2025 +0.0075, gain +0.0000 (+0.0000 to +0.0000) over 15 ideas, reward 2025 0.546
+  research, k=2            tests  8.1, pass  77.7%, faithful  77%, IC 2025 +0.0095, gain +0.0011 (+0.0003 to +0.0023) over 14 ideas, reward 2025 0.608
+  gates, k=2               tests  8.1, pass  87.8%, faithful  80%, IC 2025 +0.0083, gain +0.0009 (+0.0002 to +0.0018) over 15 ideas, reward 2025 0.669
+  research, k=4            tests 16.3, pass  80.0%, faithful  67%, IC 2025 +0.0115, gain +0.0012 (-0.0005 to +0.0031) over 12 ideas, reward 2025 0.627
+  gates, k=4               tests 16.3, pass 100.0%, faithful  73%, IC 2025 +0.0085, gain +0.0011 (-0.0003 to +0.0026) over 15 ideas, reward 2025 0.750
+DeepSeek
+  one episode              tests  4.3, pass  73.3%, faithful nan%, IC 2025 +0.0073, gain +0.0000 (+0.0000 to +0.0000) over 15 ideas, reward 2025 0.556
+  research, k=2            tests  8.6, pass  84.5%, faithful nan%, IC 2025 +0.0079, gain +0.0006 (-0.0001 to +0.0014) over 15 ideas, reward 2025 0.637
+  gates, k=2               tests  8.6, pass  90.0%, faithful nan%, IC 2025 +0.0079, gain +0.0006 (-0.0001 to +0.0014) over 15 ideas, reward 2025 0.677
+  research, k=4            tests 17.3, pass  86.7%, faithful nan%, IC 2025 +0.0097, gain +0.0019 (+0.0000 to +0.0039) over 13 ideas, reward 2025 0.662
+  gates, k=4               tests 17.3, pass 100.0%, faithful nan%, IC 2025 +0.0089, gain +0.0015 (-0.0002 to +0.0034) over 15 ideas, reward 2025 0.753
+The same tests and no more episodes: hand in the formula an episode tested best, scored on 2025, held-out ideas
+  S1        own: pass 51.6%, reward 0.341, IC +0.0015 | best test when no answer: pass 53.2%, reward 0.352, IC +0.0016 | always best test: pass 50.8%, reward 0.343, IC +0.0025, IC gain +0.0012 (+0.0004 to +0.0019)
+  S2        own: pass 44.4%, reward 0.305, IC +0.0034 | best test when no answer: pass 50.8%, reward 0.345, IC +0.0032 | always best test: pass 52.4%, reward 0.360, IC +0.0036, IC gain +0.0002 (-0.0005 to +0.0009)
+  S3 B      own: pass 59.7%, reward 0.395, IC +0.0010 | best test when no answer: pass 61.3%, reward 0.408, IC +0.0016 | always best test: pass 61.3%, reward 0.416, IC +0.0027, IC gain +0.0011 (-0.0001 to +0.0027)
+  S4 A      own: pass 71.4%, reward 0.471, IC +0.0012 | best test when no answer: pass 71.8%, reward 0.473, IC +0.0012 | always best test: pass 72.6%, reward 0.481, IC +0.0014, IC gain +0.0002 (-0.0001 to +0.0006)
+  S4 B      own: pass 68.5%, reward 0.453, IC +0.0008 | best test when no answer: pass 68.5%, reward 0.453, IC +0.0008 | always best test: pass 70.2%, reward 0.468, IC +0.0016, IC gain +0.0007 (+0.0002 to +0.0013)
+  S4 C      own: pass 65.7%, reward 0.427, IC +0.0004 | best test when no answer: pass 66.1%, reward 0.430, IC +0.0003 | always best test: pass 66.5%, reward 0.437, IC +0.0011, IC gain +0.0008 (+0.0000 to +0.0016)
+  DeepSeek  own: pass 79.0%, reward 0.551, IC +0.0042 | best test when no answer: pass 90.3%, reward 0.630, IC +0.0040 | always best test: pass 88.7%, reward 0.626, IC +0.0046, IC gain +0.0004 (-0.0003 to +0.0013)

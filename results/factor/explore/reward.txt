@@ -1,0 +1,19 @@
+IC among passes on training ideas, steps 1-10 to steps 26-35, per idea
+  arm gates   +0.0021 to +0.0017, change -0.0004 (-0.0010 to +0.0002) over 69 ideas
+  arm ic      +0.0023 to +0.0019, change -0.0004 (-0.0010 to +0.0000) over 69 ideas
+  arm judged  +0.0028 to +0.0022, change -0.0006 (-0.0011 to -0.0000) over 69 ideas
+  arm B's change minus arm A's -0.0001 (-0.0006 to +0.0005)
+Share of arm B's within-group spread that is IC among passes, under its reward and others, with a table from arms A and C
+  steps 1-5, arm B's                            2.8%
+  steps 1-5, table, floor 0.3                  16.6%
+  steps 1-5, table, floor 0.2                  22.7%
+  steps 1-5, table, floor 0.1                  29.5%
+  steps 1-5, rank within group, floor 0.3      29.8%
+  steps 1-5, rank within group, floor 0.1      50.3%
+  steps 31-35, arm B's                            2.8%
+  steps 31-35, table, floor 0.3                  21.0%
+  steps 31-35, table, floor 0.2                  28.3%
+  steps 31-35, table, floor 0.1                  36.2%
+  steps 31-35, rank within group, floor 0.3      40.8%
+  steps 31-35, rank within group, floor 0.1      63.2%
+Typical spread of IC among passes in a group 0.0033, which is 0.039 of arm B's reward

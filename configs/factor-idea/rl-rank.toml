@@ -1,0 +1,73 @@
+# Run 2 of prereg/03b-pilot.md: online GRPO from S2, with a training reward that ranks IC among passes on an idea.
+# Run it with scripts/factor/run_pilot.py. Validation stays on factor-idea. Kept whole, because the command line can't
+# change one field of an item in a list. Everything else must stay the same as rl.toml.
+max_steps = 35
+seq_len = 8192
+
+[deployment]
+num_train_gpus = 2
+num_infer_gpus = 2
+
+[model]
+name = "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct"
+
+[trainer.optim]
+lr = 3e-5
+weight_decay = 0.0
+
+[trainer.model.lora]
+rank = 32
+dropout = 0.0
+target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+[orchestrator]
+batch_size = 128
+group_size = 8
+
+[orchestrator.concurrency]
+initial_inflight = 256
+
+[orchestrator.model.lora]
+
+[orchestrator.model.client]
+base_url = "http://localhost:18000/v1"
+
+[orchestrator.renderer]
+name = "default"
+tool_parser = "olmo3_keep_text"
+
+[orchestrator.train.sampling]
+max_completion_tokens = 512
+
+[[orchestrator.train.source]]
+name = "factor-idea-train"
+curriculum = { gates = { zero_advantage = { type = "advantage_range" } } }
+env.taskset.id = "factor-idea-rank"
+env.taskset.ideas = "/mnt/nvme1/bruce/lora-posttrain/task/ideas_v2.jsonl"
+env.taskset.split = "train"
+env.agent.max_turns = 6
+env.agent.harness.id = "null"
+env.agent.runtime.type = "subprocess"
+
+# Validation ideas only during training: held-out ideas wait until the stage's settings are final.
+[orchestrator.eval]
+interval = 15
+
+[[orchestrator.eval.source]]
+name = "factor-idea-val"
+env.taskset.id = "factor-idea"
+env.taskset.ideas = "/mnt/nvme1/bruce/lora-posttrain/task/ideas_v2.jsonl"
+env.taskset.split = "val"
+env.agent.max_turns = 6
+env.agent.harness.id = "null"
+env.agent.runtime.type = "subprocess"
+
+[ckpt]
+
+[inference.server]
+port = 18000
+
+[inference.vllm]
+tool_call_parser = "olmo3_keep_text"
+tool_parser_plugin = "/mnt/nvme1/bruce/lora-posttrain/setup/vllm_olmo3_keep_text.py"
+max_model_len = 8192

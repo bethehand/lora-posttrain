@@ -10,3 +10,7 @@
 - s3p-judged: `77bf9db573c4ec1c58d0bbfc2ccef716d6be562416e32cedb456f6c37803823e`, from `/mnt/nvme1/bruce/outputs/sft/s3p-judged/s3p-judged/broadcasts/step_34`
 - s4-ic-seed1: `91bfe9cf10c0c74ab9d5dfa6db8bb6943e3ac03b41f328f5b8861f874d101889`, from `/mnt/nvme1/bruce/outputs/factor-s4-ic-seed1/factor-idea-train--olmo-3-7b-instruct--18911557/broadcasts/step_35`
 - s4-judged-seed1: `172384477d2e925abc3207d678488096e30cde24fc3320b6e18e7b05df506e67`, from `/mnt/nvme1/bruce/outputs/factor-s4-judged-seed1/factor-idea-train--olmo-3-7b-instruct--e3c66f0b/broadcasts/step_35`
+- s4-gates-seed1: `c53bba1775671610c7c738eb4848653187bf5254357b36638d5e7744411cd8c8`, from `/mnt/nvme1/bruce/outputs/factor-s4-gates-seed1/factor-idea-train--olmo-3-7b-instruct--4fd37b3d/broadcasts/step_35`
+- s4-ic-seed2: `f4eabafbfba62bbb3b26f86173f54bb8479f2b3e78ca38efc058e0e5ec5b1d22`, from `/mnt/nvme1/bruce/outputs/factor-s4-ic-seed2/factor-idea-train--olmo-3-7b-instruct--4fc75651/broadcasts/step_35`
+- s4-judged-seed2: `a71dfa361c8fa9143d854e6bca30f2389d484a2c846a8aeb75104e65371234e5`, from `/mnt/nvme1/bruce/outputs/factor-s4-judged-seed2/factor-idea-train--olmo-3-7b-instruct--687c15c1/broadcasts/step_35`
+- s4-gates-seed2: `3ae83a15ae3ac22b8719b5acc37f831b74bcb133e5e168a14c9ec20b6ebe6f84`, from `/mnt/nvme1/bruce/outputs/factor-s4-gates-seed2/factor-idea-train--olmo-3-7b-instruct--c493a4df/broadcasts/step_35`

@@ -1,0 +1,103 @@
+Held-out ideas on the sealed period, 2026-01-01 to 2026-10-16. Each arm's seeds are pooled.
+
+Mean IC among passes per idea, 95% CI over ideas, with the same answers on 2025 beside it
+  S1: 64/124 pass, 64 on 2025
+    ic: 2026 +0.0025 (-0.0006 to +0.0060), 2025 +0.0015 (-0.0014 to +0.0046)
+    raw_ic: 2026 +0.0029 (-0.0056 to +0.0109), 2025 +0.0028 (-0.0068 to +0.0117)
+  S4 arm A: 177/248 pass, 177 on 2025
+    ic: 2026 +0.0009 (-0.0010 to +0.0026), 2025 +0.0012 (-0.0007 to +0.0030)
+    raw_ic: 2026 +0.0008 (-0.0069 to +0.0081), 2025 +0.0017 (-0.0070 to +0.0093)
+  S4 arm B: 170/248 pass, 170 on 2025
+    ic: 2026 +0.0012 (-0.0008 to +0.0032), 2025 +0.0008 (-0.0012 to +0.0028)
+    raw_ic: 2026 +0.0019 (-0.0045 to +0.0085), 2025 +0.0028 (-0.0044 to +0.0101)
+  S4 arm C: 163/248 pass, 163 on 2025
+    ic: 2026 +0.0014 (-0.0009 to +0.0037), 2025 +0.0004 (-0.0019 to +0.0027)
+    raw_ic: 2026 +0.0019 (-0.0058 to +0.0097), 2025 +0.0015 (-0.0074 to +0.0106)
+  DeepSeek: 98/124 pass, 98 on 2025
+    ic: 2026 +0.0050 (+0.0025 to +0.0075), 2025 +0.0042 (+0.0018 to +0.0067)
+    raw_ic: 2026 +0.0084 (+0.0026 to +0.0143), 2025 +0.0099 (+0.0024 to +0.0169)
+
+== H8: results/factor/sealed/ic-seed1.jsonl,results/factor/sealed/ic-seed2.jsonl against results/factor/sealed/s1.jsonl
+heldout: 31 ideas; later 248 episodes, earlier 124
+  pass: later +0.6855, earlier +0.5161, difference +0.1694 (95% CI +0.0726 to +0.2661) over 31 ideas
+  reward_ic: later +0.4547, earlier +0.3471, difference +0.1076 (95% CI +0.0369 to +0.1773) over 31 ideas
+  ic_among_passes: later +0.0012, earlier +0.0022, difference -0.0011 (95% CI -0.0034 to +0.0011) over 27 ideas
+  faithful_among_passes: later +0.6895, earlier +0.6667, difference +0.0228 (95% CI -0.0840 to +0.1411) over 27 ideas
+  by family, pass rate later / earlier:
+    illiquidity        0.35 / 0.21 (6 ideas)
+    market_relative    0.70 / 0.45 (5 ideas)
+    taker_flow         0.91 / 0.68 (7 ideas)
+    trade_count        0.90 / 0.65 (5 ideas)
+    trend_position     0.59 / 0.56 (8 ideas)
+== Arm A against S1: results/factor/sealed/gates-seed1.jsonl,results/factor/sealed/gates-seed2.jsonl against results/factor/sealed/s1.jsonl
+heldout: 31 ideas; later 248 episodes, earlier 124
+  pass: later +0.7137, earlier +0.5161, difference +0.1976 (95% CI +0.1089 to +0.2823) over 31 ideas
+  reward_ic: later +0.4696, earlier +0.3471, difference +0.1225 (95% CI +0.0559 to +0.1875) over 31 ideas
+  ic_among_passes: later +0.0005, earlier +0.0025, difference -0.0021 (95% CI -0.0047 to +0.0003) over 28 ideas
+  faithful_among_passes: later +0.6871, earlier +0.6429, difference +0.0442 (95% CI -0.0961 to +0.1926) over 28 ideas
+  by family, pass rate later / earlier:
+    illiquidity        0.33 / 0.21 (6 ideas)
+    market_relative    0.80 / 0.45 (5 ideas)
+    taker_flow         0.95 / 0.68 (7 ideas)
+    trade_count        0.90 / 0.65 (5 ideas)
+    trend_position     0.62 / 0.56 (8 ideas)
+== Arm C against S1: results/factor/sealed/judged-seed1.jsonl,results/factor/sealed/judged-seed2.jsonl against results/factor/sealed/s1.jsonl
+heldout: 31 ideas; later 248 episodes, earlier 124
+  pass: later +0.6573, earlier +0.5161, difference +0.1411 (95% CI +0.0444 to +0.2339) over 31 ideas
+  reward_ic: later +0.4367, earlier +0.3471, difference +0.0896 (95% CI +0.0236 to +0.1542) over 31 ideas
+  ic_among_passes: later +0.0010, earlier +0.0024, difference -0.0014 (95% CI -0.0048 to +0.0016) over 27 ideas
+  faithful_among_passes: later +0.7123, earlier +0.6296, difference +0.0827 (95% CI -0.0291 to +0.2077) over 27 ideas
+  by family, pass rate later / earlier:
+    illiquidity        0.35 / 0.21 (6 ideas)
+    market_relative    0.62 / 0.45 (5 ideas)
+    taker_flow         0.89 / 0.68 (7 ideas)
+    trade_count        0.90 / 0.65 (5 ideas)
+    trend_position     0.55 / 0.56 (8 ideas)
+== Arm B against arm A: results/factor/sealed/ic-seed1.jsonl,results/factor/sealed/ic-seed2.jsonl against results/factor/sealed/gates-seed1.jsonl,results/factor/sealed/gates-seed2.jsonl
+heldout: 31 ideas; later 248 episodes, earlier 248
+  pass: later +0.6855, earlier +0.7137, difference -0.0282 (95% CI -0.0927 to +0.0363) over 31 ideas
+  reward_ic: later +0.4547, earlier +0.4696, difference -0.0149 (95% CI -0.0595 to +0.0280) over 31 ideas
+  ic_among_passes: later +0.0013, earlier +0.0008, difference +0.0004 (95% CI -0.0013 to +0.0022) over 29 ideas
+  faithful_among_passes: later +0.6764, earlier +0.7151, difference -0.0387 (95% CI -0.1168 to +0.0401) over 29 ideas
+  by family, pass rate later / earlier:
+    illiquidity        0.35 / 0.33 (6 ideas)
+    market_relative    0.70 / 0.80 (5 ideas)
+    taker_flow         0.91 / 0.95 (7 ideas)
+    trade_count        0.90 / 0.90 (5 ideas)
+    trend_position     0.59 / 0.62 (8 ideas)
+== Arm C against arm B: results/factor/sealed/judged-seed1.jsonl,results/factor/sealed/judged-seed2.jsonl against results/factor/sealed/ic-seed1.jsonl,results/factor/sealed/ic-seed2.jsonl
+heldout: 31 ideas; later 248 episodes, earlier 248
+  pass: later +0.6573, earlier +0.6855, difference -0.0282 (95% CI -0.1129 to +0.0524) over 31 ideas
+  reward_ic: later +0.4367, earlier +0.4547, difference -0.0180 (95% CI -0.0741 to +0.0361) over 31 ideas
+  ic_among_passes: later +0.0017, earlier +0.0014, difference +0.0002 (95% CI -0.0019 to +0.0025) over 29 ideas
+  faithful_among_passes: later +0.7321, earlier +0.6764, difference +0.0557 (95% CI -0.0300 to +0.1376) over 29 ideas
+  by family, pass rate later / earlier:
+    illiquidity        0.35 / 0.35 (6 ideas)
+    market_relative    0.62 / 0.70 (5 ideas)
+    taker_flow         0.89 / 0.91 (7 ideas)
+    trade_count        0.90 / 0.90 (5 ideas)
+    trend_position     0.55 / 0.59 (8 ideas)
+== Arm B against the teacher: results/factor/sealed/ic-seed1.jsonl,results/factor/sealed/ic-seed2.jsonl against results/factor/sealed/deepseek.jsonl
+heldout: 31 ideas; later 248 episodes, earlier 124
+  pass: later +0.6855, earlier +0.7903, difference -0.1048 (95% CI -0.2500 to +0.0363) over 31 ideas
+  reward_ic: later +0.4547, earlier +0.5656, difference -0.1109 (95% CI -0.2109 to -0.0132) over 31 ideas
+  ic_among_passes: later +0.0012, earlier +0.0050, difference -0.0038 (95% CI -0.0068 to -0.0009) over 30 ideas
+  faithful_among_passes: no idea has a value in both
+  by family, pass rate later / earlier:
+    illiquidity        0.35 / 0.79 (6 ideas)
+    market_relative    0.70 / 0.80 (5 ideas)
+    taker_flow         0.91 / 0.75 (7 ideas)
+    trade_count        0.90 / 0.90 (5 ideas)
+    trend_position     0.59 / 0.75 (8 ideas)
+== S1 against the teacher: results/factor/sealed/s1.jsonl against results/factor/sealed/deepseek.jsonl
+heldout: 31 ideas; later 124 episodes, earlier 124
+  pass: later +0.5161, earlier +0.7903, difference -0.2742 (95% CI -0.4113 to -0.1371) over 31 ideas
+  reward_ic: later +0.3471, earlier +0.5656, difference -0.2185 (95% CI -0.3195 to -0.1143) over 31 ideas
+  ic_among_passes: later +0.0025, earlier +0.0043, difference -0.0018 (95% CI -0.0056 to +0.0021) over 28 ideas
+  faithful_among_passes: no idea has a value in both
+  by family, pass rate later / earlier:
+    illiquidity        0.21 / 0.79 (6 ideas)
+    market_relative    0.45 / 0.80 (5 ideas)
+    taker_flow         0.68 / 0.75 (7 ideas)
+    trade_count        0.65 / 0.90 (5 ideas)
+    trend_position     0.56 / 0.75 (8 ideas)
