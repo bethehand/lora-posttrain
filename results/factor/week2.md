@@ -211,7 +211,7 @@ Each checkpoint has 60 episodes with none failed, and recomputing arm C's reward
 
 ## Testing the fix, with the rule set first
 
-While S3 arm C trains, GPUs 0 and 1 are free and nothing is frozen, so I'm running arm B once more with the same data, the same start from S2, the same learning rate and the same checkpoint rule, with the one change that rows with a negative weight are left out. That is 920 of the 1,617 rows, and their weights are unchanged. Nothing can push a shared token down any more, so if the reading above is right the skill should hold.
+While S3 arm C trains, GPUs 0 and 1 are free and nothing is frozen, so I'm running arm B once more with the same data, the same start from S2, the same learning rate and the same checkpoint rule, with the one change that rows with a negative weight are left out. That keeps 920 of the 1,617 rows, and their weights are unchanged. Nothing can push a shared token down any more, so if the reading above is right the skill should hold.
 
 The rule, written before any of its results: if the checkpoint this version's rule picks has at least 61.7% passed on val, S2's 71.7% less the 10-point stop rule, S3 is replaced by this version in all three arms, before the freeze. Otherwise the first S3 stands, as the rules already applied it. Either way both versions stay on disk and are reported. Whether S3 gives better formulas stays H4's question, on held-out ideas.
 
@@ -486,3 +486,68 @@ Given the same process, S2 has the higher IC and S4 the higher pass rate. At k=4
 **No form of formula pays everywhere.** Within an idea, EMA goes with higher IC for students and not for the teacher, and more fields goes with higher IC for the teacher and is unclear for students. None of the forms I tried is clear in students on training ideas, students on val and the teacher together, and more fields runs against faithfulness. More tests go with higher IC for students on training ideas, +0.0009 a test (+0.0006 to +0.0012). Of the spread of IC among passes on training ideas, 68% is between ideas and 32% within one. So a reward on IC may teach which formula suits a training idea more than a skill that carries over, and search and picking are the most likely things to carry over.
 
 **So the next thing to try is the simplest.** S2's formulas with online RL's two repairs: online RL straight from S2, skipping offline RL. `prereg/03b-pilot.md` sets that out, with a second run on the better-scaled reward and the rules for going on, before either starts.
+
+## Pilot 03b: online RL straight from S2
+
+The rules are in `prereg/03b-pilot.md`, pushed before either run started. `scripts/factor/pilot_compare.py` applies them, with its output in `results/factor/pilot/`, and a recount written apart from it, from the raw traces, gives the same numbers. Each run is compared with S4 arm B, both seeds pooled.
+
+| Run | Reward it trained on | Rule 1: training IC, steps 26-35, minus S4 arm B | Rule 2: val IC minus S4 arm B | Rule 3: val pass rate minus S4 arm B | Verdict |
+|---|---|---|---|---|---|
+| `factor-p1-s2-ic` | arm B's | +0.0003 (-0.0003 to +0.0008) | +0.0005 (-0.0006 to +0.0016) | -2.9 points | does not pass |
+| `factor-p2-s2-rank` | arm B's, by mistake | +0.0004 (-0.0002 to +0.0011) | -0.0000 (-0.0011 to +0.0009) | +1.7 points | does not pass, and decides nothing |
+| `factor-p2b-s2-rank` | the percentile reward, an answer-less episode scored on its best test | +0.0012 (+0.0005 to +0.0019) | +0.0009 (+0.0000 to +0.0019) | -7.5 points counting best tests, -10.0 on answers alone | does not pass |
+
+Runs 1 and 2 behaved as S4's did. No guard tripped, KL stayed at 0.0041 or below, entropy stayed above 0.75, and no rollout errored. In run 1, from steps 1-5 to steps 31-35 on training ideas, the pass rate rose from 47.7% to 71.1%, answers handed in from 81% to 97%, and tests fell from 4.08 to 3.41. On val it passes 76.2% of 240 episodes, hands in 97.9%, and the judge finds 85.8% of its passes faithful. S4 arm B passes 79.2% of its 120.
+
+**What run 1 says.** Starting online RL from S2 instead of S3 didn't carry S2's better formulas through, at least not by enough to show. IC among passes in steps 26-35 is +0.0003 above S4 arm B, with a CI across zero, and run 1's own IC moved -0.0005 (-0.0012 to +0.0002) from steps 1-10 to 26-35. This is the pattern S4 showed: with this reward, online RL makes the model more reliable and leaves its formulas where they were or a little worse. So skipping offline RL isn't enough on its own.
+
+**Run 2 trained on run 1's reward.** The framework rebuilds every task it hands out as the type named in the taskset's generic base, not as the type `load` returns, and `FactorIdeaRankTaskset` inherited factor-idea's. Every rollout of `factor-p2-s2-rank` was scored by arm B's linear reward, with no fallback for an episode without an answer: the task type in its traces is `FactorIdeaTask`, its reward equals `reward_ic` in every rollout, and `reward_rank` was never recorded. My check before the run loaded the taskset and saw the new reward, but didn't rebuild a task the way the server does. Prereg 03's arms set their reward with a field of one task class, and their traces show each arm's own reward. The fix names the task type in the class's bases, and a new test rebuilds a task as the server does. Run 2 is thus a second run of run 1's recipe, and it lands close to run 1, within a few points of pass rate and +0.0002 (-0.0005 to +0.0009) on training IC. It runs again as `factor-p2b-s2-rank`, under the same rules, as `prereg/03b-pilot.md` records.
+
+**What the rerun of run 2 says.** `factor-p2b-s2-rank` trained on the percentile reward in all 4,683 of its rollouts: the task type in its traces is the rank task's, and the reward equals `reward_rank` in every one. No guard tripped, KL stayed at 0.0033 or below, and no rollout errored, but entropy fell further than in run 1, to 0.69 at its lowest against 0.78. The rerun passes rules 1 and 2 and fails rule 3.
+
+- **Its formulas are a little better.** In steps 26-35, IC among passes is +0.0012 (+0.0005 to +0.0019) above S4 arm B and +0.0009 (+0.0001 to +0.0017) above run 1. On val it is +0.0009 (+0.0000 to +0.0019) above S4 arm B.
+- **It hands in fewer answers and passes less.** On val it hands in 94.2%, against run 1's 97.9% and S4 arm B's 100%. It passes 69.2%, or 71.7% when an episode with no answer is scored on its best test. That is 7.5 points below S4 arm B, where the rule allows 5. In training it handed in 89% in steps 31-35, against run 1's 97%. A reward that pays an answer-less episode for its best test takes away part of the reason to hand one in, and a reward in which IC can be heard pays less for passing alone.
+- **The gain is more likely kept than learned.** Its own IC moved +0.0001 (-0.0008 to +0.0011) from steps 1-10 to 26-35, and run 1's moved -0.0005 (-0.0012 to +0.0002). Neither change is clear. So this reward may have kept S2's formulas from slipping, rather than taught better ones.
+- **Beside the rules.** The judge finds 81.9% of its 166 passes on val faithful, against run 1's 85.8% of 183. 9.2% of its val episodes go in the wrong direction, against run 1's 10.4% and S4 arm B's 6.7%. It runs 3.77 tests an episode, against 3.42 and 2.68.
+
+This is one seed of 35 steps on 15 val ideas, and the IC it gained is small beside the pass rate it gave up. Neither run passes, so online RL from S2 goes no further here. The second exam runs on the models prereg 03 already had, and its E5 isn't tested. The recount gives the same numbers for the rerun, with intervals that differ in the fourth decimal because it draws its own bootstrap samples.
+
+## Second exam: prereg 04, on 21 ideas no model had read
+
+The rules are in `prereg/04-second-exam.md`, frozen and pushed (`93aef32`) before any model answered. No pilot run passed, so the exam had S1, S2, S3 arm B, S4 arms A, B and C with both seeds, and DeepSeek, 16 rollouts per idea each. Every file came back whole on its first attempt, the judge read every student's pass, and each file gave back its own verdicts and ICs on 2025 before 2026 was opened. `sealed_access.log` went from 8 lines to 18, one opening per file. `scripts/factor/second_exam.py report` wrote `results/factor/exam2/comparisons.txt`. A recount from the raw files that shares no code with it, `scripts/factor/recount_exam2.py` with its output in `results/factor/exam2/recount.txt`, gives the same point estimates, apart from E3, whose random draws move it by 0.0001. `compare_stages.py` gives the same E1 and E2 to the last digit. The answers, the 2026 scores, the report and the recount were pushed the same day (`515da4e`).
+
+| ID | Hypothesis | On 2026 | Verdict |
+|---|---|---|---|
+| E1 | S2 writes better formulas than online RL's model | S2 minus S4 arm B, IC among passes: +0.0020 (-0.0005 to +0.0044) over 18 ideas | does not pass |
+| E2 | Online RL is more reliable than S2 | S4 arm B minus S2, pass rate: +19.0 points (+11.6 to +26.5) over 21 ideas | passes |
+| E3 | Keeping one of four by research IC recovers signal | S4 arm B at k=4 minus one episode, IC among passes: +0.0041 (+0.0027 to +0.0055) over 19 ideas | passes |
+| E4 | Research IC guides later IC | Within one model's passes on one idea, pooled: correlation +0.852 (+0.766 to +0.908) over 1,335 passes | passes |
+| E5 | A run from S2 keeps both | Not tested: no run passed pilot 03b | |
+
+On 2025, deciding nothing, E1 is +0.0007 (-0.0011 to +0.0024), E3 +0.0028 (+0.0017 to +0.0042) and E4 +0.823.
+
+Each model on 2026, per idea and then over ideas:
+
+| Model | Answered | Tests | Passed | IC among passes | Judged faithful |
+|---|---|---|---|---|---|
+| S1 | 86.6% | 3.81 | 43.5% | +0.0012 (-0.0024 to +0.0050) | 57.1% |
+| S2 | 81.2% | 4.21 | 46.1% | +0.0039 (-0.0000 to +0.0079) | 47.5% |
+| S3 arm B | 91.1% | 4.02 | 52.4% | +0.0030 (-0.0006 to +0.0069) | 58.7% |
+| S4 arm A | 99.1% | 2.64 | 64.3% | +0.0028 (-0.0013 to +0.0067) | 56.5% |
+| S4 arm B | 100.0% | 2.62 | 65.2% | +0.0008 (-0.0033 to +0.0048) | 55.5% |
+| S4 arm C | 98.8% | 2.74 | 58.9% | +0.0018 (-0.0024 to +0.0060) | 55.8% |
+| DeepSeek | 88.1% | 4.14 | 79.8% | +0.0041 (-0.0009 to +0.0089) | not judged |
+
+**Three of the four readings held, with the rule written first.**
+
+- **Online RL is more reliable.** S4 arm B passes 19.0 points more than S2. It hands in every time, against S2's 81.2%, and more of the answers it hands in pass.
+- **Research IC is a good guide to later IC.** Within one model's passes on one idea the correlation with 2026 is +0.85 pooled, and between +0.75 and +0.89 for each model alone.
+- **Keeping one of four by research IC recovers signal.** S4 arm B at k=4 reaches IC +0.0049 (+0.0009 to +0.0090) at an 83.8% pass rate, against +0.0008 and 65.2% for one episode. At k=8 it is +0.0069 (+0.0031 to +0.0110) and 87.6%.
+
+**E1 did not.** S2's formulas are ahead of S4 arm B's by +0.0020, the same direction as on prereg 03's held-out ideas, but the interval includes 0. Outside the mirrored pairs it is +0.0050 (+0.0006 to +0.0100) over 5 ideas, as the prereg warned mirrored pairs leave little room for a better form. That decides nothing.
+
+**Against the teacher.** S2 minus DeepSeek on IC among passes is +0.0000 (-0.0033 to +0.0033) on 2026 and -0.0007 (-0.0046 to +0.0036) on 2025. On prereg 03's held-out ideas it was -0.0001 on 2025, and S2 wasn't scored on 2026. But S2 passes 33.6 points fewer. S4 arm B is -0.0010 (-0.0041 to +0.0024) on IC and passes 14.6 points fewer. At about the same number of tests, S4 arm B at k=4 minus DeepSeek at k=2 is +0.0021 (-0.0008 to +0.0054) on IC, -6.0 points (-24.5 to +11.6) on passes, and -0.0435 (-0.2047 to +0.0978) on reward. So on these ideas the student with the process can't be told from the teacher with the same process, where after prereg 03's exam it was -0.0017 on IC. The intervals are wide.
+
+**Faithfulness fell on new families.** The judge finds 47.5% to 58.7% of each student's passes faithful. Averaged the same way, on prereg 03's held-out ideas it was 64.3% for S1, 67.3% for S2, 77.5% for S3 arm B and 68.7% to 70.8% for the S4 arms. S2 fell most, by 20 points, and S3 arm B by 19. Picking by research IC doesn't change it: S4 arm B at k=4 is 56.6%. A process for these families would need the judge in it, as the exploration after prereg 03 suggested.
+
+**Limits.** 2026 had been read once before, by prereg 03's exam. The same author wrote these ideas after seeing that exam. There are 21 ideas, 14 in mirrored pairs, and the new families share data fields with training families. Four hypotheses were tested with no correction for multiple testing.
