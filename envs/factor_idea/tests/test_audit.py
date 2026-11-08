@@ -55,6 +55,8 @@ def test_a_ruling_reads_only_borderline_items_by_their_reason():
         {"n": 2, "borderline": True, "why": "level of trades, not growth"},
         {"n": 3, "borderline": False, "why": "volume against its own recent mean, not long-run illiquidity"},
         {"n": 4, "borderline": True, "why": "volume ranked against its own past, not long-run illiquidity"},
+        {"n": 5, "borderline": True, "why": "volatility against its own past is volatility expansion, not beta"},
+        {"n": 6, "borderline": True, "why": "rank of mean return against its own past, not distance from the average"},
     ]
     found = {label: (items, ruled) for label, items, ruled in rulings(answers)}
     assert found["volatility as beta"] == ([1], False)
