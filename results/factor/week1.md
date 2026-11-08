@@ -39,7 +39,7 @@ False fails 0/149; false passes 3/483 (0.6%). Known blind spots: an equal blend 
 | OLMo-3-7B-Instruct, no training | 248 | 61.3% | 16.5% | 15.3% | 4.8% | 0.032 |
 | deepseek-flash | 124 | 100% | 100% | 100% | 100% | 0.671 |
 
-55% of OLMo's replies ran out of the 1,500-token budget. All 124 DeepSeek formulas were read by hand and are reasonable, which is the only out-of-sample check on false fails so far.
+55% of OLMo's replies ran out of the 1,500-token budget. All 124 DeepSeek formulas were read one by one, by Claude, and are reasonable, which is the only out-of-sample check on false fails so far.
 
 ## Does IC persist between years?
 

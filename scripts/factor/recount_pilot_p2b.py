@@ -1,5 +1,5 @@
-"""Recount pilot 03b's three rules for factor-p2b-s2-rank from raw files, sharing no code with pilot_compare.py.
-Rule 3 scores each answer-less episode on the formula it tested best on the research window, on 2025 only. Run on GS01:
+"""Recount pilot 03b's three rules for factor-p2b-s2-rank from raw files, sharing no code with pilot_compare.py
+apart from the sandbox that scores a formula. Rule 3 scores each answer-less episode on the formula it tested best on the research window, on 2025 only. Run on GS01:
 training IC comes from the raw rollout traces under /mnt/nvme1/bruce/outputs, which are not in the repo, and the
 sandbox reads the dev panel, which ends with 2025."""
 import collections, glob, json, pathlib, re, sys

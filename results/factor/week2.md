@@ -35,9 +35,9 @@ DeepSeek with the second manual, every idea once. The held-out families' traces 
 
 Tests that came back as errors: 4 of 436. So the teacher barely shows how to recover from a bad formula, which is what OLMo needs most. Recovery has to be taught separately.
 
-## Reading the pilot by hand
+## Reading the pilot one by one
 
-One reader's judgement of every formula, the same person who wrote the verifier. It is the closest thing so far to a blind check, and it shows the exam was too kind.
+One reader's judgement of every formula: Claude, which also wrote the verifier. It is the closest thing so far to a blind check, and it shows the exam was too kind.
 
 **Honest formulas the verifier failed, 4 to 6 of about 105, far above the exam's 0/173:**
 
@@ -56,7 +56,7 @@ One reader's judgement of every formula, the same person who wrote the verifier.
 
 **Failures that are right:** `upside_vol_up` handed in a ratio of up moves to down moves; `momentum_1m` a median of daily ranks, which a large gain barely moves, borderline; `rsi_high_up` no answer. `doji_down` and `doji_up` measured body size against its own history. The ideas said "small-bodied" without saying relative to what, so their wording was made explicit afterwards.
 
-A false fail costs little: SFT loses a good trace and RL gives an honest formula 0. A false pass is what RL can exploit, so it gets a human audit after every stage.
+A false fail costs little: SFT loses a good trace and RL gives an honest formula 0. A false pass is what RL can exploit, so it was to get a human audit after every stage. In the end one audit ran, after the exam, read by Claude.
 
 ## Splits
 
@@ -163,7 +163,7 @@ The judge found 1,398 of the 1,449 passing strategy trajectories faithful, 96.5%
 
 ## The judge on the student, validation ideas
 
-The judge read every passing formula from the chosen S1 and S2 adapters, and none went without a verdict. It found 80.0% of S1's 45 faithful and 79.1% of S2's 43, against about 96% for the teacher, so arm C's reward does differ from arm B's on the student's own work. The rejections read as fair. Most of them answer `volume_level_down` with a ratio or a rank of volume instead of its level, or `downside_vol_down` with absolute returns over all days instead of the down days.
+The judge read every passing formula from the chosen S1 and S2 adapters, and none went without a verdict. It found 80.0% of S1's 45 faithful and 79.1% of S2's 43, against about 96% for the teacher's own trajectories, written with the manual, so arm C's reward does differ from arm B's on the student's own work. The rejections read as fair. Most of them answer `volume_level_down` with a ratio or a rank of volume instead of its level, or `downside_vol_down` with absolute returns over all days instead of the down days.
 
 ## Offline RL, arm A
 
@@ -207,7 +207,7 @@ What fits better is that nothing holds the skill in place. Weights sum to zero i
 | IC among passes | +0.0099 | +0.0095 | +0.0078 | +0.0104 | +0.0061 | none |
 | Judged faithful, of passes | 19 of 23 | 19 of 24 | 17 of 22 | 9 of 13 | 20 of 22 | none |
 
-Each checkpoint has 60 episodes with none failed, and recomputing arm C's reward by hand gives the driver's numbers. The rule gives step 56, at 38.3% passed against S2's 71.7%. That is 33.3 points down, far over the stop rule, so arm C's S4 starts from S2. It is the worst of the three arms, and it broke the same way: at step 56, 10 episodes have no factor tag, 8 fail on an unmatched bracket, 9 don't respond to the idea and 7 move against it. The kept adapters of all three arms equal the checkpoints they were copied from, byte for byte.
+Each checkpoint has 60 episodes with none failed, and recomputing arm C's reward separately gives the driver's numbers. The rule gives step 56, at 38.3% passed against S2's 71.7%. That is 33.3 points down, far over the stop rule, so arm C's S4 starts from S2. It is the worst of the three arms, and it broke the same way: at step 56, 10 episodes have no factor tag, 8 fail on an unmatched bracket, 9 don't respond to the idea and 7 move against it. The kept adapters of all three arms equal the checkpoints they were copied from, byte for byte.
 
 ## Testing the fix, with the rule set first
 
@@ -254,7 +254,7 @@ Arm C on its positive rows:
 | IC among passes | +0.0074 | +0.0084 | +0.0073 | +0.0067 | +0.0113 | +0.0068 |
 | Judged faithful, of passes | 34 of 40 | 30 of 37 | 33 of 38 | 33 of 38 | 27 of 31 | 34 of 36 |
 
-Each checkpoint has 60 episodes with none failed and no missing verdict, and recomputing arm C's reward by hand gives the driver's numbers. The rule gives step 34, at 66.7% passed, 5.0 points below S2 and inside the stop rule, so arm C's S4 starts from this adapter. The first version of this arm passed 38.3% at its pick. The gradient norm stays near 0.06 for all 204 steps. Step 170's dip to 51.7% recovers at step 204, so it is probably noise, though 60 episodes can't settle that.
+Each checkpoint has 60 episodes with none failed and no missing verdict, and recomputing arm C's reward separately gives the driver's numbers. The rule gives step 34, at 66.7% passed, 5.0 points below S2 and inside the stop rule, so arm C's S4 starts from this adapter. The first version of this arm passed 38.3% at its pick. The gradient norm stays near 0.06 for all 204 steps. Step 170's dip to 51.7% recovers at step 204, so it is probably noise, though 60 episodes can't settle that.
 
 The rules picked the first checkpoint for arms A and C, half an epoch at lr 3e-5, so both have moved little from S2. Any difference between the arms will have to come mostly from online RL. In all three arms the kept adapter equals its checkpoint, byte for byte.
 
@@ -372,7 +372,7 @@ Other readings of the same verdicts, since 54 items were marked borderline befor
 | Only volatility as beta not faithful | -9.8, passes | +5.0 (-11.7 to +21.7) |
 | Only a level for an idea about a change faithful | +3.2, passes | +0.0 (-13.3 to +13.3) |
 | Only distance from a high for its recency faithful | -8.3, passes | +11.7 (-3.3 to +26.7) |
-| Only a formula against own past for an idea about a level faithful | -17.7 (-31.1 to -4.5), fails | +10.0 (-5.0 to +25.0) |
+| Only a formula against own past for an idea about a level faithful | -14.1 (-27.7 to -0.3), fails | +8.3 (-6.7 to +23.3) |
 
 H9 fails every way. H7 depends on one ruling, that a formula against a coin's own past doesn't answer an idea about a standing level. S2 hands in many of those, 6 of its 11 rejections, and the rubric's "rank" and "ratio" could be read to allow them. One more thing to weigh: the pilot reading earlier in this log called plain volatility "not beta", and this audit accepts it as a proxy, marked borderline. The fourth row shows that doesn't change the result.
 
@@ -485,11 +485,11 @@ Given the same process, S2 has the higher IC and S4 the higher pass rate. At k=4
 
 **No form of formula pays everywhere.** Within an idea, EMA goes with higher IC for students and not for the teacher, and more fields goes with higher IC for the teacher and is unclear for students. None of the forms I tried is clear in students on training ideas, students on val and the teacher together, and more fields runs against faithfulness. More tests go with higher IC for students on training ideas, +0.0009 a test (+0.0006 to +0.0012). Of the spread of IC among passes on training ideas, 68% is between ideas and 32% within one. So a reward on IC may teach which formula suits a training idea more than a skill that carries over, and search and picking are the most likely things to carry over.
 
-**So the next thing to try is the simplest.** S2's formulas with online RL's two repairs: online RL straight from S2, skipping offline RL. `prereg/03b-pilot.md` sets that out, with a second run on the better-scaled reward and the rules for going on, before either starts.
+**So the next thing to try is the simplest.** S2's formulas with the reliability RL brings: online RL straight from S2, skipping offline RL. `prereg/03b-pilot.md` sets that out, with a second run on the better-scaled reward and the rules for going on, before either starts.
 
 ## Pilot 03b: online RL straight from S2
 
-The rules are in `prereg/03b-pilot.md`, pushed before either run started. `scripts/factor/pilot_compare.py` applies them, with its output in `results/factor/pilot/`, and a recount written apart from it, from the raw traces, gives the same point estimates (`scripts/factor/recount_pilot.py` and `scripts/factor/recount_pilot_p2b.py`, output in `results/factor/pilot/recount.txt`, committed on 2026-11-09). Each run is compared with S4 arm B, both seeds pooled.
+The rules are in `prereg/03b-pilot.md`, pushed before either run started. `scripts/factor/pilot_compare.py` applies them, with its output in `results/factor/pilot/`, and a recount written apart from it, from the raw traces and sharing only the sandbox that scores a formula, gives the same point estimates (`scripts/factor/recount_pilot.py` and `scripts/factor/recount_pilot_p2b.py`, output in `results/factor/pilot/recount.txt`, committed on 2026-11-09). Each run is compared with S4 arm B, both seeds pooled.
 
 | Run | Reward it trained on | Rule 1: training IC, steps 26-35, minus S4 arm B | Rule 2: val IC minus S4 arm B | Rule 3: val pass rate minus S4 arm B | Verdict |
 |---|---|---|---|---|---|
@@ -556,9 +556,11 @@ Each model on 2026, per idea and then over ideas:
 
 An independent read of the report and this log, after the merge, found the following. Numbers are fixed where they stand above, and `REPORT.md` is corrected to match.
 
-- **Online RL got credit for offline RL's repair.** From S2 to S4 arm B, episodes with no answer fell from 20% to 2%, but the fall to 4% came in offline RL; online RL mostly cut wrong directions, from 14% to 6%. On held-out ideas S3 arm B passes 15.3 points more than S2 (+5.7 to +24.2), and S4 arm B 8.9 more than S3 arm B (-2.0 to +20.2). Prereg 03b's rationale repeats the old reading, and its Deviations now say so.
-- **"The teacher" in comparisons is DeepSeek without the manual.** The teacher that wrote the SFT data had the manual. Every student-against-teacher number here uses the same model answering as the student does, with the tools and no manual.
-- **The audit's alternative ruling swept in items of another rule.** `rulings()` picked the own-past family by words, and two of S2's rejections for volatility against its own past, under reading rule 4, came along, with one of arm C's about distance from an average. Without them S2 is 49 of 55 under that ruling, the gap is 14.1 points (-27.7 to -0.3), and H7 still fails. S2's rejections of that kind are 6 of 11, not 8.
+- **Online RL got credit for all of RL's repair.** On prereg 03's held-out ideas, from S2 to S4 arm B, episodes with no answer fell from 20% to 2%, but the fall to 4% came in offline RL; online RL mostly cut wrong directions, from 14% to 6%. There S3 arm B passes 15.3 points more than S2 (+5.7 to +24.2), and S4 arm B 8.9 more than S3 arm B (-2.0 to +20.2). On val and on the second exam's new ideas the split runs the other way: S2, S3 arm B and S4 arm B pass 71.7%, 73.3% and 79.2% on val, and 46.1%, 52.4% and 65.2% on the new ideas. And on held-out ideas all three arms' offline stage moved a long way from S2, not little, as expected above from val. Prereg 03b's rationale repeats the old reading, and its Deviations now say so.
+- **"The teacher" in comparisons is DeepSeek without the manual.** The teacher that wrote the SFT data had the manual. Every student-against-teacher comparison of passes and IC uses the same model answering as the student does, with the tools and no manual; the judge's rate for the teacher's own trajectories is the one figure with the manual.
+- **The audit's alternative ruling swept in items of another rule.** `rulings()` picked the own-past family by words, and two of S2's rejections for volatility against its own past, under reading rule 4, came along, with one of arm C's about distance from an average. Without them S2 is 49 of 55 under that ruling, the gap is 14.1 points (-27.7 to -0.3), and H7 still fails; H9 there is +8.3 (-6.7 to +23.3) and still fails. The table above now says so. S2's rejections of that kind are 6 of 11, not 8, and prereg 03's Deviations record the change.
 - **The per-seed gains are for picking by research IC alone.** The +0.0028 and +0.0030 come from the research-only rows of `results/factor/explore/pick.txt`, not from the gates-first rule.
 - **Rounded rates were subtracted.** 33.4 and 3.4 points are 33.3 and 3.3 from the counts, and S3's tests on val run from 3.8, not 4.1.
 - **Added so claims can be checked:** the pilot recount, as above, and a copy of the sealed panel's access log, `results/factor/sealed/access.log`, whose 18 openings all come after the freeze of the prereg they belong to.
+- **Who read.** The pilot's formulas, the week-1 DeepSeek formulas and the audit were read by Claude, which also wrote the verifier. The text above had said a person, and a human audit after every stage, which never ran.
+- **The pilot recount shares one piece.** Its rule-3 part scores a formula with the same sandbox as `pilot_compare.py`; the rest is separate.
