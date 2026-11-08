@@ -35,3 +35,9 @@ step 33: reward=0.3095 trunc=0.04762 turns=3.917 orch_s=68.46 mem=18.32 ent=1.19
 step 34: reward=0.2812 trunc=0.0375 turns=4.156 orch_s=258 mem=18.32 ent=1.092 kl=0.001362 fb=248.3
 step 35: reward=0.2857 trunc=0.05714 turns=4.052 orch_s=275.9 mem=18.32 ent=1.228 kl=0.001475 fb=255
 GUARD PASSED for steps 1-10
+online eval at step 0: heldout reward 0.0879 (judge deepseek-flash, 1 rollout per question; 0.2% of episodes errored)
+online eval at step 15: heldout reward 0.1207 (judge deepseek-flash, 1 rollout per question; 0.2% of episodes errored)
+online eval at step 30: heldout reward 0.1881 (judge deepseek-flash, 1 rollout per question; 0.2% of episodes errored)
+online eval at step 35: heldout reward 0.1824 (judge deepseek-flash, 1 rollout per question; 9.4% of episodes errored, at the start of the judge outage)
+run dir: /mnt/nvme1/bruce/outputs/wiki-search-olmo/wiki-search-train--olmo-3-7b-instruct--d16074fa/
+The four online evals were added on 2026-11-09 from that run's orchestrator log ("Evaluated wiki-search-heldout | Policy v0 ... v35").

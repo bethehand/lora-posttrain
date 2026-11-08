@@ -99,11 +99,14 @@ def by_model(key: list[dict], verdicts: dict[int, bool]) -> dict[str, list[dict]
 def rulings(answers: list[dict]) -> list[tuple[str, list[int], bool]]:
     """Families of borderline verdicts, each with the way a reader could rule against this one, by the reasons given."""
     about = lambda *words: [r["n"] for r in answers if r.get("borderline") and any(w in r["why"] for w in words)]  # noqa: E731
+    # A rejection for volatility against its own past stands on rule 4 (not beta), and one for a rank of returns
+    # instead of a distance from the average is about another quantity; ruling rule 2 the other way flips neither.
+    other_rule = set(about("not beta", "not distance from the average"))
     return [
         ("volatility as beta", about("proxy for beta"), False),
         ("a level for an idea about a change", [r["n"] for r in answers if r.get("borderline") and r["why"].startswith(("level of", "cross-sectional rank of today", "smoothed cross-sectional"))], True),
         ("distance from a high for its recency", about("distance from the high"), True),
-        ("a formula against own past for an idea about a level", about("against its own past", "own normal, not", "against the coin's own normal", "short mean minus"), True),
+        ("a formula against own past for an idea about a level", [n for n in about("against its own past", "own normal, not", "against the coin's own normal", "short mean minus") if n not in other_rule], True),
     ]
 
 

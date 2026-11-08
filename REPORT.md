@@ -1,23 +1,23 @@
 # Post-training small models with LoRA on 4× RTX 4090
 
-*Chapters 1 and 2: wiki-search with Qwen3-4B and OLMo 3 7B. Chapter 3: from an investment idea to a factor, with OLMo 3 7B. Last updated 2026-11-08.*
+*Chapters 1 and 2: wiki-search with Qwen3-4B and OLMo 3 7B. Chapter 3: from an investment idea to a factor, with OLMo 3 7B. Last updated 2026-11-09.*
 
 ## Summary
 
 Prime Intellect reported that LoRA RL lifts Qwen3-4B-Instruct-2507 from 0.55 to 0.89 on wiki-search, level with gpt-4.1 (0.88). The 100 questions behind those numbers are rows 0-99 of the question bank the model trained on. We split the bank by source page and, for each of two base models, trained one LoRA adapter for 35 steps on four RTX 4090s with the same recipe, after freezing the hypotheses in a pre-registration: Qwen3-4B in chapter 1, OLMo 3 7B Instruct in chapter 2.
 
-- **Qwen3-4B: a real but small held-out gain, from reading the right section.** On 490 questions from 88 pages never trained on, accuracy goes from 0.567 to 0.633 (+0.066, 95% CI +0.042 to +0.090), about a fifth of the published gain. It gains +0.371 on the 174 questions it trained on and +0.207 on held-out questions of the same kind; most of that gap is that 94% of held-out questions are ones the base model always or never answers. Wrong-section failures fall from 30.1% to 25.9% of episodes, and two thirds of the new correct answers appear in a tool output.
-- **OLMo 3 7B: the held-out score more than doubles, mostly from answering from memory.** With the read tool's argument renamed to `section`, which leaves Qwen's scores unchanged, accuracy goes from 0.080 to 0.180 (+0.101, +0.079 to +0.122), and all six pre-registered hypotheses pass. RL repairs the call format: calls the parser cannot read fall from 34.7% to 8.4% of episodes. But 158 of the 197 additional correct episodes contain the answer in no tool output, and in a hand-read sample 18 of 20 such answers came from memory after the tools failed. The adapter also learned to skip listing a page's sections, from 67.7% to 49.5% of episodes, and its guessed section ids fail.
+- **Qwen3-4B: a real but small held-out gain, from reading the right section.** On 490 questions from 88 pages never trained on, accuracy goes from 0.567 to 0.633 (+0.066, 95% CI +0.042 to +0.090), about a fifth of the published gain. It gains +0.371 on the 174 questions it trained on but +0.066 on all held-out questions, and most of that gap is that 94% of held-out questions are ones the base model always or never answers; on held-out questions of the same kind it gains +0.207. Wrong-section failures fall from 30.1% to 25.9% of episodes, and two thirds of the new correct answers appear in a tool output.
+- **OLMo 3 7B: the held-out score more than doubles, mostly from answering from memory.** With the read tool's argument renamed to `section`, which leaves Qwen's scores unchanged, accuracy goes from 0.080 to 0.180 (+0.101, +0.079 to +0.122), and all six pre-registered hypotheses pass. RL repairs the call format: calls the parser cannot read fall from 34.7% to 8.4% of episodes. But 158 of the 197 additional correct episodes contain the answer in no tool output, and of 20 such answers read one by one, by Claude, 18 came from memory after the tools failed. The adapter also learned to skip listing a page's sections, from 67.7% to 49.5% of episodes, and its guessed section ids fail.
 - **Same recipe, different lessons.** Where the base model could use the tools, RL improved retrieval; where it could not, RL found the cheaper path the reward allowed. The judge sees only the final reply and cannot tell the two apart. A held-out split, statistics on where the answers come from, and reading trajectories can.
 - **The published gain is mostly on trained questions the base model never answers.** Seven tenths of the published +0.34 is on 36 of the 100 questions our Qwen base model never answers; the published adapter, trained on them, answers 0.78 of them, ours 0.13.
 
 Chapter 3 builds a narrow task from the owner's quant research and teaches it to OLMo 3 7B under a frozen pre-registration: from a one-sentence investment idea, write a factor formula, test it up to five times on past data, and hand one in. Unlike a judge, an unopened year of market data can't be talked round, so this task can tell whether a model learned to do the work or only to pass.
 
 - **SFT teaches the task on families it never saw.** Pass rate on 31 held-out ideas goes from 0.0% to 51.6% (+51.6 points, +41.9 to +61.3).
-- **RL makes it reliable.** Online RL reaches 65.7% to 71.4%, against the teacher's 79.0%, by handing in nearly every time and getting the direction right.
-- **No stage was shown to teach better formulas, and the pre-registered tests of that all fail.** On the sealed 2026 period the final model's incremental IC among passes is +0.0012 (-0.0008 to +0.0032), against the teacher's +0.0050 (+0.0025 to +0.0075). So the signal is there, and the student doesn't reliably find it.
-- **Reading the answers afterwards, as exploration, explains much of this.** IC is 2.8% of the reward's spread within a group, a scaling fault of ours, so the reward could hardly teach it. S2's formulas can't be told from the teacher's, and the fall comes with offline RL. Keeping one of four answers by research IC, after the gates, reaches +0.0040 (+0.0015 to +0.0065) on 2026 at a 90.7% pass rate. These were found after the exam, and needed testing on new ideas.
-- **Then those readings were tested, with the rules written first.** Two online-RL pilots from S2 failed their rules: a better-scaled reward raised IC a little and lost passes. A second exam on 21 new ideas confirmed three of four readings. Online RL is more reliable than S2, +19.0 points (+11.6 to +26.5). Research IC tracks 2026 IC within one model's passes on one idea, at a correlation of +0.85. Keeping one of four answers by research IC adds +0.0041 (+0.0027 to +0.0055) of 2026 IC. That S2 writes better formulas than online RL's model is still only a direction, +0.0020 (-0.0005 to +0.0044).
+- **RL makes it reliable.** After offline and then online RL the student passes 65.7% to 71.4%, against 79.0% for the teacher model answering as the student does, without its manual, by handing in nearly every time and getting the direction right.
+- **No stage was shown to teach better formulas, and the pre-registered tests of that all fail.** On the sealed 2026 period the final model, S4 arm B, has an incremental IC among passes of +0.0012 (-0.0008 to +0.0032), against the teacher's +0.0050 (+0.0025 to +0.0075). So the signal is there, and the student doesn't reliably find it.
+- **Reading the answers afterwards, as exploration, explains much of this.** IC is 2.8% of the reward's spread within a group, a scaling fault of ours, so the reward could hardly teach it. On 2025, S2's formulas can't be told from the teacher's, and the fall comes with offline RL. Keeping one of four answers by research IC, after the gates, reaches +0.0040 (+0.0015 to +0.0065) on 2026 at a 90.7% pass rate. These were found after the exam, and needed testing on new ideas.
+- **Then those readings were tested, with the rules written first.** Two online-RL pilots from S2 failed their rules: a better-scaled reward raised IC a little and lost passes. A second exam on 21 new ideas confirmed three of four readings. The online-RL model is more reliable than S2, +19.0 points (+11.6 to +26.5). Research IC tracks 2026 IC within one model's passes on one idea, at a correlation of +0.85. Keeping one of four answers by research IC adds +0.0041 (+0.0027 to +0.0055) of 2026 IC. That S2 writes better formulas than online RL's model is still only a direction, +0.0020 (-0.0005 to +0.0044).
 
 ## 1. Motivation
 
@@ -194,7 +194,7 @@ A DeepSeek API outage between 16:50 and 18:20 failed the judge calls of 942 of t
 | of which no read returned any text | 31 | 135 |
 | all | 156 | 353 |
 
-The check is a normalized substring match, so spelling variants count as unseen. Reading the episodes settles it (`results/audit/olmo_rl35_heldout_labels.md`). Of 20 random adapter episodes judged right with the answer in no tool output, 18 retrieved nothing relevant and answered from memory, several saying so ("based on well-known information"); one had the answer in its section under other wording; one was judged right for a wrong answer. So roughly 7 of the 10.1 points come from answering from memory instead of ending on a broken call, and about 2 from answers read in a section. Reading did improve: episodes that had the answer in a tool output and still answered wrong fell from 258 to 130. In 50 random adapter episodes, 5 of the 9 correct answers came from a section and 4 from memory.
+The check is a normalized substring match, so spelling variants count as unseen. Reading the episodes settles it (`results/audit/olmo_rl35_heldout_labels.md`). Of 20 random adapter episodes judged right with the answer in no tool output, 18 retrieved nothing relevant and answered from memory, several saying so ("based on well-known information"); one had the answer in its section under other wording; one was judged right for a wrong answer. So roughly 7 of the 10.1 points come from answering from memory instead of ending on a broken call, and about 2 from answers read in a section. Reading did improve: episodes in which a read returned text and the answer was in a tool output, yet the reply was wrong, fell from 258 to 130. In 50 random adapter episodes, 5 of the 9 correct answers came from a section and 4 from memory.
 
 **The adapter learned to skip listing sections.** Episodes that call `wiki_view_sections` fall from 1,327 (67.7%) to 971 (49.5%); of the episodes that read a section, those that never listed the page's sections rise from 526 of 1,604 to 939 of 1,728. The guessed section ids fail:
 
@@ -236,7 +236,7 @@ Training reward on `train_mixed_olmo` (deepseek-flash, all rollouts) averages 0.
 
 **What RL teaches depends on what the base model can already do.** Qwen arrives using the tools correctly, so the only way up is better retrieval, and that is what it learns. OLMo arrives with broken calls and with more knowledge than its tool use can show, 0.252 without tools against 0.094 with them. The cheapest way up the reward is to stop failing and answer, so that is what it learns first, along with dropping a step, listing sections, that the reward does not pay for.
 
-**The final-reply judge cannot see the difference.** Both models' gains pass every pre-registered test, and for OLMo the judge check, the flash re-grade, agrees with v4-pro. Only the statistics on where the answers come from and the trajectories show that OLMo's gain is mostly memory. For a task where the process is the point, the reward has to check the evidence: that the answer appears in what the tools returned, or that the code actually ran.
+**The final-reply judge cannot see the difference.** Both models' held-out gains pass the pre-registered tests that they exist and don't depend on having trained on the page, H1 and H3, and for OLMo the judge check, the flash re-grade, agrees with v4-pro. Only the statistics on where the answers come from and the trajectories show that OLMo's gain is mostly memory. For a task where the process is the point, the reward has to check the evidence: that the answer appears in what the tools returned, or that the code actually ran.
 
 **Transfer looks higher for OLMo, but the comparison is descriptive.** OLMo's gain on comparable untrained questions is 0.68 of its trained-question gain against Qwen's 0.56, but OLMo trained on each question about a third as often, which by itself shrinks the trained-question gain. And much of OLMo's transfer is the general habit of answering from memory, which carries to any question.
 
@@ -265,29 +265,29 @@ The model gets one sentence, such as "Coins with many trades per day tend to do 
 | Ideas | 115 in 20 families: 69 train, 15 val, and 31 held out in 5 families never trained on |
 | Gates | The formula computes, and it behaves as the idea says: a shock to the data the idea names moves its rank the right way, and other data doesn't dominate. The gates read data through 2024 |
 | Quality | Incremental IC: rank IC with the next day's return after removing liquidity, volatility, 1-day and 5-day reversal, and 30-day momentum |
-| Teacher | `deepseek-flash` with a manual of the owner's research practice. The student never sees the manual |
+| Teacher | `deepseek-flash` with a manual of the owner's research practice, which the student never sees. In every comparison below, "the teacher" is the same model answering as the student does, with the tools and without the manual ("DeepSeek" in the tables) |
 | Judge | `deepseek-flash` reads the idea and the formula and says whether it is faithful |
 
 Three reward arms differ only in online and offline RL. Arm A pays 1 for a pass. Arm B pays 0.3 + 0.7 × clip((IC + 0.03) / 0.06, 0, 1) for a pass. Arm C pays arm B's reward if the judge finds the formula faithful. A failure earns 0 in every arm.
 
 ### The recipe
 
-Four stages, after Samaya's Sterling, all on one LoRA adapter of rank 32 from OLMo 3 7B Instruct.
+Four stages, after Samaya's Sterling, all on one LoRA adapter of rank 32 from OLMo 3 7B Instruct, each continuing from the one before. S0 is the untrained model.
 
 | Stage | Data | Chosen on val | Passed on val |
 |---|---|---|---|
 | S1, SFT | 2,021 teacher trajectories that passed, 187 of them recovering from the student's own broken formulas | rank 32 against 8 and 128, step 350 of 420 | 75.0% |
 | S2, SFT | 206 trajectories: for each idea and wording, the best of 8 strategies by research IC | step 35 of 42 | 71.7% |
-| S3, offline RL | The teacher's strategy trajectories with a positive advantage, weighted by it: 453, 920 and 967 rows | A step 16, B step 64, C step 34 | 68.3%, 73.3%, 66.7% |
+| S3, offline RL | The teacher's strategy trajectories with a positive advantage, weighted by it: 453, 920 and 967 rows. So it is imitation weighted by advantage, and nothing in it pushes a bad answer down | A step 16, B step 64, C step 34 | 68.3%, 73.3%, 66.7% |
 | S4, online RL | 35 steps of 128 rollouts in groups of 8, lr 3e-5, from each arm's S3, two seeds per arm | step 35 | 70.0% to 81.7% |
 
-Offline RL's first version kept failing trajectories with negative weights, as the first design said, and broke the model: its last checkpoints fell to 2% or less passed, with invented methods and dropped quotes. With the negative rows out, on the same data, start and rate, that collapse disappeared. The rule for that swap was written before its result, it was tested on val only, and the prereg says so.
+Offline RL's first version kept failing trajectories with negative weights, as the first design said, and broke the model: its last checkpoints fell to 2% or less passed, with invented methods and dropped quotes. With the negative rows out, on the same data, start and rate, that collapse disappeared. The rule for that swap was written before its result, as the prereg says, though the two entered the repo in the same commit, and it was tested on val only.
 
 All six online runs ran their 35 steps with no guard tripped, a highest mismatch KL of 0.0054 and no failed rollout. Each kept adapter equals its step 35 byte for byte.
 
 ### Pre-registered hypotheses
 
-`results/factor/heldout_online_comparisons.txt` and `results/factor/sealed/comparisons.txt` hold the comparisons, by the pinned `scripts/factor/compare_stages.py`, per idea with a paired bootstrap. Seeds of an arm count as one model.
+`results/factor/heldout_comparisons.txt` (H1, H3, H4), `results/factor/heldout_online_comparisons.txt` (H5, H6) and `results/factor/sealed/comparisons.txt` (H8) hold the comparisons, by the pinned `scripts/factor/compare_stages.py`, per idea with a paired bootstrap, and `results/factor/audit/report.txt` holds H7 and H9. H2's interval, on val, is only in the working log. Seeds of an arm count as one model.
 
 | ID | Hypothesis | Result | Verdict |
 |---|---|---|---|
@@ -320,7 +320,7 @@ S4 arm B passes 16.9 points more than S1 [+7.3, +26.6] and 24.2 more than S2 [+1
 
 ### The audit
 
-The verifier's author read 163 distinct pairs of idea and formula, covering 235 passing formulas of S2 and the three S4 arms, shuffled and with model names hidden, by the judge's rubric. The verdicts and the rulings on what the rubric leaves open were locked by hash before the key was opened (`results/factor/audit/`).
+The verifier's author, Claude, read 163 distinct pairs of idea and formula, covering 235 passing formulas of S2 and the three S4 arms, shuffled and with model names hidden, by the judge's rubric. The verdicts and the rulings on what the rubric leaves open were locked by hash before the key was opened (`results/factor/audit/`); the hashes and the key entered the repo in the same commit, so that order rests on the working log.
 
 | Model | Reader: faithful | Judge: faithful | They agree |
 |---|---|---|---|
@@ -329,11 +329,11 @@ The verifier's author read 163 distinct pairs of idea and formula, covering 235 
 | S4 arm B | 42 of 60, 70.0% | 43 of 60 | 49 of 60 |
 | S4 arm C | 48 of 60, 80.0% | 44 of 60 | 52 of 60 |
 
-H7 passes by no margin, and it depends on one ruling. If a formula against a coin's own past is allowed to answer an idea about a standing level, S2 rises to 51 of 55 and the gap to 17.7 points [-31.1, -4.5], and H7 fails. It passes under the other rulings tried, and H9 fails under all of them. Half of arm B's rejections are a plain level for an idea about a change, such as the taker share for "suddenly rises above normal". That would fit a student who tests less, though the link isn't tested. The owner of the research system hasn't read the sample.
+H7 passes by no margin, and it depends on one ruling. If a formula against a coin's own past is allowed to answer an idea about a standing level, S2 rises to 49 of 55 and the gap to 14.1 points [-27.7, -0.3], and H7 fails. It passes under the other rulings tried, and H9 fails under all of them. Half of arm B's rejections are a plain level for an idea about a change, such as the taker share for "suddenly rises above normal". That would fit a student who tests less, though the link isn't tested. The owner of the research system hasn't read the sample.
 
 ### The sealed exam
 
-Every answer file was first scored on 2025 and gave back its verdicts and ICs exactly. The sealed period was then opened once per file, 8 openings in `sealed_access.log`. Passing doesn't change, since the gates read data through 2024.
+Every answer file was first scored on 2025 and gave back its verdicts and ICs exactly. The sealed period was then opened once per file, 8 openings in its access log (copied to `results/factor/sealed/access.log`), the first about 15 hours after prereg 03 was frozen. Passing doesn't change, since the gates read data through 2024.
 
 | Model | Passed | IC among passes, 2025 | IC among passes, 2026 |
 |---|---|---|---|
@@ -353,7 +353,7 @@ Everything in this subsection came after the exam, and the 2026 numbers were rea
 
 **The reward could hardly say anything about IC.** Within a group, 97% of arm B's reward spread comes from passing or failing and 2.8% from IC among passes. The reward maps IC onto a range of ±0.03, and passes in a group typically differ by about 0.003. That scaling is our fault. IC on training ideas didn't rise during RL, -0.0004 [-0.0010, +0.0000] in arm B. So H6 shows that this reward taught no more signal than the gates did, and says little about whether a reward can.
 
-**S2's formulas can't be told from the teacher's, and the fall comes with offline RL.** Per idea on held-out ideas, S2 minus the teacher is -0.0001 [-0.0023, +0.0022], and on val +0.0001 [-0.0018, +0.0025]. S3 arm B is -0.0033 [-0.0059, -0.0010] and S4 arm B -0.0031 [-0.0051, -0.0010]. The gap appears on training ideas too, so it isn't about transfer. IC falls in offline RL, with tests near 4. Online RL then cuts tests from 4.00 to 2.63 and leaves IC flat. Its gain in pass rate from S2 is mostly two repairs, fewer episodes with no answer, 20% to 2%, and fewer in the wrong direction, 16% to 6%. These intervals are wide, and S2 passes the fewest, which may flatter it.
+**S2's formulas can't be told from the teacher's, and the fall comes with offline RL.** Per idea on held-out ideas, scored on 2025, S2 minus the teacher is -0.0001 [-0.0023, +0.0022], and on val +0.0001 [-0.0018, +0.0025]. S3 arm B is -0.0033 [-0.0059, -0.0010] and S4 arm B -0.0031 [-0.0051, -0.0010]. The gap appears on training ideas too, so it isn't about transfer. IC falls in offline RL, with tests near 4. Online RL then cuts tests from 4.00 to 2.63 and leaves IC flat. From S2 to S4 arm B the pass rate rises through two repairs, fewer episodes with no answer, 20% to 2%, and fewer in the wrong direction, 16% to 6%. The first came almost all in offline RL, which cut no-answer episodes to 4% and raised passes 15.3 points [+5.7, +24.2]; online RL added 8.9 [-2.0, +20.2], mostly by cutting wrong directions from 14%. These intervals are wide, and S2 passes the fewest, which may flatter its IC.
 
 **The student already writes good formulas, and doesn't pick them.** Among one model's passes on one idea, research IC correlates +0.69 to +0.84 with 2026. So draw k episodes, run the gates, and keep the answer with the highest research IC:
 
@@ -366,24 +366,24 @@ Everything in this subsection came after the exam, and the 2026 numbers were rea
 | DeepSeek, one episode | 4.5 | 79.0% | | +0.0050 [+0.0025, +0.0075] | 0.566 |
 | DeepSeek, k=2, gates | 8.9 | 92.5% | | +0.0057 [+0.0028, +0.0084] | 0.668 |
 
-At about 10 tests each, S4 arm B minus the teacher is -0.0017 [-0.0051, +0.0016] on IC and -0.033 [-0.121, +0.046] on reward. At one episode each it is -0.0038 [-0.0068, -0.0009] and -0.111 [-0.211, -0.013]. The rule has nothing to tune, each seed gains about the same, and val ideas agree on 2025. But it is a model and a process, not the model alone, and the teacher with the same process stays ahead on point estimates. The gates can't be skipped: by research IC alone, arm A at k=8 passes only 54.8%. Picking also costs faithfulness, 69% to 60% at k=8 by the judge, which is why a judge belongs in the process.
+At about 10 tests each, S4 arm B minus the teacher is -0.0017 [-0.0051, +0.0016] on IC and -0.033 [-0.121, +0.046] on reward. At one episode each it is -0.0038 [-0.0068, -0.0009] and -0.111 [-0.211, -0.013]. The rule has nothing to tune, each seed alone gains about the same when picking by research IC without the gates, +0.0028 and +0.0030 at k=4, and val ideas agree on 2025. But it is a model and a process, not the model alone, and the teacher with the same process stays ahead on point estimates. The gates can't be skipped: by research IC alone, arm A at k=8 passes only 54.8%. Picking also costs faithfulness, 69% to 60% at k=8 by the judge, which is why a judge belongs in the process.
 
-**What this suggested.** Better formulas came from SFT on the best rows, and reliability from online RL, and offline RL lost the first before online RL brought the second. So online RL straight from S2 might keep both. `prereg/03b-pilot.md` set out a pilot of that, with a better-scaled reward beside it, and its rules were public before either run started. A second exam on new ideas, `prereg/04-second-exam.md`, tested the readings. The next two subsections report both.
+**What this suggested.** S2, from SFT on the best rows, wrote formulas level with the teacher's on 2025, though H3 hadn't shown them better than S1's. In arm B, offline RL lost that and brought most of the reliability, and online RL added the rest; arms A and C, whose offline stage moved little from S2, reached similar reliability through online RL. So online RL straight from S2 might keep both. `prereg/03b-pilot.md` set out a pilot of that, with a better-scaled reward beside it, and its rules were public before either run started. A second exam on new ideas, `prereg/04-second-exam.md`, tested the readings. The next two subsections report both.
 
 ### Pilot 03b: online RL straight from S2
 
-This is exploration too, but its rules were pushed before either run started (`prereg/03b-pilot.md`). Each run starts from S2 with one seed, trains 35 steps under prereg 03's guards, and then answers the 15 val ideas 16 times each. A run passes only if three things hold against S4 arm B. Its training IC among passes in steps 26-35 has a CI lower bound above 0. Its val IC among passes is above S4 arm B's. Its val pass rate is no more than 5 points below. `scripts/factor/pilot_compare.py` applies the rules, and a recount from the raw traces that shares no code with it gives the same numbers.
+This is exploration too, but its rules were pushed before either run started (`prereg/03b-pilot.md`). Each run starts from S2 with one seed, trains 35 steps under prereg 03's guards, and then answers the 15 val ideas 16 times each. A run passes only if three things hold against S4 arm B. Its training IC among passes in steps 26-35, minus S4 arm B's, has a CI lower bound above 0. Its val IC among passes is above S4 arm B's. Its val pass rate is no more than 5 points below. `scripts/factor/pilot_compare.py` applies the rules (`results/factor/pilot/`). A recount from the raw traces that shares no code with it, `scripts/factor/recount_pilot.py` and `scripts/factor/recount_pilot_p2b.py`, gives the same point estimates, with intervals from its own draws (`results/factor/pilot/recount.txt`).
 
 | Run | Reward | Training IC, steps 26-35, minus S4 arm B | Val IC minus S4 arm B | Val pass rate, S4 arm B 79.2% | Verdict |
 |---|---|---|---|---|---|
-| Run 1 | Arm B's, unchanged | +0.0003 [-0.0003, +0.0008] | +0.0005 [-0.0006, +0.0016] | 76.2% | Fails rule 1 |
-| Run 2 | Percentile among passes on the same idea, and an episode with no answer scored on its best test | +0.0012 [+0.0005, +0.0019] | +0.0009 [+0.0000, +0.0019] | 71.7% counting best tests, 69.2% on answers alone | Fails rule 3 |
+| Run 1, `factor-p1-s2-ic` | Arm B's, unchanged | +0.0003 [-0.0003, +0.0008] | +0.0005 [-0.0006, +0.0016] | 76.2% | Fails rule 1 |
+| Run 2, rerun as `factor-p2b-s2-rank` | Percentile among passes on the same idea, and an episode with no answer scored on its best test | +0.0012 [+0.0005, +0.0019] | +0.0009 [+0.0000, +0.0019] | 71.7% counting best tests, 69.2% on answers alone | Fails rule 3 |
 
 **Skipping offline RL wasn't enough.** Run 1 showed S4's pattern again. It became more reliable: on training ideas, from steps 1-5 to 31-35, the pass rate rose from 48% to 71% and answers handed in from 81% to 97%. Its formulas didn't get better: its own IC moved -0.0005 [-0.0012, +0.0002] within the run.
 
 **A reward that can hear IC moved IC a little, and cost passes.** Run 2's training IC ended +0.0009 [+0.0001, +0.0017] above run 1's. But it handed in fewer answers, 94.2% on val against run 1's 97.9%, and passed fewer. Two parts of the reward plausibly explain that. Paying an answer-less episode for its best test takes away part of the reason to hand one in. And when IC can be heard, passing alone earns less. Its own IC barely moved within the run, +0.0001 [-0.0008, +0.0011], so the reward may have kept S2's formulas from slipping rather than taught better ones. Each run has one seed, and the intervals are about as wide as the effects.
 
-**Run 2 first trained on run 1's reward.** The framework rebuilds every task it hands out as the type named in the taskset's generic base, and the new taskset inherited its parent's. So every rollout of the first attempt was scored by arm B's reward, as its traces show. A new test now rebuilds a task the way the server does, and run 2 ran again under the same rules. The first attempt is reported as a second run of run 1's recipe, and it landed close to run 1, +0.0002 [-0.0005, +0.0009] on training IC.
+**Run 2 first trained on run 1's reward.** The framework rebuilds every task it hands out as the type named in the taskset's generic base, and the new taskset inherited its parent's. So every rollout of the first attempt was scored by arm B's reward, as its traces show. A new test now rebuilds a task the way the server does, and run 2 ran again under the same rules. The first attempt, `factor-p2-s2-rank`, is reported as a second run of run 1's recipe, and it landed close to run 1, +0.0002 [-0.0005, +0.0009] on training IC.
 
 Neither run passed, so neither joined the second exam, and its E5 isn't tested.
 
@@ -398,13 +398,13 @@ Neither run passed, so neither joined the second exam, and its E5 isn't tested.
 | E3 | Keeping one of four by research IC recovers signal | S4 arm B at k=4 minus one episode, IC among passes: +0.0041 [+0.0027, +0.0055] | Passes |
 | E4 | Research IC guides later IC | Within one model's passes on one idea: correlation +0.852 [+0.766, +0.908] | Passes |
 
-Three of the four held. E1 points the same way as before but its interval includes 0, so it stays a reading. Against the teacher, S2's IC among passes is level again, +0.0000 [-0.0033, +0.0033], and it passes 33.6 points fewer. At about the same number of tests, S4 arm B at k=4 minus the teacher at k=2 is +0.0021 [-0.0008, +0.0054] on IC and -6.0 points [-24.5, +11.6] on passes. Within these intervals the student with the process matches the teacher with it.
+Three of the four held. E1 points the same way as before but its interval includes 0, so it stays a reading. Against the teacher, S2's IC among passes is level again, +0.0000 [-0.0033, +0.0033], and it passes 33.6 points fewer. At about the same number of tests, S4 arm B at k=4 minus the teacher at k=2 is +0.0021 [-0.0008, +0.0054] on IC and -6.0 points [-24.5, +11.6] on passes. Within these wide intervals the student with the process can't be told from the teacher with it.
 
-One thing got worse on new families. The judge finds 47.5% to 58.7% of the students' passes faithful, against 64% to 78% on prereg 03's held-out ideas. A process for new families needs the judge in it. The numbers are in `results/factor/exam2/comparisons.txt`, and a recount that shares no code with the exam script agrees.
+One thing got worse on new families. The judge finds 47.5% to 58.7% of the students' passes faithful, against 64% to 78% on prereg 03's held-out ideas, both averaged per idea, unlike the pooled counts in the held-out table above. A process for new families needs the judge in it. The numbers are in `results/factor/exam2/comparisons.txt`.
 
 ### What three chapters say together
 
-The same thing happened three times, in three forms. Reward rises by the cheapest path the reward can see, and what it can't see is left alone or lost. Qwen could use the tools, so it read better sections. OLMo couldn't, so it answered from memory and dropped a step the judge didn't pay for. On factors the student stopped failing and handed in plainer formulas after fewer tests. In chapter 3 an independent measure shows the cost directly, since a year of market data doesn't care how the formula was written. A verifier's pass rate is not evidence of the skill it was built to check, and the share of a reward's spread that carries the skill is worth measuring before a run starts.
+The same thing happened three times, in three forms. Reward rises by the cheapest path the reward can see, and what it can't see is left alone or lost. Qwen could use the tools, so it read better sections. OLMo couldn't, so it answered from memory and dropped a step the judge didn't pay for. On factors the student stopped failing and handed in plainer formulas after fewer tests. In chapter 3 market data shows the cost, since it doesn't care how a formula was written: on held-out ideas offline RL lowered incremental IC on 2025, and on 2026 the final model stays below the teacher, though not clearly below S1 or S2. A verifier's pass rate is not evidence of the skill it was built to check, and the share of a reward's spread that carries the skill is worth measuring before a run starts.
 
 ## 8. Cost on 4× RTX 4090
 
@@ -443,9 +443,10 @@ The first five are in `results/smoke-test.md`: stalled GitHub downloads during i
 
 Chapter 3:
 
-- **One task, one model, one author.** These results say nothing general about RL. The verifier's author wrote the bank, the gates, the rubric and the audit's rulings, and read the audit, and nobody independent has checked them. H7 turns on one of those rulings.
+- **One task, one model, one author.** These results say nothing general about RL. The verifier's author, Claude, wrote the bank, the gates, the rubric and the audit's rulings, and read the audit, and nobody independent has checked them. H7 turns on one of those rulings.
 - **Most of chapter 3's explanation came after its exam.** The pre-registered result is that no stage was shown to teach better formulas. The reasons offered were readings. A second exam then tested four of them on new ideas, and three held. Its ideas came from the same author after the first exam, and it reused 2026.
-- **The reward was mis-scaled.** So chapter 3 doesn't show that a reward can't teach IC. In a one-seed pilot from S2, a better-scaled reward ended 0.0009 above the old one on training IC and passed fewer val episodes, 71.7% against 76.2%. What to solve next is that trade-off, not the scale alone.
+- **"Unseen" has limits.** Held-out families share data fields with training families, and the reference formulas of 9 held-out ideas appear verbatim among the tests in 21 of S1's 2,021 trajectories, 3 of them as the answer (prereg 03).
+- **The reward was mis-scaled.** So chapter 3 doesn't show that a reward can't teach IC. In a one-seed pilot from S2, a better-scaled reward ended 0.0009 above the old one on training IC and passed fewer val episodes, 69.2% against 76.2% counting answers alone. What to solve next is that trade-off, not the scale alone.
 - **Two seeds, 35 steps.** Online RL's arms differ by about as much as its seeds do on val.
 - **Selection bias.** Some ideas come from a research system whose factors were chosen on data through 2025, so 2025 IC may lean optimistic. 2026 was the clean year, and it has now been read twice.
 
@@ -453,6 +454,7 @@ Chapters 1 and 2:
 
 - **One seed and one budget per model.** The published run used about 23 times as many rollouts as either of ours. A longer run and a second seed would show whether the held-out gains keep growing and whether Qwen learns to read further.
 - **The judge sees only the final reply.** For Qwen this mattered little; for OLMo most of the gain is answers from memory. A reward that requires the answer to appear in retrieved text, or that credits a successful read, would separate retrieval from memory. This is the most direct next experiment on wiki-search.
+- **The trajectories were read by Claude.** The episodes read for chapters 1 and 2 were labelled by Claude, not by a person, as the label files say and the preregs' Deviations now record.
 - **OLMo's remaining failures are teachable.** Missing page prefixes, a tool name that does not exist, and skipped section listings are what SFT on correct tool-use trajectories before RL would target.
 - **Long tool outputs garble OLMo's replies.** Capping section length in the environment may matter more than more RL steps.
 - **Never-right training questions give no signal**: 592 for Qwen, 1,277 for OLMo. A curriculum, hints, or credit for reaching the right section could open them.

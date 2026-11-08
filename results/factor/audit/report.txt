@@ -20,9 +20,9 @@ H9: S4 arm C minus arm B +0.0% (95% CI -13.3% to +13.3%); does not pass, the rul
 The same with 4 items, distance from a high for its recency, ruled faithful:
 H7: S4 arm B minus S2 -8.3% (95% CI -23.9% to +7.3%, beside the rule); passes, the rule is no more than 10 points below
 H9: S4 arm C minus arm B +11.7% (95% CI -3.3% to +26.7%); does not pass, the rule is a lower bound above 0
-The same with 13 items, a formula against own past for an idea about a level, ruled faithful:
-H7: S4 arm B minus S2 -17.7% (95% CI -31.1% to -4.5%, beside the rule); fails, the rule is no more than 10 points below
-H9: S4 arm C minus arm B +10.0% (95% CI -5.0% to +25.0%); does not pass, the rule is a lower bound above 0
+The same with 10 items, a formula against own past for an idea about a level, ruled faithful:
+H7: S4 arm B minus S2 -14.1% (95% CI -27.7% to -0.3%, beside the rule); fails, the rule is no more than 10 points below
+H9: S4 arm C minus arm B +8.3% (95% CI -6.7% to +23.3%); does not pass, the rule is a lower bound above 0
 Exploratory, per idea over the ideas both models have:
   S4 arm B minus S2: -4.9% (95% CI -21.6% to +11.7%) over 27 ideas
   S4 arm C minus S4 arm B: +15.5% (95% CI +4.6% to +28.2%) over 29 ideas
