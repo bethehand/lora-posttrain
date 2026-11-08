@@ -73,4 +73,8 @@ The data, verifier, prompts, judge, scoring and comparison scripts and eval sett
 
 ## Deviations
 
-None yet.
+None in how the exam ran. All ten answer files were whole on the first attempt, each gave back its verdicts and ICs on 2025 before 2026 was opened, and each was scored on 2026 once: the sealed panel's access log went from 8 lines to 18.
+
+One check was added after the results:
+
+- **A recount, not pinned.** `scripts/factor/recount_exam2.py` counts E1 to E4 again from the stored answer files and 2026 files, sharing no code with `second_exam.py` or what it imports, and it decides nothing. Its bootstrap and keep-one draws are its own, so its intervals and E3 can differ from `results/factor/exam2/comparisons.txt` in the last digit. Its output is `results/factor/exam2/recount.txt`.

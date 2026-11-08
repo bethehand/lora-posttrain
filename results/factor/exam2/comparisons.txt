@@ -1,0 +1,137 @@
+21 ideas, 14 of them in mirrored pairs. Each model has 16 rollouts per idea, and two seeds give half each.
+
+Hypotheses, on 2026
+  E1: S2 minus S4 B, IC among passes: IC +0.0020 (-0.0005 to +0.0044) over 18 ideas: does not pass
+  E2: S4 B minus S2, pass rate: pass rate +19.0% (+11.6% to +26.5%) over 21 ideas: PASSES
+  E3: S4 B, one of four minus one episode, IC among passes: IC +0.0041 (+0.0027 to +0.0055) over 19 ideas: PASSES
+  E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.852 (+0.766 to +0.908) over 1335 passes: PASSES
+
+The same on 2025, deciding nothing
+  E1: S2 minus S4 B, IC among passes: IC +0.0007 (-0.0011 to +0.0024) over 18 ideas
+  E2: S4 B minus S2, pass rate: pass rate +19.0% (+11.6% to +26.5%) over 21 ideas
+  E3: S4 B, one of four minus one episode, IC among passes: IC +0.0028 (+0.0017 to +0.0042) over 19 ideas
+  E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.823 (+0.686 to +0.891) over 1335 passes
+
+The same on 2026, outside mirrored pairs, deciding nothing
+  E1: S2 minus S4 B, IC among passes: IC +0.0050 (+0.0006 to +0.0100) over 5 ideas
+  E2: S4 B minus S2, pass rate: pass rate +6.2% (-0.9% to +11.6%) over 7 ideas
+  E3: S4 B, one of four minus one episode, IC among passes: IC +0.0039 (+0.0013 to +0.0066) over 6 ideas
+  E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.769 (+0.620 to +0.871) over 425 passes
+
+The same on 2026, by family, deciding nothing
+  drawdown, 4 ideas
+    E1: S2 minus S4 B, IC among passes: IC +0.0045 (+0.0023 to +0.0062) over 3 ideas
+    E2: S4 B minus S2, pass rate: pass rate +9.4% (+0.0% to +18.8%) over 4 ideas
+    E3: S4 B, one of four minus one episode, IC among passes: IC +0.0047 (+0.0008 to +0.0080) over 3 ideas
+    E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.864 (+0.653 to +0.907) over 206 passes
+  market_link, 3 ideas
+    E1: S2 minus S4 B, IC among passes: IC +0.0013 (-0.0043 to +0.0069) over 2 ideas
+    E2: S4 B minus S2, pass rate: pass rate +16.7% (-12.5% to +37.5%) over 3 ideas
+    E3: S4 B, one of four minus one episode, IC among passes: IC +0.0045 (+0.0033 to +0.0056) over 2 ideas
+    E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.868 (+0.751 to +0.929) over 95 passes
+  return_acceleration, 2 ideas
+    E1: S2 minus S4 B, IC among passes: IC +0.0009 (-0.0028 to +0.0047) over 2 ideas
+    E2: S4 B minus S2, pass rate: pass rate +28.1% (+25.0% to +31.2%) over 2 ideas
+    E3: S4 B, one of four minus one episode, IC among passes: IC +0.0011 (+0.0009 to +0.0013) over 2 ideas
+    E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.853 (+0.823 to +0.884) over 82 passes
+  return_persistence, 2 ideas
+    E1: S2 minus S4 B, IC among passes: IC -0.0001 (-0.0004 to +0.0001) over 2 ideas
+    E2: S4 B minus S2, pass rate: pass rate +31.2% (+25.0% to +37.5%) over 2 ideas
+    E3: S4 B, one of four minus one episode, IC among passes: IC +0.0025 (+0.0020 to +0.0030) over 2 ideas
+    E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.850 (+0.806 to +0.890) over 103 passes
+  taker_shape, 3 ideas
+    E1: S2 minus S4 B, IC among passes: IC +0.0001 (-0.0016 to +0.0016) over 3 ideas
+    E2: S4 B minus S2, pass rate: pass rate +20.8% (+6.2% to +31.2%) over 3 ideas
+    E3: S4 B, one of four minus one episode, IC among passes: IC +0.0010 (+0.0003 to +0.0014) over 3 ideas
+    E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.789 (+0.746 to +0.844) over 283 passes
+  trade_shape, 3 ideas
+    E1: S2 minus S4 B, IC among passes: IC +0.0030 (-0.0109 to +0.0147) over 3 ideas
+    E2: S4 B minus S2, pass rate: pass rate +25.0% (+6.2% to +62.5%) over 3 ideas
+    E3: S4 B, one of four minus one episode, IC among passes: IC +0.0066 (+0.0045 to +0.0076) over 3 ideas
+    E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.872 (+0.858 to +0.937) over 278 passes
+  vol_shape, 4 ideas
+    E1: S2 minus S4 B, IC among passes: IC +0.0027 (+0.0006 to +0.0069) over 3 ideas
+    E2: S4 B minus S2, pass rate: pass rate +14.1% (+3.1% to +29.7%) over 4 ideas
+    E3: S4 B, one of four minus one episode, IC among passes: IC +0.0062 (+0.0021 to +0.0095) over 4 ideas
+    E4: research IC against the year's IC, within one model's passes on one idea: correlation +0.955 (+0.886 to +0.976) over 288 passes
+
+Each model, per idea
+  S1: 336 episodes, answered 86.6%, tests 3.81, faithful 57.1%
+      2026: pass 43.5%, reward 0.282, IC +0.0012 (-0.0024 to +0.0050), 19 ideas, raw IC +0.0018 (-0.0095 to +0.0135), 19 ideas
+      2025: pass 43.5%, reward 0.279, IC +0.0010 (-0.0023 to +0.0040), 19 ideas, raw IC +0.0017 (-0.0096 to +0.0139), 19 ideas
+  S2: 336 episodes, answered 81.2%, tests 4.21, faithful 47.5%
+      2026: pass 46.1%, reward 0.316, IC +0.0039 (-0.0000 to +0.0079), 20 ideas, raw IC +0.0059 (-0.0062 to +0.0179), 20 ideas
+      2025: pass 46.1%, reward 0.309, IC +0.0015 (-0.0019 to +0.0049), 20 ideas, raw IC +0.0042 (-0.0082 to +0.0171), 20 ideas
+  S3 B: 336 episodes, answered 91.1%, tests 4.02, faithful 58.7%
+      2026: pass 52.4%, reward 0.347, IC +0.0030 (-0.0006 to +0.0069), 21 ideas, raw IC +0.0047 (-0.0063 to +0.0159), 21 ideas
+      2025: pass 52.4%, reward 0.348, IC +0.0022 (-0.0008 to +0.0051), 21 ideas, raw IC +0.0054 (-0.0065 to +0.0170), 21 ideas
+  S4 A: 336 episodes, answered 99.1%, tests 2.64, faithful 56.5%
+      2026: pass 64.3%, reward 0.426, IC +0.0028 (-0.0013 to +0.0067), 20 ideas, raw IC +0.0025 (-0.0106 to +0.0160), 20 ideas
+      2025: pass 64.3%, reward 0.424, IC +0.0012 (-0.0020 to +0.0042), 20 ideas, raw IC +0.0018 (-0.0123 to +0.0164), 20 ideas
+  S4 B: 336 episodes, answered 100.0%, tests 2.62, faithful 55.5%
+      2026: pass 65.2%, reward 0.429, IC +0.0008 (-0.0033 to +0.0048), 19 ideas, raw IC +0.0022 (-0.0114 to +0.0166), 19 ideas
+      2025: pass 65.2%, reward 0.429, IC +0.0008 (-0.0027 to +0.0042), 19 ideas, raw IC +0.0031 (-0.0116 to +0.0190), 19 ideas
+  S4 C: 336 episodes, answered 98.8%, tests 2.74, faithful 55.8%
+      2026: pass 58.9%, reward 0.386, IC +0.0018 (-0.0024 to +0.0060), 20 ideas, raw IC +0.0014 (-0.0120 to +0.0151), 20 ideas
+      2025: pass 58.9%, reward 0.383, IC +0.0008 (-0.0026 to +0.0041), 20 ideas, raw IC +0.0007 (-0.0132 to +0.0151), 20 ideas
+  DeepSeek: 336 episodes, answered 88.1%, tests 4.14, faithful not judged
+      2026: pass 79.8%, reward 0.559, IC +0.0041 (-0.0009 to +0.0089), 20 ideas, raw IC +0.0063 (-0.0077 to +0.0205), 20 ideas
+      2025: pass 79.8%, reward 0.546, IC +0.0021 (-0.0030 to +0.0072), 20 ideas, raw IC +0.0045 (-0.0084 to +0.0175), 20 ideas
+
+Research IC against each year's IC, within one model's passes on one idea
+  S1: 2026 +0.852 (+0.737 to +0.915) over 143 passes; 2025 +0.860 (+0.778 to +0.904) over 143 passes
+  S2: 2026 +0.844 (+0.749 to +0.910) over 148 passes; 2025 +0.815 (+0.691 to +0.890) over 148 passes
+  S3 B: 2026 +0.864 (+0.777 to +0.925) over 172 passes; 2025 +0.830 (+0.685 to +0.902) over 172 passes
+  S4 A: 2026 +0.852 (+0.762 to +0.917) over 214 passes; 2025 +0.769 (+0.543 to +0.890) over 214 passes
+  S4 B: 2026 +0.874 (+0.791 to +0.929) over 215 passes; 2025 +0.846 (+0.714 to +0.927) over 215 passes
+  S4 C: 2026 +0.889 (+0.748 to +0.959) over 197 passes; 2025 +0.886 (+0.708 to +0.946) over 197 passes
+  DeepSeek: 2026 +0.747 (+0.665 to +0.843) over 246 passes; 2025 +0.668 (+0.417 to +0.845) over 246 passes
+
+Against the teacher
+  S2 minus DeepSeek, 2026: IC +0.0000 (-0.0033 to +0.0033) over 19 ideas; pass rate -33.6% (-47.9% to -19.9%) over 21 ideas; reward -0.2429 (-0.3634 to -0.1326) over 21 ideas
+  S2 minus DeepSeek, 2025: IC -0.0007 (-0.0046 to +0.0036) over 19 ideas; pass rate -33.6% (-47.9% to -19.9%) over 21 ideas; reward -0.2371 (-0.3458 to -0.1346) over 21 ideas
+  S4 B minus DeepSeek, 2026: IC -0.0010 (-0.0041 to +0.0024) over 18 ideas; pass rate -14.6% (-31.8% to +1.8%) over 21 ideas; reward -0.1304 (-0.2741 to +0.0001) over 21 ideas
+  S4 B minus DeepSeek, 2025: IC -0.0002 (-0.0049 to +0.0047) over 18 ideas; pass rate -14.6% (-31.8% to +1.8%) over 21 ideas; reward -0.1173 (-0.2524 to +0.0076) over 21 ideas
+
+Keeping one of k answers by research IC
+  S4 B, k=1, tests spent 2.6: answered 100.0%, tests 2.62, faithful 55.5%
+      2026: pass 65.2%, reward 0.429, IC +0.0008 (-0.0033 to +0.0048), 19 ideas, raw IC +0.0022 (-0.0113 to +0.0164), 19 ideas
+      2025: pass 65.2%, reward 0.429, IC +0.0008 (-0.0028 to +0.0042), 19 ideas, raw IC +0.0031 (-0.0116 to +0.0186), 19 ideas
+  S4 B, k=2, tests spent 5.2: answered 100.0%, tests 2.64, faithful 56.3%
+      2026: pass 76.8%, reward 0.525, IC +0.0027 (-0.0013 to +0.0067), 19 ideas, raw IC +0.0043 (-0.0090 to +0.0182), 19 ideas
+      2025: pass 76.8%, reward 0.519, IC +0.0021 (-0.0016 to +0.0057), 19 ideas, raw IC +0.0048 (-0.0097 to +0.0199), 19 ideas
+      gain over one episode: 2026 IC +0.0019 (+0.0012 to +0.0026) over 19 ideas; 2025 IC +0.0013 (+0.0008 to +0.0019) over 19 ideas
+  S4 B, k=4, tests spent 10.5: answered 100.0%, tests 2.64, faithful 56.6%
+      2026: pass 83.8%, reward 0.596, IC +0.0049 (+0.0009 to +0.0090), 19 ideas, raw IC +0.0072 (-0.0059 to +0.0210), 19 ideas
+      2025: pass 83.8%, reward 0.582, IC +0.0037 (-0.0002 to +0.0074), 19 ideas, raw IC +0.0072 (-0.0069 to +0.0217), 19 ideas
+      gain over one episode: 2026 IC +0.0041 (+0.0027 to +0.0055) over 19 ideas; 2025 IC +0.0028 (+0.0017 to +0.0042) over 19 ideas
+  S4 B, k=8, tests spent 21.0: answered 100.0%, tests 2.64, faithful 56.0%
+      2026: pass 87.6%, reward 0.644, IC +0.0069 (+0.0031 to +0.0110), 19 ideas, raw IC +0.0102 (-0.0030 to +0.0243), 19 ideas
+      2025: pass 87.6%, reward 0.622, IC +0.0050 (+0.0012 to +0.0089), 19 ideas, raw IC +0.0098 (-0.0047 to +0.0249), 19 ideas
+      gain over one episode: 2026 IC +0.0061 (+0.0040 to +0.0084) over 19 ideas; 2025 IC +0.0042 (+0.0024 to +0.0063) over 19 ideas
+  S2, k=1, tests spent 4.2: answered 81.2%, tests 4.21, faithful 47.5%
+      2026: pass 46.1%, reward 0.316, IC +0.0039 (+0.0001 to +0.0078), 20 ideas, raw IC +0.0059 (-0.0057 to +0.0177), 20 ideas
+      2025: pass 46.1%, reward 0.309, IC +0.0015 (-0.0020 to +0.0049), 20 ideas, raw IC +0.0042 (-0.0079 to +0.0167), 20 ideas
+  S2, k=2, tests spent 8.4: answered 94.8%, tests 4.19, faithful 48.1%
+      2026: pass 62.7%, reward 0.442, IC +0.0051 (+0.0013 to +0.0089), 20 ideas, raw IC +0.0075 (-0.0039 to +0.0190), 20 ideas
+      2025: pass 62.7%, reward 0.428, IC +0.0023 (-0.0012 to +0.0057), 20 ideas, raw IC +0.0056 (-0.0061 to +0.0179), 20 ideas
+      gain over one episode: 2026 IC +0.0012 (+0.0007 to +0.0017) over 20 ideas; 2025 IC +0.0008 (+0.0005 to +0.0011) over 20 ideas
+  S2, k=4, tests spent 16.9: answered 99.5%, tests 4.21, faithful 47.6%
+      2026: pass 76.1%, reward 0.553, IC +0.0068 (+0.0030 to +0.0106), 20 ideas, raw IC +0.0102 (-0.0009 to +0.0215), 20 ideas
+      2025: pass 76.1%, reward 0.528, IC +0.0034 (-0.0001 to +0.0069), 20 ideas, raw IC +0.0082 (-0.0034 to +0.0204), 20 ideas
+      gain over one episode: 2026 IC +0.0028 (+0.0018 to +0.0040) over 20 ideas; 2025 IC +0.0019 (+0.0012 to +0.0027) over 20 ideas
+  DeepSeek, k=1, tests spent 4.1: answered 88.1%, tests 4.14, faithful not judged
+      2026: pass 79.8%, reward 0.559, IC +0.0041 (-0.0009 to +0.0091), 20 ideas, raw IC +0.0063 (-0.0076 to +0.0208), 20 ideas
+      2025: pass 79.8%, reward 0.546, IC +0.0021 (-0.0031 to +0.0074), 20 ideas, raw IC +0.0045 (-0.0084 to +0.0178), 20 ideas
+  DeepSeek, k=2, tests spent 8.3: answered 97.2%, tests 4.18, faithful not judged
+      2026: pass 89.8%, reward 0.640, IC +0.0051 (+0.0002 to +0.0100), 20 ideas, raw IC +0.0074 (-0.0065 to +0.0219), 20 ideas
+      2025: pass 89.8%, reward 0.616, IC +0.0026 (-0.0026 to +0.0079), 20 ideas, raw IC +0.0051 (-0.0077 to +0.0183), 20 ideas
+      gain over one episode: 2026 IC +0.0010 (+0.0006 to +0.0015) over 20 ideas; 2025 IC +0.0005 (+0.0001 to +0.0008) over 20 ideas
+  DeepSeek, k=4, tests spent 16.6: answered 99.6%, tests 4.30, faithful not judged
+      2026: pass 93.3%, reward 0.681, IC +0.0068 (+0.0021 to +0.0115), 20 ideas, raw IC +0.0094 (-0.0044 to +0.0238), 20 ideas
+      2025: pass 93.3%, reward 0.646, IC +0.0035 (-0.0015 to +0.0087), 20 ideas, raw IC +0.0066 (-0.0061 to +0.0197), 20 ideas
+      gain over one episode: 2026 IC +0.0027 (+0.0017 to +0.0039) over 20 ideas; 2025 IC +0.0014 (+0.0007 to +0.0022) over 20 ideas
+
+The process against the teacher's, at about the same number of tests, 2026
+  S4 B k=4 minus DeepSeek k=2: IC +0.0021 (-0.0008 to +0.0054) over 18 ideas; pass rate -6.0% (-24.5% to +11.6%) over 21 ideas; reward -0.0435 (-0.2047 to +0.0978) over 21 ideas
+  S2 k=2 minus DeepSeek k=2: IC +0.0002 (-0.0031 to +0.0034) over 19 ideas; pass rate -27.1% (-43.2% to -11.6%) over 21 ideas; reward -0.1979 (-0.3305 to -0.0747) over 21 ideas

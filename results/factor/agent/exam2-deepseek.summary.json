@@ -1,0 +1,107 @@
+{
+ "name": "exam2-deepseek",
+ "episodes": 336,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   300
+  ],
+  [
+   "max_turns",
+   36
+  ]
+ ],
+ "has_answer": 0.8809523809523809,
+ "parsed": 0.8809523809523809,
+ "computes": 0.8809523809523809,
+ "passed": 0.7976190476190477,
+ "reward_mean": 0.5461894444401215,
+ "ic_mean_among_passed": 0.002987627454601988,
+ "ic_median_among_passed": 0.0031424136527383865,
+ "tests_per_episode": 4.142857142857143,
+ "tests_distribution": [
+  [
+   0,
+   2
+  ],
+  [
+   1,
+   8
+  ],
+  [
+   2,
+   20
+  ],
+  [
+   3,
+   44
+  ],
+  [
+   4,
+   98
+  ],
+  [
+   5,
+   164
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9910714285714286,
+ "tool_results": [
+  [
+   "computed",
+   1334
+  ],
+  [
+   "expression error",
+   43
+  ],
+  [
+   "does not compute",
+   15
+  ]
+ ],
+ "turns_truncated": 4,
+ "turns": 1712,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   40
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   14
+  ],
+  [
+   "moves_against_the_idea",
+   12
+  ],
+  [
+   "measures_move_size_not_direction",
+   2
+  ]
+ ],
+ "passed_by_idea": {
+  "accel_down": 0.875,
+  "accel_up": 1,
+  "down_harder_down": 0.75,
+  "drawdown_bounce": 1,
+  "drawdown_weak": 0.9375,
+  "follow_through_up": 0,
+  "high_age_down": 0.625,
+  "next_day_reversal_up": 0.3125,
+  "own_moves_down": 0.8125,
+  "own_moves_long_down": 1,
+  "own_moves_up": 0.4375,
+  "recovery_up": 0.9375,
+  "taker_majority_days_down": 0.875,
+  "taker_majority_days_up": 0.9375,
+  "taker_own_high_up": 0.875,
+  "trades_own_high_up": 1,
+  "trades_unstable_down": 0.9375,
+  "trades_unstable_up": 0.8125,
+  "vol_of_vol_down": 0.875,
+  "vol_own_high_down": 0.8125,
+  "vol_own_high_up": 0.9375
+ }
+}
