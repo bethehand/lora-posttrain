@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Evaluate one adapter (or the base model, with "base") on a set of ideas, on two GPUs. Scores on 2025.
 #   bash scripts/factor/eval_stage.sh <name> <adapter dir|base> <split> [gpus] [port] [rank]
-# ROLLOUTS sets the rollouts per idea, 4 unless a pilot asks for more.
+# ROLLOUTS sets the rollouts per idea, 4 unless a pilot asks for more. IDEAS sets the ideas file, ideas_v2.jsonl unless an exam brings its own.
 set -u
 source "$(dirname "$0")/../../setup/env.sh"
 name=$1 adapter=$2 split=$3 gpus=${4:-2,3} port=${5:-18200} rank=${6:-128}
+ideas=${IDEAS:-$REPO/task/ideas_v2.jsonl}
 model=$ROOT/models/Olmo-3-7B-Instruct
 out=$ROOT/outputs/evals/factor
 export FACTOR_IDEA_WORKERS=16 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
@@ -27,7 +28,7 @@ if [ "$adapter" != base ]; then
 fi
 rm -rf "${out:?}/$name"
 (cd "$PRIME_RL_DIR" && uv run eval @ "$REPO/configs/factor-idea/eval.toml" -m "$served" -r "${ROLLOUTS:-4}" -c 32 --output-dir "$out/$name" --no-rich \
-   --client.base-url "http://localhost:$port/v1" --env.taskset.ideas "$REPO/task/ideas_v2.jsonl" --env.taskset.split "$split") > "$ROOT/logs/$name.log" 2>&1
+   --client.base-url "http://localhost:$port/v1" --env.taskset.ideas "$ideas" --env.taskset.split "$split") > "$ROOT/logs/$name.log" 2>&1
 echo "eval exit $?"
 rm -f "$REPO/results/factor/agent/$name.jsonl" "$REPO/results/factor/agent/$name.summary.json"
 (cd "$REPO" && $py scripts/factor/summarize_agent_eval.py "$out/$name" "$name" > /dev/null)

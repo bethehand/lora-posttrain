@@ -3,6 +3,8 @@
 
     tmux new-session -d -s lp-pilot-p1 "bash -c 'source setup/env.sh; cd \\$REPO; \\$PRIME_RL_DIR/.venv/bin/python scripts/factor/run_pilot.py p1'"
     tmux new-session -d -s lp-pilot-p2 "bash -c 'source setup/env.sh; cd \\$REPO; \\$PRIME_RL_DIR/.venv/bin/python scripts/factor/run_pilot.py p2 --after lp-pilot-p1'"
+
+p2 trained on p1's reward by mistake (see the deviations in prereg/03b-pilot.md), and p2b is run 2 as written.
 """
 from __future__ import annotations
 
@@ -19,7 +21,7 @@ START = "factor-s2"
 RANK = 32
 SEED = 1
 ROLLOUTS = 16
-RUNS = {"p1": ("factor-p1-s2-ic", "ic"), "p2": ("factor-p2-s2-rank", "rank")}
+RUNS = {"p1": ("factor-p1-s2-ic", "ic"), "p2": ("factor-p2-s2-rank", "rank"), "p2b": ("factor-p2b-s2-rank", "rank")}
 
 
 def wait_for(session: str) -> None:

@@ -14,7 +14,7 @@ from pathlib import Path
 import verifiers.v1 as vf
 from factor_idea import workers
 from factor_idea.prompt import extract_factor
-from factor_idea.taskset import MAX_TESTS, FactorIdeaTask, FactorIdeaTaskset
+from factor_idea.taskset import MAX_TESTS, FactorIdeaConfig, FactorIdeaTask, FactorIdeaTaskset
 
 FLOOR = 0.1
 TABLE_PATH = Path(__file__).with_name("ic_table.json")
@@ -96,7 +96,10 @@ def _table() -> dict[str, list[float]]:
     return _TABLE
 
 
-class FactorIdeaRankTaskset(FactorIdeaTaskset):
+# The framework rebuilds every task it dispatches as the type named in the taskset's generic base
+# (`Taskset.task_type()`), not as what `load` returns. Without the second base this class inherits
+# FactorIdeaTask from its parent, and every rollout is scored by factor-idea's reward.
+class FactorIdeaRankTaskset(FactorIdeaTaskset, vf.Taskset[FactorIdeaRankTask, FactorIdeaConfig]):
     def load(self) -> list[FactorIdeaRankTask]:
         tasks = [FactorIdeaRankTask(task.data, task.config) for task in super().load()]
         missing = sorted({task.data.idea_id for task in tasks} - set(_table()))

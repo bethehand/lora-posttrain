@@ -23,7 +23,7 @@ from compare_stages import interval  # noqa: E402
 
 COMPARED_WITH = ["factor-s4-ic-seed1", "factor-s4-ic-seed2"]
 MOST_PASS_LOST = 0.05
-HANDS_IN_BEST = {"factor-p2-s2-rank"}
+HANDS_IN_BEST = {"factor-p2b-s2-rank"}  # factor-p2-s2-rank trained without it: see prereg/03b-pilot.md
 
 
 # Kept pure so it can be tested.

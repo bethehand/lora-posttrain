@@ -14,3 +14,5 @@
 - s4-ic-seed2: `f4eabafbfba62bbb3b26f86173f54bb8479f2b3e78ca38efc058e0e5ec5b1d22`, from `/mnt/nvme1/bruce/outputs/factor-s4-ic-seed2/factor-idea-train--olmo-3-7b-instruct--4fc75651/broadcasts/step_35`
 - s4-judged-seed2: `a71dfa361c8fa9143d854e6bca30f2389d484a2c846a8aeb75104e65371234e5`, from `/mnt/nvme1/bruce/outputs/factor-s4-judged-seed2/factor-idea-train--olmo-3-7b-instruct--687c15c1/broadcasts/step_35`
 - s4-gates-seed2: `3ae83a15ae3ac22b8719b5acc37f831b74bcb133e5e168a14c9ec20b6ebe6f84`, from `/mnt/nvme1/bruce/outputs/factor-s4-gates-seed2/factor-idea-train--olmo-3-7b-instruct--c493a4df/broadcasts/step_35`
+- p1-s2-ic: `a1567b21289d994821c311786ece5187911b0476216aa37b4bc94f0cdb5c74f7`, from `/mnt/nvme1/bruce/outputs/factor-p1-s2-ic/factor-idea-train--olmo-3-7b-instruct--db54fb6f/broadcasts/step_35`
+- p2-s2-rank: `0b8f34e7abdeb4f59e0b9f0e5d16e8c6d6d16587831d72f3dbb9cbece566b61b`, from `/mnt/nvme1/bruce/outputs/factor-p2-s2-rank/factor-idea-train--olmo-3-7b-instruct--78660aad/broadcasts/step_35`

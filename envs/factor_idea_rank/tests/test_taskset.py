@@ -112,6 +112,19 @@ def test_the_arm_b_reward_stays_on_record_beside_it(task):
     assert trace.metrics["reward_ic"] == pytest.approx(sb.Score(parsed=True, computes=True, matches_idea=True, ic=sb.ICResult(0.015, 0.02, 300, 3.0)).reward("ic"))
 
 
+def test_the_framework_rebuilds_a_dispatched_task_as_the_rank_task(monkeypatch):
+    """As serve/server.py does: the task class from Taskset.task_type(), its data from the wire, the task config."""
+    source = str(__import__("pathlib").Path(__file__).resolve().parents[3] / "task" / "ideas_v2.jsonl")
+    config = FactorIdeaConfig(id="factor-idea-rank", ideas=source, split="train")
+    taskset = ts.FactorIdeaRankTaskset(config)
+    task_cls = type(taskset).task_type()
+    assert task_cls is ts.FactorIdeaRankTask
+    sent = taskset.load()[0]
+    rebuilt = task_cls(task_cls.data_type().model_validate(sent.data.model_dump()), config.task)
+    assert type(rebuilt) is ts.FactorIdeaRankTask
+    assert rebuilt.data.idea_id == sent.data.idea_id
+
+
 def test_the_taskset_refuses_an_idea_with_no_table(monkeypatch):
     monkeypatch.setattr(ts, "_TABLE", {"elsewhere": [0.0]})
     source = str(__import__("pathlib").Path(__file__).resolve().parents[3] / "task" / "ideas_v2.jsonl")
