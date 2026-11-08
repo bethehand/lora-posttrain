@@ -78,3 +78,4 @@ Recorded after the run; no hypothesis, threshold or setting above changed.
 
 - prime-rl also ran its online held-out eval after the last step (35), besides steps 0, 15 and 30. Exploratory like the others.
 - The analysis code was written after the freeze. `scripts/navigation_metrics.py` (H4) was committed before any trained-model number was seen. `scripts/rejudge.py` and `scripts/prereg01_tests.py` were written after the online evals during training had been seen and before any result of the evaluation above. They implement the definitions here and add no choices.
+- **The trajectories were read by Claude, not by hand.** The 50 trajectories were read and labelled by Claude, the AI assistant that ran these experiments, as `results/audit/rl35_heldout_labels.md` says. Recorded on 2026-11-09, after an independent read of the report.
