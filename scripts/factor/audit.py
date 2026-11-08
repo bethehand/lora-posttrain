@@ -96,6 +96,17 @@ def by_model(key: list[dict], verdicts: dict[int, bool]) -> dict[str, list[dict]
     return out
 
 
+def rulings(answers: list[dict]) -> list[tuple[str, list[int], bool]]:
+    """Families of borderline verdicts, each with the way a reader could rule against this one, by the reasons given."""
+    about = lambda *words: [r["n"] for r in answers if r.get("borderline") and any(w in r["why"] for w in words)]  # noqa: E731
+    return [
+        ("volatility as beta", about("proxy for beta"), False),
+        ("a level for an idea about a change", [r["n"] for r in answers if r.get("borderline") and r["why"].startswith(("level of", "cross-sectional rank of today", "smoothed cross-sectional"))], True),
+        ("distance from a high for its recency", about("distance from the high"), True),
+        ("a formula against own past for an idea about a level", about("against its own past", "own normal, not", "against the coin's own normal", "short mean minus"), True),
+    ]
+
+
 def within_ten_points(later: list[bool], earlier: list[bool]) -> bool:
     """In fractions: 42/60 minus 44/55 is exactly -1/10, and floats put it just under."""
     return Fraction(sum(later), len(later)) - Fraction(sum(earlier), len(earlier)) >= Fraction(-1, 10)
@@ -166,6 +177,9 @@ def score(ideas: dict[str, dict]) -> None:
     settle(by_model(key, {n: v and n not in borderline for n, v in verdicts.items()}))
     print("The same with them all ruled faithful:")
     settle(by_model(key, {n: v or n in borderline for n, v in verdicts.items()}))
+    for label, items, ruled in rulings(answers):
+        print(f"The same with {len(items)} items, {label}, ruled {'faithful' if ruled else 'not faithful'}:")
+        settle(by_model(key, {**verdicts, **{n: ruled for n in items}}))
     print("Exploratory, per idea over the ideas both models have:")
     for later, earlier in (("S4 arm B", "S2"), ("S4 arm C", "S4 arm B"), ("S4 arm A", "S2"), ("S4 arm B", "S4 arm A")):
         diff, low, high, count = same_ideas(models[later], models[earlier])

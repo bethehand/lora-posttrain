@@ -8,7 +8,7 @@ import pytest
 REPO = pathlib.Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO / "scripts" / "factor"))
 
-from audit import by_model, difference, read_once, same_ideas, sample_evenly, within_ten_points  # noqa: E402
+from audit import by_model, difference, read_once, rulings, same_ideas, sample_evenly, within_ten_points  # noqa: E402
 
 
 def rows(**counts):
@@ -47,6 +47,19 @@ def test_exactly_ten_points_below_is_within_the_rule_and_one_formula_more_is_not
     earlier = [True] * 44 + [False] * 11
     assert within_ten_points([True] * 42 + [False] * 18, earlier)
     assert not within_ten_points([True] * 41 + [False] * 19, earlier)
+
+
+def test_a_ruling_reads_only_borderline_items_by_their_reason():
+    answers = [
+        {"n": 1, "borderline": True, "why": "own volatility as a proxy for beta"},
+        {"n": 2, "borderline": True, "why": "level of trades, not growth"},
+        {"n": 3, "borderline": False, "why": "volume against its own recent mean, not long-run illiquidity"},
+        {"n": 4, "borderline": True, "why": "volume ranked against its own past, not long-run illiquidity"},
+    ]
+    found = {label: (items, ruled) for label, items, ruled in rulings(answers)}
+    assert found["volatility as beta"] == ([1], False)
+    assert found["a level for an idea about a change"] == ([2], True)
+    assert found["a formula against own past for an idea about a level"] == ([4], True)
 
 
 def test_the_per_idea_difference_uses_only_ideas_both_have():
