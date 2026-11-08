@@ -1,0 +1,17 @@
+S4 arm B, val: 120 episodes, answered 100.0%, passed 79.2%, wrong direction 6.7%, tests 2.68, faithful not judged, research IC of answers +0.0068
+factor-p1-s2-ic
+  val: 240 episodes, answered 97.9%, passed 76.2%, wrong direction 10.4%, tests 3.42, faithful 85.8% of 183, research IC of answers +0.0075
+  rule 1, training IC, steps 26-35, minus S4 arm B: +0.0003 (-0.0003 to +0.0008) over 68 ideas
+  rule 2, val IC minus S4 arm B: +0.0005 (-0.0006 to +0.0016) over 15 ideas
+  rule 3, val pass rate minus S4 arm B: -2.9% per idea, -0.0292 (-0.1208 to +0.0667)
+  beside them, training IC from steps 1-10 to 26-35: -0.0005 (-0.0012 to +0.0002) over 68 ideas
+  DOES NOT PASS
+factor-p2b-s2-rank
+  val: 240 episodes, answered 94.2%, passed 69.2%, wrong direction 9.2%, tests 3.77, faithful 81.9% of 166, research IC of answers +0.0091
+  val, best test when no answer: passed 71.7%
+  rule 1, training IC, steps 26-35, minus S4 arm B: +0.0012 (+0.0005 to +0.0019) over 69 ideas
+  rule 2, val IC minus S4 arm B: +0.0009 (+0.0000 to +0.0019) over 15 ideas
+  rule 3, val pass rate minus S4 arm B: -7.5% per idea, -0.0750 (-0.1375 to +0.0000)
+  beside them, training IC from steps 1-10 to 26-35: +0.0001 (-0.0008 to +0.0011) over 67 ideas
+  DOES NOT PASS
+factor-p2b-s2-rank minus factor-p1-s2-ic, training IC, steps 26-35: +0.0009 (+0.0001 to +0.0017) over 68 ideas
