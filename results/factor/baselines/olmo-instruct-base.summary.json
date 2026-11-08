@@ -1,0 +1,88 @@
+{
+ "name": "olmo-instruct-base",
+ "model": "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct",
+ "samples": 248,
+ "tagged": 0.6129032258064516,
+ "parsed": 0.16532258064516128,
+ "computes": 0.1532258064516129,
+ "passed": 0.04838709677419355,
+ "distinct_skeletons_among_passed": 9,
+ "ic_mean_among_passed": 0.00041555891088008876,
+ "ic_median_among_passed": 0.0002067203305290233,
+ "reward_gates_mean": 0.04838709677419355,
+ "reward_ic_mean": 0.03168620261098069,
+ "seconds_median": 0.0,
+ "seconds_max": 1.54,
+ "reasons": [
+  [
+   "parse",
+   111
+  ],
+  [
+   "no factor tag",
+   96
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   17
+  ],
+  [
+   "moves_against_the_idea",
+   6
+  ],
+  [
+   "too_few_coins_or_constant",
+   3
+  ],
+  [
+   "depends_on_price_units",
+   2
+  ],
+  [
+   "measures_volume_not_trade_size",
+   1
+  ]
+ ],
+ "passed_by_key": {
+  "close_near_high": 0.0,
+  "return": 0.10714285714285714,
+  "taker_buy": 0.0,
+  "trade_size": 0.0,
+  "trades": 0.1875,
+  "volatility": 0.0,
+  "volume": 0.05357142857142857
+ },
+ "passed_by_idea": {
+  "volume_level_up": 0.125,
+  "volume_level_down": 0.0,
+  "volume_surge_up": 0.0,
+  "volume_surge_down": 0.125,
+  "volume_dry_up": 0.125,
+  "illiquid_up": 0.0,
+  "liquid_up": 0.0,
+  "trades_level_up": 0.25,
+  "trades_surge_down": 0.125,
+  "trade_size_up": 0.0,
+  "trade_size_down": 0.0,
+  "taker_up": 0.0,
+  "taker_exhausted": 0.0,
+  "taker_sell_bounce": 0.0,
+  "reversal_1d": 0.125,
+  "reversal_1w": 0.125,
+  "momentum_1m": 0.125,
+  "momentum_3m": 0.125,
+  "candle_body_up": 0.25,
+  "near_high_up": 0.0,
+  "above_ma_down": 0.0,
+  "low_vol_up": 0.0,
+  "high_vol_up": 0.0,
+  "dispersion_down": 0.0,
+  "extreme_day_down": 0.0,
+  "range_down": 0.0,
+  "range_up": 0.0,
+  "close_high_up": 0.0,
+  "upper_shadow_down": 0.0,
+  "lower_shadow_up": 0.0,
+  "close_low_bounce": 0.0
+ }
+}

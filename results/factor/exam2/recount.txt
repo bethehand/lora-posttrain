@@ -1,0 +1,12 @@
+S1        pass26 0.435 IC26 +0.0012 pass25 0.435 IC25 +0.0010
+S2        pass26 0.461 IC26 +0.0039 pass25 0.461 IC25 +0.0015
+S3 B      pass26 0.524 IC26 +0.0030 pass25 0.524 IC25 +0.0022
+S4 A      pass26 0.643 IC26 +0.0028 pass25 0.643 IC25 +0.0012
+S4 B      pass26 0.652 IC26 +0.0008 pass25 0.652 IC25 +0.0008
+S4 C      pass26 0.589 IC26 +0.0018 pass25 0.589 IC25 +0.0008
+DeepSeek  pass26 0.798 IC26 +0.0041 pass25 0.798 IC25 +0.0021
+E1 S2 - S4 B, IC 2026: +0.0020 (-0.0005 to +0.0044) over 18 ideas does not pass
+E2 S4 B - S2, pass 2026: +19.0% (+11.9% to +26.5%) over 21 ideas PASSES
+E3 S4 B k=4 - k=1, IC 2026: +0.0042 (+0.0028 to +0.0056) over 19 ideas PASSES | k=4 pass 0.838, k=1 pass 0.652
+E4 within correlation 2026: +0.852 (+0.766 to +0.908) over 1335 passes PASSES
+2025 beside: E1 +0.0007 (-0.0011 to +0.0024) over 18 ideas | E4 +0.823

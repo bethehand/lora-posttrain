@@ -1,0 +1,113 @@
+{
+ "name": "s3p-ic-heldout",
+ "episodes": 124,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   119
+  ],
+  [
+   "max_turns",
+   5
+  ]
+ ],
+ "has_answer": 0.9596774193548387,
+ "parsed": 0.9354838709677419,
+ "computes": 0.9274193548387096,
+ "passed": 0.5967741935483871,
+ "reward_mean": 0.39452617633920234,
+ "ic_mean_among_passed": 0.0009512500379086003,
+ "ic_median_among_passed": 0.00036497617506195965,
+ "tests_per_episode": 4,
+ "tests_distribution": [
+  [
+   3,
+   37
+  ],
+  [
+   4,
+   50
+  ],
+  [
+   5,
+   37
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9838709677419355,
+ "tool_results": [
+  [
+   "computed",
+   445
+  ],
+  [
+   "expression error",
+   37
+  ],
+  [
+   "does not compute",
+   14
+  ]
+ ],
+ "turns_truncated": 0,
+ "turns": 620,
+ "failure_reasons": [
+  [
+   "does_not_respond_to_the_idea",
+   23
+  ],
+  [
+   "moves_against_the_idea",
+   17
+  ],
+  [
+   "no factor tag",
+   5
+  ],
+  [
+   "parse",
+   3
+  ],
+  [
+   "too_few_coins_or_constant",
+   1
+  ],
+  [
+   "depends_on_price_units",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 0.5,
+  "above_ma_up": 0.75,
+  "beat_market_days_up": 0,
+  "excess_momentum_up": 0.5,
+  "excess_reversal_down": 0.75,
+  "fresh_high_up": 0.75,
+  "high_beta_down": 0,
+  "high_beta_up": 0.75,
+  "illiquid_long_up": 1,
+  "illiquid_up": 0.5,
+  "impact_rising_down": 0,
+  "impact_rising_up": 0.25,
+  "liquid_up": 0,
+  "ma_cross_up": 0.75,
+  "near_high_up": 0.75,
+  "near_low_bounce": 0.5,
+  "range_per_dollar_up": 0.75,
+  "range_position_down": 0.25,
+  "range_position_up": 0.75,
+  "taker_exhausted": 1,
+  "taker_imbalance_up": 0.25,
+  "taker_long_up": 1,
+  "taker_sell_bounce": 0.75,
+  "taker_surge_down": 1,
+  "taker_surge_up": 1,
+  "taker_up": 1,
+  "trades_level_up": 0.25,
+  "trades_low_up": 0.5,
+  "trades_surge_down": 0.75,
+  "trades_surge_up": 0.5,
+  "trades_trend_up": 1
+ }
+}

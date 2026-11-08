@@ -1,0 +1,9 @@
+Steps 1-5: 4062 rollouts, 472 without an answer, 322 of those tested something, and 160 of those formulas pass
+Mean advantage by number of tests
+  arm A's                                    0: -0.378 1: -0.317 2: -0.055 3: +0.076 4: +0.033 5: -0.111
+  arm B's                                    0: -0.275 1: -0.201 2: -0.048 3: +0.043 4: +0.027 5: -0.068
+  arm B's, best test if no answer            0: -0.294 1: -0.026 2: +0.016 3: +0.028 4: +0.006 5: -0.034
+  table, floor 0.1, best test if no answer   0: -0.253 1: -0.027 2: +0.015 3: +0.028 4: +0.004 5: -0.031
+Share of episodes and how they end, by number of tests, across all six runs
+  steps 1-5: 0: 2% of episodes, answered 1%, passed 1% | 1: 1% of episodes, answered 12%, passed 7% | 2: 5% of episodes, answered 70%, passed 42% | 3: 32% of episodes, answered 97%, passed 62% | 4: 37% of episodes, answered 99%, passed 56% | 5: 23% of episodes, answered 75%, passed 36%
+  steps 31-35: 0: 1% of episodes, answered 3%, passed 2% | 1: 2% of episodes, answered 72%, passed 55% | 2: 34% of episodes, answered 98%, passed 75% | 3: 50% of episodes, answered 99%, passed 72% | 4: 11% of episodes, answered 100%, passed 66% | 5: 1% of episodes, answered 89%, passed 35%

@@ -15,7 +15,9 @@ It first runs both parsers on hand-written edge cases. Prints counts and every m
 model served by prime-rl's inference server with --vllm.tool-call-parser olmo3, and
 setup/install_olmo3_parser.sh.
 
-    uv run python $REPO/scripts/olmo3_parity.py <traces.jsonl> <server base url> [n=300] [seed=0]
+    uv run python $REPO/scripts/olmo3_parity.py <traces.jsonl> <server base url> [n=300] [seed=0] [parser=olmo3]
+
+With parser olmo3_keep_text it also compares the text kept before a tool call.
 """
 
 from __future__ import annotations
@@ -128,6 +130,12 @@ async def check(prompt, renderer, tokenizer, http, client, sem, tally):
               for c in choice["message"].get("tool_calls") or []] or None
     content_ids, parsed = renderer._tool_parser.extract(choice["token_ids"])
     ours = [(p.name, p.arguments) for p in parsed if p.status == ToolCallParseStatus.OK] or None
+    if theirs and ours:
+        if (choice["message"].get("content") or "") == tokenizer.decode(content_ids, skip_special_tokens=True):
+            tally["kept text match"] += 1
+        else:
+            tally["kept text mismatch"] += 1
+            print(f"KEPT TEXT MISMATCH vllm {choice['message'].get('content')!r}\n  ours {tokenizer.decode(content_ids, skip_special_tokens=True)!r}")
     tally["vllm called tools" if theirs else "vllm no tool call"] += 1
     if theirs == ours:
         tally["parse match"] += 1
@@ -154,7 +162,7 @@ async def main() -> None:
     tokenizer = AutoTokenizer.from_pretrained(MODEL)
     bad = edge_cases(tokenizer)
 
-    renderer = DefaultRenderer(tokenizer, DefaultRendererConfig(tool_parser="olmo3"))
+    renderer = DefaultRenderer(tokenizer, DefaultRendererConfig(tool_parser=sys.argv[5] if len(sys.argv) > 5 else "olmo3"))
     tally = Counter()
     sem = asyncio.Semaphore(CONCURRENCY)
     async with httpx.AsyncClient(base_url=base_url, timeout=600) as http:
@@ -163,7 +171,7 @@ async def main() -> None:
                                for p in sample_prompts(path, n, seed)))
     for key, count in sorted(tally.items()):
         print(f"  {count:5d}  {key}")
-    if bad or tally["prompt mismatch"] or tally["parse mismatch"] or tally["training path ran past the turn"]:
+    if bad or tally["prompt mismatch"] or tally["parse mismatch"] or tally["kept text mismatch"] or tally["training path ran past the turn"]:
         sys.exit(1)
 
 

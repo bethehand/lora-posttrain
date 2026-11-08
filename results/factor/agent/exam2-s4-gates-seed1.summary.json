@@ -1,0 +1,111 @@
+{
+ "name": "exam2-s4-gates-seed1",
+ "episodes": 168,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   167
+  ],
+  [
+   "max_turns",
+   1
+  ]
+ ],
+ "has_answer": 0.9880952380952381,
+ "parsed": 0.9702380952380952,
+ "computes": 0.9642857142857143,
+ "passed": 0.6428571428571429,
+ "reward_mean": 0.42500084272144806,
+ "ic_mean_among_passed": 0.0009524933152406956,
+ "ic_median_among_passed": 0.00018418015063045593,
+ "tests_per_episode": 2.6904761904761907,
+ "tests_distribution": [
+  [
+   1,
+   5
+  ],
+  [
+   2,
+   64
+  ],
+  [
+   3,
+   80
+  ],
+  [
+   4,
+   16
+  ],
+  [
+   5,
+   3
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9761904761904762,
+ "tool_results": [
+  [
+   "computed",
+   405
+  ],
+  [
+   "does not compute",
+   24
+  ],
+  [
+   "expression error",
+   23
+  ]
+ ],
+ "turns_truncated": 0,
+ "turns": 620,
+ "failure_reasons": [
+  [
+   "does_not_respond_to_the_idea",
+   25
+  ],
+  [
+   "moves_against_the_idea",
+   22
+  ],
+  [
+   "measures_move_size_not_direction",
+   7
+  ],
+  [
+   "parse",
+   3
+  ],
+  [
+   "no factor tag",
+   2
+  ],
+  [
+   "too_few_coins_or_constant",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "accel_down": 0.25,
+  "accel_up": 0.5,
+  "down_harder_down": 0,
+  "drawdown_bounce": 0.625,
+  "drawdown_weak": 0.25,
+  "follow_through_up": 0.875,
+  "high_age_down": 0.125,
+  "next_day_reversal_up": 0.875,
+  "own_moves_down": 0.125,
+  "own_moves_long_down": 0,
+  "own_moves_up": 0.25,
+  "recovery_up": 0.75,
+  "taker_majority_days_down": 1,
+  "taker_majority_days_up": 1,
+  "taker_own_high_up": 1,
+  "trades_own_high_up": 1,
+  "trades_unstable_down": 1,
+  "trades_unstable_up": 1,
+  "vol_of_vol_down": 1,
+  "vol_own_high_down": 1,
+  "vol_own_high_up": 0.875
+ }
+}

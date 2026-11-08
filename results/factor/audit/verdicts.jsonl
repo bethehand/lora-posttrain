@@ -1,0 +1,163 @@
+{"n": 1, "faithful": false, "borderline": true, "why": "level of price move per dollar, no comparison with what the coin usually does"}
+{"n": 2, "faithful": false, "borderline": true, "why": "level of the share, not a rise"}
+{"n": 3, "faithful": false, "borderline": true, "why": "above its own average, no market in it"}
+{"n": 4, "faithful": true, "borderline": true, "why": "heavy read as above the coin's own normal"}
+{"n": 5, "faithful": true, "borderline": false, "why": ""}
+{"n": 6, "faithful": true, "borderline": false, "why": ""}
+{"n": 7, "faithful": false, "borderline": true, "why": "volume ranked against its own past, not long-run illiquidity"}
+{"n": 8, "faithful": true, "borderline": false, "why": ""}
+{"n": 9, "faithful": false, "borderline": false, "why": "abs return scaled by its own spread is scale-free, so it does not measure how much the coin moves"}
+{"n": 10, "faithful": true, "borderline": false, "why": ""}
+{"n": 11, "faithful": true, "borderline": false, "why": ""}
+{"n": 12, "faithful": true, "borderline": true, "why": "above an average instead of the upper part of the range"}
+{"n": 13, "faithful": true, "borderline": false, "why": ""}
+{"n": 14, "faithful": false, "borderline": true, "why": "level of price move per dollar, no comparison with what the coin usually does"}
+{"n": 15, "faithful": true, "borderline": true, "why": "own volatility as a proxy for beta"}
+{"n": 16, "faithful": true, "borderline": true, "why": "recent share against a slightly longer normal"}
+{"n": 17, "faithful": true, "borderline": false, "why": ""}
+{"n": 18, "faithful": true, "borderline": false, "why": ""}
+{"n": 19, "faithful": true, "borderline": false, "why": ""}
+{"n": 20, "faithful": true, "borderline": false, "why": ""}
+{"n": 21, "faithful": false, "borderline": true, "why": "a rank against its own past removes the level that makes a coin liquid"}
+{"n": 22, "faithful": true, "borderline": true, "why": "second term is share over dollar volume, negligible and meaningless"}
+{"n": 23, "faithful": true, "borderline": true, "why": "relative return ranked against its own past"}
+{"n": 24, "faithful": false, "borderline": true, "why": "volume ranked against its own past, not long-run illiquidity"}
+{"n": 25, "faithful": false, "borderline": true, "why": "today's share against its own normal, not buying against selling"}
+{"n": 26, "faithful": false, "borderline": false, "why": "close over quote_volume is about one over coin volume, with no price move"}
+{"n": 27, "faithful": true, "borderline": false, "why": ""}
+{"n": 28, "faithful": false, "borderline": false, "why": "gross return over volume is about one over volume, with no price move"}
+{"n": 29, "faithful": true, "borderline": false, "why": ""}
+{"n": 30, "faithful": true, "borderline": false, "why": ""}
+{"n": 31, "faithful": true, "borderline": false, "why": ""}
+{"n": 32, "faithful": true, "borderline": false, "why": ""}
+{"n": 33, "faithful": true, "borderline": false, "why": ""}
+{"n": 34, "faithful": true, "borderline": false, "why": ""}
+{"n": 35, "faithful": true, "borderline": false, "why": ""}
+{"n": 36, "faithful": true, "borderline": false, "why": ""}
+{"n": 37, "faithful": true, "borderline": true, "why": "own volatility as a proxy for beta"}
+{"n": 38, "faithful": true, "borderline": true, "why": "own volatility as a proxy for beta"}
+{"n": 39, "faithful": true, "borderline": true, "why": "own volatility as a proxy for beta"}
+{"n": 40, "faithful": true, "borderline": false, "why": ""}
+{"n": 41, "faithful": false, "borderline": false, "why": "close over quote_volume is about one over coin volume, with no price move"}
+{"n": 42, "faithful": true, "borderline": false, "why": ""}
+{"n": 43, "faithful": true, "borderline": true, "why": "own volatility as a proxy for beta"}
+{"n": 44, "faithful": true, "borderline": false, "why": ""}
+{"n": 45, "faithful": false, "borderline": true, "why": "trades against the coin's own normal, not few trades"}
+{"n": 46, "faithful": false, "borderline": false, "why": "volume against its own recent mean, not long-run illiquidity"}
+{"n": 47, "faithful": true, "borderline": false, "why": ""}
+{"n": 48, "faithful": false, "borderline": true, "why": "five-day return, nothing about the recent high"}
+{"n": 49, "faithful": true, "borderline": false, "why": ""}
+{"n": 50, "faithful": false, "borderline": true, "why": "level of trades, not a jump above normal"}
+{"n": 51, "faithful": true, "borderline": false, "why": ""}
+{"n": 52, "faithful": true, "borderline": false, "why": ""}
+{"n": 53, "faithful": false, "borderline": true, "why": "level of trades, not a jump above normal"}
+{"n": 54, "faithful": true, "borderline": false, "why": ""}
+{"n": 55, "faithful": false, "borderline": true, "why": "trades against the coin's own normal, not few trades"}
+{"n": 56, "faithful": false, "borderline": true, "why": "level of price move per dollar, no comparison with what the coin usually does"}
+{"n": 57, "faithful": true, "borderline": false, "why": ""}
+{"n": 58, "faithful": false, "borderline": true, "why": "volatility against its own past is volatility expansion, not beta"}
+{"n": 59, "faithful": true, "borderline": false, "why": ""}
+{"n": 60, "faithful": true, "borderline": false, "why": ""}
+{"n": 61, "faithful": true, "borderline": false, "why": ""}
+{"n": 62, "faithful": true, "borderline": false, "why": ""}
+{"n": 63, "faithful": true, "borderline": false, "why": ""}
+{"n": 64, "faithful": true, "borderline": false, "why": ""}
+{"n": 65, "faithful": false, "borderline": true, "why": "total twenty-day return, not on how many days it beat the market"}
+{"n": 66, "faithful": true, "borderline": false, "why": ""}
+{"n": 67, "faithful": true, "borderline": false, "why": ""}
+{"n": 68, "faithful": false, "borderline": true, "why": "level of price move per dollar, no comparison with what the coin usually does"}
+{"n": 69, "faithful": true, "borderline": false, "why": ""}
+{"n": 70, "faithful": true, "borderline": true, "why": "sum of returns instead of distance from an average"}
+{"n": 71, "faithful": true, "borderline": false, "why": ""}
+{"n": 72, "faithful": true, "borderline": false, "why": ""}
+{"n": 73, "faithful": false, "borderline": true, "why": "level of price move per dollar, no comparison with what the coin usually does"}
+{"n": 74, "faithful": false, "borderline": true, "why": "level of trades, not growth"}
+{"n": 75, "faithful": true, "borderline": false, "why": ""}
+{"n": 76, "faithful": false, "borderline": true, "why": "volatility against its own past is volatility expansion, not beta"}
+{"n": 77, "faithful": true, "borderline": false, "why": ""}
+{"n": 78, "faithful": true, "borderline": true, "why": "odd form, recent against normal and the direction is right"}
+{"n": 79, "faithful": false, "borderline": true, "why": "above its own average, no market in it"}
+{"n": 80, "faithful": true, "borderline": false, "why": ""}
+{"n": 81, "faithful": true, "borderline": false, "why": ""}
+{"n": 82, "faithful": false, "borderline": true, "why": "level of the share, not a rise above normal"}
+{"n": 83, "faithful": true, "borderline": false, "why": ""}
+{"n": 84, "faithful": false, "borderline": true, "why": "level of trades, not growth"}
+{"n": 85, "faithful": false, "borderline": false, "why": "close over quote_volume is about one over coin volume, with no price move"}
+{"n": 86, "faithful": true, "borderline": false, "why": ""}
+{"n": 87, "faithful": true, "borderline": false, "why": ""}
+{"n": 88, "faithful": true, "borderline": false, "why": ""}
+{"n": 89, "faithful": true, "borderline": false, "why": ""}
+{"n": 90, "faithful": true, "borderline": false, "why": ""}
+{"n": 91, "faithful": true, "borderline": false, "why": ""}
+{"n": 92, "faithful": true, "borderline": false, "why": ""}
+{"n": 93, "faithful": true, "borderline": false, "why": ""}
+{"n": 94, "faithful": true, "borderline": false, "why": ""}
+{"n": 95, "faithful": true, "borderline": false, "why": ""}
+{"n": 96, "faithful": true, "borderline": false, "why": ""}
+{"n": 97, "faithful": true, "borderline": false, "why": ""}
+{"n": 98, "faithful": true, "borderline": false, "why": ""}
+{"n": 99, "faithful": true, "borderline": false, "why": ""}
+{"n": 100, "faithful": true, "borderline": false, "why": ""}
+{"n": 101, "faithful": true, "borderline": false, "why": ""}
+{"n": 102, "faithful": true, "borderline": false, "why": ""}
+{"n": 103, "faithful": true, "borderline": true, "why": "own mean abs return as a proxy for beta"}
+{"n": 104, "faithful": true, "borderline": false, "why": ""}
+{"n": 105, "faithful": false, "borderline": true, "why": "level of the share, not a rise above normal"}
+{"n": 106, "faithful": true, "borderline": false, "why": ""}
+{"n": 107, "faithful": true, "borderline": true, "why": "recent share against a longer normal"}
+{"n": 108, "faithful": true, "borderline": true, "why": "odd form, monotone in the return"}
+{"n": 109, "faithful": false, "borderline": true, "why": "distance from the high, not how recently it was made"}
+{"n": 110, "faithful": false, "borderline": false, "why": "twenty-day high against sixty-day high, not recency"}
+{"n": 111, "faithful": true, "borderline": false, "why": ""}
+{"n": 112, "faithful": true, "borderline": false, "why": ""}
+{"n": 113, "faithful": false, "borderline": true, "why": "distance from the high, not how recently it was made"}
+{"n": 114, "faithful": false, "borderline": false, "why": "spread of abs return over its mean is scale-free, so it does not measure how much the coin moves"}
+{"n": 115, "faithful": true, "borderline": false, "why": ""}
+{"n": 116, "faithful": true, "borderline": false, "why": ""}
+{"n": 117, "faithful": false, "borderline": true, "why": "cross-sectional rank of today's share, no comparison with normal"}
+{"n": 118, "faithful": true, "borderline": false, "why": ""}
+{"n": 119, "faithful": true, "borderline": false, "why": ""}
+{"n": 120, "faithful": true, "borderline": true, "why": "heavy read as above the coin's own normal"}
+{"n": 121, "faithful": false, "borderline": true, "why": "distance from the high, not how recently it was made"}
+{"n": 122, "faithful": true, "borderline": false, "why": ""}
+{"n": 123, "faithful": false, "borderline": true, "why": "level of the share, not a rise"}
+{"n": 124, "faithful": true, "borderline": false, "why": ""}
+{"n": 125, "faithful": false, "borderline": false, "why": "trades per dollar is about trade size, not few trades"}
+{"n": 126, "faithful": true, "borderline": false, "why": ""}
+{"n": 127, "faithful": true, "borderline": false, "why": ""}
+{"n": 128, "faithful": false, "borderline": true, "why": "rank of mean return against its own past, not distance from the average"}
+{"n": 129, "faithful": false, "borderline": true, "why": "distance from the high, not how recently it was made"}
+{"n": 130, "faithful": true, "borderline": false, "why": ""}
+{"n": 131, "faithful": true, "borderline": false, "why": ""}
+{"n": 132, "faithful": true, "borderline": false, "why": ""}
+{"n": 133, "faithful": false, "borderline": false, "why": "close over quote_volume is about one over coin volume, with no price move"}
+{"n": 134, "faithful": true, "borderline": false, "why": ""}
+{"n": 135, "faithful": false, "borderline": true, "why": "a rank against its own past removes the level that makes a coin liquid"}
+{"n": 136, "faithful": false, "borderline": false, "why": "twenty-day high against sixty-day high, not recency"}
+{"n": 137, "faithful": true, "borderline": false, "why": ""}
+{"n": 138, "faithful": true, "borderline": false, "why": ""}
+{"n": 139, "faithful": true, "borderline": false, "why": ""}
+{"n": 140, "faithful": true, "borderline": false, "why": ""}
+{"n": 141, "faithful": true, "borderline": false, "why": ""}
+{"n": 142, "faithful": true, "borderline": false, "why": ""}
+{"n": 143, "faithful": false, "borderline": true, "why": "trades against the coin's own normal, not few trades"}
+{"n": 144, "faithful": true, "borderline": false, "why": ""}
+{"n": 145, "faithful": true, "borderline": false, "why": ""}
+{"n": 146, "faithful": true, "borderline": false, "why": ""}
+{"n": 147, "faithful": true, "borderline": false, "why": ""}
+{"n": 148, "faithful": true, "borderline": false, "why": ""}
+{"n": 149, "faithful": true, "borderline": false, "why": ""}
+{"n": 150, "faithful": true, "borderline": false, "why": ""}
+{"n": 151, "faithful": false, "borderline": true, "why": "level of trades, not growth"}
+{"n": 152, "faithful": true, "borderline": false, "why": ""}
+{"n": 153, "faithful": true, "borderline": false, "why": ""}
+{"n": 154, "faithful": true, "borderline": false, "why": ""}
+{"n": 155, "faithful": true, "borderline": false, "why": ""}
+{"n": 156, "faithful": true, "borderline": true, "why": "heavy read as above the coin's own normal"}
+{"n": 157, "faithful": false, "borderline": true, "why": "smoothed cross-sectional rank of the share, no comparison with normal"}
+{"n": 158, "faithful": false, "borderline": true, "why": "short mean minus long mean is a change, and the idea is a level"}
+{"n": 159, "faithful": true, "borderline": false, "why": ""}
+{"n": 160, "faithful": true, "borderline": false, "why": ""}
+{"n": 161, "faithful": false, "borderline": true, "why": "level of trades, not growth"}
+{"n": 162, "faithful": false, "borderline": false, "why": "volatility per dollar mixes in volume the idea does not mention"}
+{"n": 163, "faithful": true, "borderline": false, "why": ""}

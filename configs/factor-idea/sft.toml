@@ -1,0 +1,30 @@
+# SFT on teacher trajectories for OLMo 3 7B Instruct, LoRA on all linear projections.
+# Weights stay fp32 as in rl-olmo.toml, so at least two GPUs are needed for FSDP.
+#   LORA_POSTTRAIN_ADAPTER_EVERY=N uv run sft @ configs/factor-idea/sft.toml --data.name <dataset dir> --output-dir <dir>
+max_steps = 100
+
+[deployment]
+num_train_gpus = 2
+
+[model]
+name = "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct"
+
+[model.lora]
+rank = 32
+dropout = 0.0
+target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+[renderer]
+name = "default"
+tool_parser = "olmo3_keep_text"
+
+[data]
+seq_len = 4096
+batch_size = 8
+
+[optim]
+lr = 1e-4
+weight_decay = 0.0
+
+[weight_broadcast]
+type = "filesystem"

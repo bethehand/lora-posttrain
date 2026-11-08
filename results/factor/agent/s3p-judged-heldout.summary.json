@@ -1,0 +1,125 @@
+{
+ "name": "s3p-judged-heldout",
+ "episodes": 124,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   121
+  ],
+  [
+   "max_turns",
+   3
+  ]
+ ],
+ "has_answer": 0.9758064516129032,
+ "parsed": 0.967741935483871,
+ "computes": 0.9435483870967742,
+ "passed": 0.5241935483870968,
+ "reward_mean": 0.3533265700426089,
+ "ic_mean_among_passed": 0.0020604325520222114,
+ "ic_median_among_passed": 0.0013388566458438459,
+ "tests_per_episode": 3.967741935483871,
+ "tests_distribution": [
+  [
+   2,
+   1
+  ],
+  [
+   3,
+   35
+  ],
+  [
+   4,
+   55
+  ],
+  [
+   5,
+   33
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.9758064516129032,
+ "tool_results": [
+  [
+   "computed",
+   437
+  ],
+  [
+   "does not compute",
+   30
+  ],
+  [
+   "expression error",
+   25
+  ]
+ ],
+ "turns_truncated": 0,
+ "turns": 616,
+ "failure_reasons": [
+  [
+   "does_not_respond_to_the_idea",
+   25
+  ],
+  [
+   "moves_against_the_idea",
+   19
+  ],
+  [
+   "depends_on_price_units",
+   4
+  ],
+  [
+   "too_few_coins_or_constant",
+   3
+  ],
+  [
+   "no factor tag",
+   3
+  ],
+  [
+   "driven_by_unrelated_data",
+   2
+  ],
+  [
+   "measures_move_size_not_direction",
+   2
+  ],
+  [
+   "parse",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 0.5,
+  "above_ma_up": 1,
+  "beat_market_days_up": 0.25,
+  "excess_momentum_up": 0.5,
+  "excess_reversal_down": 0.75,
+  "fresh_high_up": 0.5,
+  "high_beta_down": 0.5,
+  "high_beta_up": 0.5,
+  "illiquid_long_up": 0.5,
+  "illiquid_up": 0,
+  "impact_rising_down": 0,
+  "impact_rising_up": 0,
+  "liquid_up": 0,
+  "ma_cross_up": 1,
+  "near_high_up": 0.5,
+  "near_low_bounce": 0.5,
+  "range_per_dollar_up": 0.5,
+  "range_position_down": 0.25,
+  "range_position_up": 0.25,
+  "taker_exhausted": 0.5,
+  "taker_imbalance_up": 0.5,
+  "taker_long_up": 1,
+  "taker_sell_bounce": 0.75,
+  "taker_surge_down": 0.75,
+  "taker_surge_up": 0.5,
+  "taker_up": 1,
+  "trades_level_up": 0.5,
+  "trades_low_up": 0.75,
+  "trades_surge_down": 0.75,
+  "trades_surge_up": 0.5,
+  "trades_trend_up": 0.75
+ }
+}

@@ -1,0 +1,163 @@
+{"n": 1, "idea": "impact_rising_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": false}]}
+{"n": 2, "idea": "taker_surge_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 3, "idea": "beat_market_days_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": false}]}
+{"n": 4, "idea": "taker_exhausted", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 5, "idea": "taker_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 6, "idea": "liquid_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 7, "idea": "illiquid_long_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 8, "idea": "taker_imbalance_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 9, "idea": "high_beta_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": false}]}
+{"n": 10, "idea": "range_per_dollar_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 11, "idea": "excess_reversal_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 12, "idea": "range_position_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": false}]}
+{"n": 13, "idea": "taker_long_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 14, "idea": "impact_rising_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 15, "idea": "high_beta_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": false}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}]}
+{"n": 16, "idea": "taker_sell_bounce", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 17, "idea": "trades_level_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 18, "idea": "trades_surge_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 19, "idea": "trades_trend_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 20, "idea": "taker_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 21, "idea": "liquid_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 22, "idea": "taker_imbalance_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 23, "idea": "excess_reversal_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 24, "idea": "illiquid_long_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 25, "idea": "taker_imbalance_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 26, "idea": "impact_rising_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}]}
+{"n": 27, "idea": "ma_cross_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 28, "idea": "impact_rising_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 29, "idea": "excess_reversal_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": false}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 30, "idea": "taker_imbalance_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 31, "idea": "ma_cross_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 32, "idea": "excess_momentum_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 33, "idea": "above_ma_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 34, "idea": "excess_momentum_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": false}]}
+{"n": 35, "idea": "near_high_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 36, "idea": "liquid_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 37, "idea": "high_beta_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 38, "idea": "high_beta_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}, {"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}]}
+{"n": 39, "idea": "high_beta_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}]}
+{"n": 40, "idea": "trades_level_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 41, "idea": "impact_rising_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": false}]}
+{"n": 42, "idea": "near_low_bounce", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 43, "idea": "high_beta_down", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}]}
+{"n": 44, "idea": "trades_surge_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 45, "idea": "trades_low_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}]}
+{"n": 46, "idea": "illiquid_long_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 47, "idea": "near_high_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 48, "idea": "near_high_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 49, "idea": "taker_surge_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 50, "idea": "trades_surge_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 51, "idea": "taker_long_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 52, "idea": "taker_long_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 53, "idea": "trades_surge_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}]}
+{"n": 54, "idea": "range_position_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 55, "idea": "trades_low_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 56, "idea": "impact_rising_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 57, "idea": "trades_level_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 58, "idea": "high_beta_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 59, "idea": "taker_imbalance_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 60, "idea": "trades_surge_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 61, "idea": "trades_trend_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 62, "idea": "range_per_dollar_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 63, "idea": "taker_surge_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 64, "idea": "illiquid_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 65, "idea": "beat_market_days_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}]}
+{"n": 66, "idea": "range_position_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 67, "idea": "trades_trend_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 68, "idea": "impact_rising_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": false}]}
+{"n": 69, "idea": "range_per_dollar_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 70, "idea": "above_ma_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}]}
+{"n": 71, "idea": "range_position_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 72, "idea": "taker_sell_bounce", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 73, "idea": "impact_rising_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 74, "idea": "trades_trend_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": false}]}
+{"n": 75, "idea": "near_low_bounce", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 76, "idea": "high_beta_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 77, "idea": "near_low_bounce", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 78, "idea": "taker_surge_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 79, "idea": "beat_market_days_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": false}]}
+{"n": 80, "idea": "trades_surge_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 81, "idea": "near_low_bounce", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 82, "idea": "taker_surge_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 83, "idea": "taker_surge_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 84, "idea": "trades_trend_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 85, "idea": "impact_rising_down", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": false}]}
+{"n": 86, "idea": "taker_sell_bounce", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 87, "idea": "trades_surge_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 88, "idea": "ma_cross_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 89, "idea": "trades_trend_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 90, "idea": "taker_surge_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 91, "idea": "ma_cross_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 92, "idea": "excess_momentum_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 93, "idea": "range_per_dollar_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 94, "idea": "trades_level_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 95, "idea": "taker_exhausted", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 96, "idea": "taker_imbalance_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 97, "idea": "above_ma_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 98, "idea": "taker_surge_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 99, "idea": "taker_surge_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 100, "idea": "above_ma_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 101, "idea": "near_high_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 102, "idea": "excess_reversal_down", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 103, "idea": "high_beta_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": false}]}
+{"n": 104, "idea": "range_position_down", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 105, "idea": "taker_surge_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 106, "idea": "excess_momentum_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 107, "idea": "taker_sell_bounce", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 108, "idea": "excess_momentum_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": false}]}
+{"n": 109, "idea": "fresh_high_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}]}
+{"n": 110, "idea": "fresh_high_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 111, "idea": "range_position_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 112, "idea": "trades_surge_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 113, "idea": "fresh_high_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": false}]}
+{"n": 114, "idea": "high_beta_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": false}]}
+{"n": 115, "idea": "illiquid_long_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 116, "idea": "range_position_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 117, "idea": "taker_surge_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 118, "idea": "illiquid_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 119, "idea": "liquid_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 120, "idea": "taker_exhausted", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 121, "idea": "fresh_high_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 122, "idea": "trades_low_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 123, "idea": "taker_surge_down", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 124, "idea": "near_low_bounce", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 125, "idea": "trades_low_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}]}
+{"n": 126, "idea": "above_ma_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 127, "idea": "near_high_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 128, "idea": "above_ma_down", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": false}]}
+{"n": 129, "idea": "fresh_high_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": false}]}
+{"n": 130, "idea": "above_ma_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 131, "idea": "trades_trend_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 132, "idea": "taker_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 133, "idea": "impact_rising_down", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}]}
+{"n": 134, "idea": "near_low_bounce", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 135, "idea": "liquid_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 136, "idea": "fresh_high_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 137, "idea": "near_low_bounce", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 138, "idea": "taker_imbalance_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 139, "idea": "liquid_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}]}
+{"n": 140, "idea": "illiquid_long_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 141, "idea": "taker_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 142, "idea": "ma_cross_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 143, "idea": "trades_low_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 144, "idea": "excess_reversal_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 145, "idea": "taker_sell_bounce", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 146, "idea": "trades_surge_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 147, "idea": "illiquid_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 148, "idea": "taker_imbalance_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}]}
+{"n": 149, "idea": "liquid_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 150, "idea": "above_ma_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed2-heldout", "judge": true}]}
+{"n": 151, "idea": "trades_trend_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": false}]}
+{"n": 152, "idea": "trades_low_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 153, "idea": "excess_momentum_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": false}]}
+{"n": 154, "idea": "trades_surge_down", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 155, "idea": "illiquid_up", "from": [{"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}]}
+{"n": 156, "idea": "taker_exhausted", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}]}
+{"n": 157, "idea": "taker_surge_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 158, "idea": "range_per_dollar_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": false}]}
+{"n": 159, "idea": "taker_up", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed1-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}
+{"n": 160, "idea": "range_per_dollar_up", "from": [{"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}]}
+{"n": 161, "idea": "trades_trend_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 162, "idea": "high_beta_up", "from": [{"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": false}]}
+{"n": 163, "idea": "above_ma_down", "from": [{"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S2", "file": "s2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm A", "file": "factor-s4-gates-seed2-heldout", "judge": true}, {"model": "S4 arm B", "file": "factor-s4-ic-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed1-heldout", "judge": true}, {"model": "S4 arm C", "file": "factor-s4-judged-seed2-heldout", "judge": true}]}

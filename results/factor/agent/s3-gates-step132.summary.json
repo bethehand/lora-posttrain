@@ -1,0 +1,60 @@
+{
+ "name": "s3-gates-step132",
+ "episodes": 60,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   60
+  ]
+ ],
+ "has_answer": 0.8,
+ "parsed": 0.03333333333333333,
+ "computes": 0.016666666666666666,
+ "passed": 0.016666666666666666,
+ "reward_mean": 0.01010836522970665,
+ "ic_mean_among_passed": -0.0037284073900800733,
+ "ic_median_among_passed": -0.0037284073900800733,
+ "tests_per_episode": 0,
+ "tests_distribution": [
+  [
+   0,
+   60
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.0,
+ "tool_results": [],
+ "turns_truncated": 58,
+ "turns": 60,
+ "failure_reasons": [
+  [
+   "parse",
+   46
+  ],
+  [
+   "no factor tag",
+   12
+  ],
+  [
+   "too_few_coins_or_constant",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "candle_body_up": 0,
+  "close_above_vwap_down": 0.25,
+  "close_high_up": 0,
+  "doji_down": 0,
+  "down_volume_share_down": 0,
+  "downside_vol_down": 0,
+  "range_down": 0,
+  "reversal_1d": 0,
+  "skew_up": 0,
+  "taker_on_down_days_up": 0,
+  "trade_size_surge_down": 0,
+  "up_days_down": 0,
+  "volume_level_down": 0,
+  "volume_own_low_up": 0,
+  "volume_record_down": 0
+ }
+}

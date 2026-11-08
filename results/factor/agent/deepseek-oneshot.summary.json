@@ -1,0 +1,72 @@
+{
+ "name": "deepseek-oneshot",
+ "episodes": 124,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   124
+  ]
+ ],
+ "has_answer": 0.9596774193548387,
+ "parsed": 0.9596774193548387,
+ "computes": 0.9596774193548387,
+ "passed": 0.9516129032258065,
+ "reward_mean": 0.6378852727631702,
+ "ic_mean_among_passed": 0.00174172432636788,
+ "ic_median_among_passed": 8.788188893630153e-09,
+ "tests_per_episode": 0,
+ "tests_distribution": [
+  [
+   0,
+   124
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.0,
+ "tool_results": [],
+ "turns_truncated": 5,
+ "turns": 124,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   5
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "above_ma_down": 1,
+  "candle_body_up": 1,
+  "close_high_up": 1,
+  "close_low_bounce": 1,
+  "dispersion_down": 1,
+  "extreme_day_down": 1,
+  "high_vol_up": 1,
+  "illiquid_up": 1,
+  "liquid_up": 0.75,
+  "low_vol_up": 1,
+  "lower_shadow_up": 0.75,
+  "momentum_1m": 1,
+  "momentum_3m": 1,
+  "near_high_up": 1,
+  "range_down": 1,
+  "range_up": 1,
+  "reversal_1d": 0.75,
+  "reversal_1w": 1,
+  "taker_exhausted": 0.5,
+  "taker_sell_bounce": 1,
+  "taker_up": 1,
+  "trade_size_down": 1,
+  "trade_size_up": 1,
+  "trades_level_up": 1,
+  "trades_surge_down": 1,
+  "upper_shadow_down": 1,
+  "volume_dry_up": 1,
+  "volume_level_down": 1,
+  "volume_level_up": 1,
+  "volume_surge_down": 0.75,
+  "volume_surge_up": 1
+ }
+}

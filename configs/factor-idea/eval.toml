@@ -1,0 +1,30 @@
+# Baseline or eval of one served model on factor-idea, with test_factor. Scores on 2025.
+#   uv run eval @ $REPO/configs/factor-idea/eval.toml -m <model> --output-dir <dir>
+# One-shot control: --env.taskset.use-tools false. Sampling follows the model's generation_config.
+# OLMo must be served with the parser that keeps the text before a tool call:
+#   SERVE_EXTRA="--vllm.data-parallel-size 2 --vllm.tool-parser-plugin $REPO/setup/vllm_olmo3_keep_text.py" \
+#     bash scripts/serve.sh 0,1 18000 $ROOT/models/Olmo-3-7B-Instruct olmo3_keep_text 8192
+
+model = "/mnt/nvme1/bruce/models/Olmo-3-7B-Instruct"
+num_rollouts = 4
+# Results stay local; nothing is uploaded to Prime Intellect's platform
+push = false
+
+[client]
+base_url = "http://localhost:18000/v1"
+
+[sampling]
+max_tokens = 512
+
+[env.taskset]
+id = "factor-idea"
+
+[env.agent]
+# Five test_factor calls and the final answer
+max_turns = 6
+
+[env.agent.harness]
+id = "null"
+
+[env.agent.runtime]
+type = "subprocess"

@@ -113,3 +113,17 @@ class Olmo3ToolParser:
         status = (ToolCallParseStatus.MALFORMED_STRUCTURE if "</function_calls>" in text
                   else ToolCallParseStatus.UNCLOSED_BLOCK)
         return ids, [ParsedToolCall(raw=text, status=status)]
+
+
+class Olmo3KeepTextToolParser(Olmo3ToolParser):
+    """The same, keeping the text before a successful call as setup/vllm_olmo3_keep_text.py does at eval."""
+
+    def extract(self, ids: list[int]) -> tuple[list[int], list[ParsedToolCall]]:
+        content_ids, parsed = super().extract(ids)
+        if content_ids or not parsed:
+            return content_ids, parsed
+        text = self._tokenizer.decode(ids, skip_special_tokens=True)
+        head = text.split("<function_calls>", 1)[0] if "<function_calls>" in text else ""
+        if not head.strip():
+            return [], parsed
+        return self._tokenizer.encode(head, add_special_tokens=False), parsed

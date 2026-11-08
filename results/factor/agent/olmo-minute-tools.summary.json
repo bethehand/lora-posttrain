@@ -1,0 +1,82 @@
+{
+ "name": "olmo-minute-tools",
+ "episodes": 48,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   47
+  ],
+  [
+   "max_turns",
+   1
+  ]
+ ],
+ "has_answer": 0.5625,
+ "parsed": 0.0,
+ "computes": 0.0,
+ "passed": 0.0,
+ "reward_mean": 0.0,
+ "ic_mean_among_passed": null,
+ "ic_median_among_passed": null,
+ "tests_per_episode": 1.2708333333333333,
+ "tests_distribution": [
+  [
+   0,
+   31
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   2,
+   1
+  ],
+  [
+   3,
+   5
+  ],
+  [
+   4,
+   7
+  ],
+  [
+   5,
+   3
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.0,
+ "tool_results": [
+  [
+   "expression error",
+   61
+  ]
+ ],
+ "turns_truncated": 8,
+ "turns": 109,
+ "failure_reasons": [
+  [
+   "parse",
+   27
+  ],
+  [
+   "no factor tag",
+   21
+  ]
+ ],
+ "passed_by_idea": {
+  "flow_asia_session": 0,
+  "flow_bursts": 0,
+  "flow_down_share": 0,
+  "flow_late_center": 0,
+  "flow_spike_share": 0,
+  "flow_up_share": 0,
+  "flow_us_session": 0,
+  "path_down_early": 0,
+  "path_down_late": 0,
+  "path_up_late": 0,
+  "sync_market": 0,
+  "sync_own_way": 0
+ }
+}

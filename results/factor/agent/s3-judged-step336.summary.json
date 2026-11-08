@@ -1,0 +1,93 @@
+{
+ "name": "s3-judged-step336",
+ "episodes": 60,
+ "errors": 0,
+ "stops": [
+  [
+   "agent_completed",
+   60
+  ]
+ ],
+ "has_answer": 0.3333333333333333,
+ "parsed": 0.13333333333333333,
+ "computes": 0.13333333333333333,
+ "passed": 0.0,
+ "reward_mean": 0.0,
+ "ic_mean_among_passed": null,
+ "ic_median_among_passed": null,
+ "tests_per_episode": 1.6666666666666667,
+ "tests_distribution": [
+  [
+   0,
+   17
+  ],
+  [
+   1,
+   7
+  ],
+  [
+   2,
+   16
+  ],
+  [
+   3,
+   19
+  ],
+  [
+   4,
+   1
+  ]
+ ],
+ "episodes_with_a_computed_test": 0.23333333333333334,
+ "tool_results": [
+  [
+   "expression error",
+   86
+  ],
+  [
+   "computed",
+   14
+  ]
+ ],
+ "turns_truncated": 4,
+ "turns": 160,
+ "failure_reasons": [
+  [
+   "no factor tag",
+   40
+  ],
+  [
+   "parse",
+   12
+  ],
+  [
+   "does_not_respond_to_the_idea",
+   6
+  ],
+  [
+   "depends_on_price_units",
+   1
+  ],
+  [
+   "moves_against_the_idea",
+   1
+  ]
+ ],
+ "passed_by_idea": {
+  "candle_body_up": 0,
+  "close_above_vwap_down": 0,
+  "close_high_up": 0,
+  "doji_down": 0,
+  "down_volume_share_down": 0,
+  "downside_vol_down": 0,
+  "range_down": 0,
+  "reversal_1d": 0,
+  "skew_up": 0,
+  "taker_on_down_days_up": 0,
+  "trade_size_surge_down": 0,
+  "up_days_down": 0,
+  "volume_level_down": 0,
+  "volume_own_low_up": 0,
+  "volume_record_down": 0
+ }
+}
