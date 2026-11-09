@@ -32,8 +32,9 @@ knowledge"). One had the answer in its section under different wording. One was 
 a wrong answer (Avatar: The Way of Water for "Avatar 3"). So roughly 7 of the 10.1-point
 held-out gain comes from answering from memory instead of ending on a broken call, and about 2
 from answers read in a section. The judge sees only the final reply, so the reward cannot tell the
-two apart. The model did get better at reading: episodes that had the gold answer in a tool
-output and still answered wrong fell from 258 to 130.
+two apart. The model did get better at reading: episodes in which a read returned text and the gold answer was in a tool
+output, yet the reply was wrong, fell from 258 to 130 (324 to 178 counting every episode with
+the gold answer in a tool output).
 
 **The model learned to skip listing a page's sections.** Episodes that call `wiki_view_sections`
 fell from 1,327 (67.7%) to 971 (49.5%); of episodes that read a section, those that never listed
